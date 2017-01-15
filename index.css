@@ -71,6 +71,10 @@ body {
   font-weight: bold;
 }
 
+#canvas {
+	margin-top: 20px;
+}
+
 h1 {
 	font-family: 'FiraSans-Eight';
 	color: white;
@@ -126,6 +130,10 @@ h3 {
 }
 
 @media (min-width: 992px) {
+	
+	#canvas {
+		margin-top: 30px;
+	}
   .mastfoot,
   .cover-container {
     width: 700px;
