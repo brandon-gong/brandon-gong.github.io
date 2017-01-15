@@ -34,6 +34,7 @@ body {
 	background: -webkit-linear-gradient(to left, #085078 , #85D8CE); /* Chrome 10-25, Safari 5.1-6 */
 	background: linear-gradient(to left, #085078 , #85D8CE); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 	text-align: center;
+	overflow: hidden;
 }
 
 /* Extra markup and styles for table-esque vertical and horizontal centering */
@@ -130,12 +131,9 @@ h3 {
 }
 
 @media (min-width: 992px) {
-	
-	#canvas {
-		margin-top: 30px;
-	}
   .mastfoot,
   .cover-container {
     width: 700px;
+	vertical-align: center;
   }
 }
