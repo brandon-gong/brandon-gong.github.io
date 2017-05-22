@@ -38,8 +38,15 @@ permalink: /404.html
                 }
                 resizeCanvas();
 
-                function redraw() {
-                        // do your drawing stuff here
+                function redraw() {  
+                    // Create gradient
+                    var grd = context.createLinearGradient(0,0,200,0);
+                    grd.addColorStop(0,"red");
+                    grd.addColorStop(1,"white");
+
+                    // Fill with gradient
+                    context.fillStyle = grd;
+                    context.fillRect(10,10,150,80); 
                 }
             })();
         </script>
