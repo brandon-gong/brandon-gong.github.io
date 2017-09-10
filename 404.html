@@ -7,48 +7,8 @@ permalink: /404.html
     <head>
         <meta charset="utf-8">
         <title>You just 404'd</title>
-        <style>
-            * {
-                margin:0; padding:0;
-            }
-
-            html, body {
-                width:100%; height:100%;
-            }
-
-            canvas {
-                display:block;
-            }
-        </style>
     </head>
     <body>
-        <canvas id="canvas"></canvas>
-        <script>
-            (function() {
-                var canvas  = document.getElementById('canvas'),
-                    context = canvas.getContext('2d');
-
-                // resize the canvas to fill browser window dynamically
-                window.addEventListener('resize', resizeCanvas, false);
-
-                function resizeCanvas() {
-                        canvas.width = window.innerWidth;
-                        canvas.height = window.innerHeight;
-                        redraw(); 
-                }
-                resizeCanvas();
-
-                function redraw() {  
-                    // Create gradient
-                    var grd = context.createLinearGradient(0,0,200,0);
-                    grd.addColorStop(0,"red");
-                    grd.addColorStop(1,"white");
-
-                    // Fill with gradient
-                    context.fillStyle = grd;
-                    context.fillRect(10,10,150,80); 
-                }
-            })();
-        </script>
+        <div>error 404: potato not found</div>
     </body>
 </html>
