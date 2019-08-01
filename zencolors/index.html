@@ -366,6 +366,10 @@
             endShape(CLOSE);
         }
 
+        function touchStarted() {
+            document.body.style.background = "#fff";
+        }
+
         function draw() {
             for (let i = 0; i < DIMS; i++) {
                 for (let j = 0; j < DIMS; j++) {
