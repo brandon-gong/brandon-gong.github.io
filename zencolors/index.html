@@ -1,0 +1,444 @@
+<!doctype html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js" lang="">
+<!--<![endif]-->
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/bootstrap-theme.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Playfair+Display:700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/main.css">
+    <!--[if lt IE 9]>
+            <script src="js/vendor/html5-3.6-respond-1.4.2.min.js"></script>
+        <![endif]-->
+</head>
+
+<body>
+    <!--[if lt IE 8]>
+            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+
+        <div id="board-wrapper" style="position: absolute; top: 0; left: 0;"></div>
+        <h1 id="logo">zencolors</h1>
+
+    <script>
+
+        // synthetically place h1
+        function positionLogo() {
+            let logo = document.getElementById('logo');
+            if(window.innerWidth > window.innerHeight) {
+                logo.style.top = window.innerHeight/2 - 0.5*logo.offsetHeight + 'px';
+                logo.style.left = window.innerHeight + (0.5*(window.innerWidth-window.innerHeight)-0.5*logo.offsetWidth) + 'px';
+            } else {
+                logo.style.top = window.innerWidth + (0.5*(window.innerHeight-window.innerWidth)-0.5*logo.offsetHeight) + 'px';
+                logo.style.left = window.innerWidth/2 - 0.5*logo.offsetWidth + 'px';
+            }
+        }
+
+
+
+
+        // puzzle code begins HERE
+        const DIMS = 7;
+
+        let fromSquare = null;
+        let dragActive = false;
+        let isSolved = false;
+
+        const patternGenerators = [
+
+            // #0: perimeter locked
+            function() {
+                let result = [...Array(DIMS)].map(e => Array(DIMS).fill(false));
+                for (let i = 0; i < DIMS; i++) {
+                    result[0][i] = true;
+                    result[DIMS - 1][i] = true;
+                }
+                for (let i = 1; i < DIMS - 1; i++) {
+                    result[i][0] = true;
+                    result[i][DIMS - 1] = true;
+                }
+                return result;
+            },
+
+            // #1: insides + 4 corners locked
+            function() {
+                let result = [...Array(DIMS)].map(e => Array(DIMS).fill(false));
+                // mark corners
+                result[0][0] = true;
+                result[0][DIMS - 1] = true;
+                result[DIMS - 1][0] = true;
+                result[DIMS - 1][DIMS - 1] = true;
+                // infill interior
+                for (let i = 1; i < DIMS - 1; i++) {
+                    for (let j = 1; j < DIMS - 1; j++) {
+                        result[i][j] = true;
+                    }
+                }
+                return result;
+            },
+
+            // #2: x pattern
+            function() {
+                let result = [...Array(DIMS)].map(e => Array(DIMS).fill(false));
+                for (let i = 0; i < DIMS; i++) {
+                    result[i][i] = true;
+                    result[DIMS - i - 1][i] = true;
+                }
+                return result;
+            },
+
+            // #3: horizontal stripes pattern
+            function() {
+                let result = [...Array(DIMS)].map(e => Array(DIMS).fill(false));
+                for (let i = 0; i < DIMS; i += 2) {
+                    for (let j = 0; j < DIMS; j++) {
+                        result[i][j] = true;
+                    }
+                }
+                return result;
+            },
+
+            // #4: vertical stripes pattern
+            function() {
+                let result = [...Array(DIMS)].map(e => Array(DIMS).fill(false));
+                for (let i = 0; i < DIMS; i++) {
+                    for (let j = 0; j < DIMS; j += 2) {
+                        result[i][j] = true;
+                    }
+                }
+                return result;
+            },
+
+            // #5: window pattern 田
+            function() {
+                let result = [...Array(DIMS)].map(e => Array(DIMS).fill(false));
+                middex = floor(DIMS / 2);
+                for (let i = 0; i < DIMS; i++) {
+                    result[0][i] = true;
+                    result[DIMS - 1][i] = true;
+                }
+                for (let i = 1; i < DIMS - 1; i++) {
+                    if (i === middex) {
+                        for (let j = 0; j < DIMS; j++) {
+                            result[i][j] = true;
+                        }
+                    } else {
+                        result[i][0] = true;
+                        result[i][DIMS - 1] = true;
+                        result[i][middex] = true;
+                    }
+                }
+                return result;
+            },
+
+            // #6: checkerboard pattern
+            function() {
+                let result = [...Array(DIMS)].map(e => Array(DIMS).fill(false));
+                for (let i = 0; i < DIMS; i++) {
+                    for (let j = 0; j < DIMS; j++) {
+                        if ((i + j) % 2 === 0) result[i][j] = true;
+                    }
+                }
+                return result;
+            },
+
+            // #7: fat / pattern
+            function() {
+                let result = [...Array(DIMS)].map(e => Array(DIMS).fill(false));
+                let stripeWidth = round(DIMS / 3);
+                // cheap hack for odd-width stripe
+                if (stripeWidth % 2 === 0) stripeWidth++;
+                let offset = floor(stripeWidth / 2);
+                for (let i = 0; i < DIMS; i++) {
+                    // dont ask me how this works because i forgot
+                    for (let j = max(0, i - offset); j < min(DIMS, i + (stripeWidth - offset)); j++) {
+                        result[i][j] = true;
+                    }
+                }
+                result.reverse();
+                return result;
+            },
+
+            // #8: fat \ pattern
+            function() {
+                let result = [...Array(DIMS)].map(e => Array(DIMS).fill(false));
+                let stripeWidth = round(DIMS / 3);
+                // cheap hack for odd-width stripe
+                if (stripeWidth % 2 === 0) stripeWidth++;
+                let offset = floor(stripeWidth / 2);
+                for (let i = 0; i < DIMS; i++) {
+                    // dont ask me how this works because i forgot
+                    for (let j = max(0, i - offset); j < min(DIMS, i + (stripeWidth - offset)); j++) {
+                        result[i][j] = true;
+                    }
+                }
+                return result;
+            },
+
+            // #9: random pattern
+            function() {
+                let result = [...Array(DIMS)].map(e => Array(DIMS).fill(false));
+                let numPoints = round(pow(DIMS, 2) / 3);
+                while (numPoints > 0) {
+                    let x = round(random(DIMS - 1));
+                    let y = round(random(DIMS - 1));
+                    if (result[x][y] === false) {
+                        result[x][y] = true;
+                        numPoints--;
+                    }
+                }
+                return result;
+            },
+
+            // #10: 4 corners pattern
+            function() {
+                let result = [...Array(DIMS)].map(e => Array(DIMS).fill(false));
+                result[0][0] = true;
+                result[0][DIMS - 1] = true;
+                result[DIMS - 1][0] = true;
+                result[DIMS - 1][DIMS - 1] = true;
+                return result;
+            },
+        ];
+
+        // because my brain is too small to use objects or prototypes or whatever
+        // we're just gonna use arrays
+        // sorry
+        // [ color -> int, movable -> bool, correctPosition -> [x, y] ]
+
+        let squares = [...Array(DIMS)].map(e => Array(DIMS).fill(null));
+
+        function setup() {
+            let size = min(window.innerWidth, window.innerHeight);
+            let c = createCanvas(size, size);
+            c.parent('board-wrapper');
+            noStroke();
+            initSquares();
+            positionLogo();
+        }
+
+        function windowResized() {
+            let size = min(window.innerWidth, window.innerHeight);
+            resizeCanvas(size, size);
+            positionLogo();
+        }
+
+        function initSquares() {
+
+            fromSquare = null;
+            dragActive = false;
+            isSolved = false;
+
+            let lockedIdx = floor(random(11));
+            // slightly discourage the random seed
+            for (let i = 0; i < 2; i++) {
+                lockedIdx = round(random(10));
+                if (lockedIdx != 9) break;
+            }
+            let locked = patternGenerators[lockedIdx]();
+
+            // generate 4 random numbers that are a minimum of some distance apart
+            let hues = [random(1)];
+            while (hues.length < 4) {
+                let attempt = random(1);
+                for (let i = 0; i < hues.length; i++) {
+                    if (abs(hues[i] - attempt) < 0.13) {
+                        break;
+                    }
+                    if (i + 1 === hues.length) hues.push(attempt);
+                }
+            }
+
+            let tmpcol1 = color(...HSVtoRGB(hues[0], 1, random(0.68, 1)));
+            let tmpcol2 = color(...HSVtoRGB(hues[1], 1, random(0.68, 1)));
+            for (let i = 0; i < DIMS; i++) {
+                let newcolor = lerpColor(tmpcol1, tmpcol2, i / (DIMS - 1));
+                squares[0][i] = [newcolor, locked[0][i],
+                    [0, i]
+                ];
+            }
+            tmpcol1 = color(...HSVtoRGB(hues[2], 1, random(0.68, 1)));
+            tmpcol2 = color(...HSVtoRGB(hues[3], 1, random(0.68, 1)));
+            for (let i = 0; i < DIMS; i++) {
+                let newcolor = lerpColor(tmpcol1, tmpcol2, i / (DIMS - 1));
+                squares[DIMS - 1][i] = [newcolor, locked[DIMS - 1][i],
+                    [DIMS - 1, i]
+                ]
+            }
+            for (let i = 0; i < DIMS; i++) {
+                for (let j = 0; j < DIMS; j++) {
+                    let endpoint1 = squares[0][i][0];
+                    let endpoint2 = squares[DIMS - 1][i][0];
+                    let newcolor = lerpColor(endpoint1, endpoint2, j / (DIMS - 1));
+                    squares[j][i] = [newcolor, locked[j][i],
+                        [j, i]
+                    ];
+                }
+            }
+
+            //----------------------------------------------------------------
+            // mix up the unlocked squares
+            // the stupid way
+            let positions = [];
+            let unlockedSquares = [];
+            for (let i = 0; i < DIMS; i++) {
+                for (let j = 0; j < DIMS; j++) {
+                    if (squares[i][j][1] === false) {
+                        positions.push([i, j]);
+                        unlockedSquares.push(squares[i][j]);
+                    }
+                }
+            }
+            // mix up the list
+            unlockedSquares.sort(() => Math.random() - 0.5);
+            //.. and put it back
+            for (let i = 0; i < unlockedSquares.length; i++) {
+                let x = positions[i][0];
+                let y = positions[i][1];
+                squares[x][y] = unlockedSquares[i];
+            }
+
+        }
+
+        function getGridSquare(x, y) {
+            let grid_x = 0;
+            while (x > grid_x * (width / DIMS)) {
+                grid_x++;
+            }
+            grid_x--;
+            let grid_y = 0;
+            while (y > grid_y * (height / DIMS)) {
+                grid_y++;
+            }
+            grid_y--;
+            return [grid_x, grid_y];
+        }
+
+        function mousePressed() {
+            if (isSolved) {
+                initSquares();
+                return;
+            }
+            let gridcoords = getGridSquare(mouseX, mouseY);
+            if (squares[gridcoords[0]][gridcoords[1]][1] === false) {
+                dragActive = true;
+                fromSquare = gridcoords;
+            }
+        }
+
+        function mouseReleased() {
+            if (isSolved) return;
+            if (!dragActive) return;
+            dragActive = false;
+            let gridcoords = getGridSquare(mouseX, mouseY);
+            let temp = squares[gridcoords[0]][gridcoords[1]];
+            if (temp[1]) return;
+            squares[gridcoords[0]][gridcoords[1]] = squares[fromSquare[0]][fromSquare[1]];
+            squares[fromSquare[0]][fromSquare[1]] = temp;
+
+            // the other thing we need to do is check if its fully solved
+            isSolved = true;
+            for (let i = 0; i < DIMS; i++) {
+                for (let j = 0; j < DIMS; j++) {
+                    if (squares[i][j][2][0] != i || squares[i][j][2][1] != j) {
+                        isSolved = false;
+                        break;
+                    }
+                }
+            }
+        }
+
+        function heart(x, y, size) {
+            beginShape();
+            vertex(x, y);
+            bezierVertex(x - size / 2, y - size / 2, x - size, y + size / 3, x, y + size);
+            bezierVertex(x + size, y + size / 3, x + size / 2, y - size / 2, x, y);
+            endShape(CLOSE);
+        }
+
+        function draw() {
+            for (let i = 0; i < DIMS; i++) {
+                for (let j = 0; j < DIMS; j++) {
+                    fill(squares[i][j][0]);
+                    rect(floor(i * (width / DIMS)), floor(j * (height / DIMS)), ceil(width / DIMS), ceil(height / DIMS));
+                    if (squares[i][j][1] && !isSolved) {
+                        fill(0);
+                        push();
+                        translate((width / (DIMS * 2)), (height / (DIMS * 2)));
+                        ellipse(floor(i * (width / DIMS)), floor(j * (height / DIMS)), width / 90, width / 90);
+                        pop();
+                    }
+                }
+            }
+            if (dragActive) {
+                fill(0);
+                rect(fromSquare[0] * (width / DIMS), fromSquare[1] * (height / DIMS), (width / DIMS), (height / DIMS));
+                fill(squares[fromSquare[0]][fromSquare[1]][0]);
+                rect(mouseX - 0.5 * (width / DIMS), mouseY - 0.5 * (height / DIMS), (width / DIMS), (height / DIMS));
+            }
+            if (isSolved) {
+                fill(255);
+                heart(width / 2, height / 2 - 0.4 * width / 20, width / 20);
+            }
+        }
+
+        // the reason why I'm using HSV is because its a lot more human-like
+        // and so its much easier for me to pick pretty colors
+        function HSVtoRGB(h, s, v) {
+            var r, g, b, i, f, p, q, t;
+            i = Math.floor(h * 6);
+            f = h * 6 - i;
+            p = v * (1 - s);
+            q = v * (1 - f * s);
+            t = v * (1 - (1 - f) * s);
+            switch (i % 6) {
+                case 0:
+                    r = v, g = t, b = p;
+                    break;
+                case 1:
+                    r = q, g = v, b = p;
+                    break;
+                case 2:
+                    r = p, g = v, b = t;
+                    break;
+                case 3:
+                    r = p, g = q, b = v;
+                    break;
+                case 4:
+                    r = t, g = p, b = v;
+                    break;
+                case 5:
+                    r = v, g = p, b = q;
+                    break;
+            }
+            return [Math.round(r * 255), Math.round(g * 255), Math.round(b * 255)]
+        }
+
+        function prettyPrint(arr) {
+            temp = "";
+            for (let i = 0; i < arr.length; i++) {
+                temp += "| "
+                for (let j = 0; j < arr[i].length; j++) {
+                    temp += ((arr[i][j]) ? 1 : 0) + " ";
+                }
+                temp += "|\n";
+            }
+            console.log(temp);
+        }
+    </script>
+
+    <script src="js/vendor/bootstrap.min.js"></script>
+    <script src="js/vendor/p5.min.js"></script>
+</body>
+
+</html>
