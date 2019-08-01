@@ -367,7 +367,10 @@
         }
 
         function touchStarted() {
-            document.body.style.background = "#fff";
+            mousePressed();
+        }
+        function touchEnded() {
+            mouseReleased();
         }
 
         function draw() {
