@@ -7,7 +7,7 @@ function preload() {
   logo = loadImage("https://raw.githubusercontent.com/brandon-gong/processing-sketches/master/logo/logo_m_black.png");
 }
 function setup() {
-  let x = createCanvas(800, 800);
+  let x = createCanvas(650, 650);
   bgc = color(0, 0, 0);
   fgc = color(140,140,140);
   tc = color(255,255,255);
