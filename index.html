@@ -1,2 +1,115 @@
 <!DOCTYPE html>
-<head><meta charset="utf-8"><title>there's nothing here</title></head><body><p>hi i'm brandon</p></body>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Brandon Gong</title>
+        <style>
+            @font-face {
+                font-family: "neptune";
+                src: url(neptune.otf);
+            }
+            html {
+                height: 100%;
+                width: 100%;
+                padding: 0;
+                margin: 0;
+            }
+            body {
+                background-color: black;
+                width: 100%;
+                min-height: 100%;
+                overflow: hidden;
+                padding: 0;
+                margin: 0;
+            }
+            h1 {
+                color: white;
+                font-family: "neptune", Helvetica, sans-serif;
+                font-size: 100px;
+                font-weight: 100;
+                display: block;
+                text-shadow: 0 0 12px white;
+                z-index: 2;
+            }
+            #wrapper {
+                display: flex;
+                width: 100%;
+                min-height: 100vh;
+                align-items: center;
+                justify-content: center;
+                flex-direction: column;
+            }   
+            #backgroundwrapper {
+                z-index: 1;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="wrapper">
+            <div id="backgroundwrapper"></div>
+            <h1>BRANDON GONG</h1>
+        </div>
+    </body>
+    <script>
+        let chars = [
+            [0, "b", "B"],
+            [0, "r", "R"],
+            [0, "a", "A"],
+            [0, "n", "N"],
+            [0, "d", "D"],
+            [0, "o", "O"],
+            [0, "n", "N"],
+            [0, " ", " "],
+            [0, "g", "G"],
+            [0, "o", "O"],
+            [0, "n", "N"],
+            [0, "g", "G"]
+        ];
+        let m = document.getElementsByTagName("h1")[0];
+        let str = "BRANDON GONG";
+        setTimeout(
+            function() {
+                setInterval(function() {
+            let x = Math.floor(Math.random() * 30);
+            if(x > 11) return;
+            else {
+                let charToAdd = "";
+                if(chars[x][0] === 0) {
+                    charToAdd = chars[x][2];
+                    chars[x][0] = 1;
+                } else {
+                    charToAdd = chars[x][1];
+                    chars[x][0] = 0;
+                }
+                str = str.substring(0, x) + charToAdd + str.substring(x+1, 12);
+                m.innerHTML = str;
+            }
+        }, 200);
+            }, 3000);
+
+    </script>
+    <script>
+        let size = window.innerWidth / 3;
+        function setup() {
+        let c = createCanvas(size, size);
+        c.parent('backgroundwrapper');
+        document.getElementsByTagName("h1")[0].style.marginTop = -1 * (size / 2 + document.getElementsByTagName("h1")[0].offsetHeight/2) + "px";
+        noStroke();
+        fill(20);
+        }
+
+        let z = 0.001;
+        function draw() {
+            background(0);
+            for(let i = 0; i < 10; i++) {
+                for(let j = 0; j < 10; j++) {
+                    let radius = noise(i/3, j/3, z) * size/10;
+                    ellipse((size-20)/10*i + 20, (size-20)/10*j + 20, radius, radius);
+                }
+            }
+            z += 0.01;
+        }
+
+    </script>
+    <script src="zencolors/js/vendor/p5.min.js"></script>
+</html>
