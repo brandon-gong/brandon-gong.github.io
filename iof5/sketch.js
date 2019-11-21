@@ -25,14 +25,14 @@ function draw() {
   if (drawAngles) {
     push();
     rotateY(-PI / 4);
-    fill(100, 70);
+    fill(220, 120);
     arc(0, 0, 150, 150, atan(40 / 100) - 0.1, PI / 2, PIE);
     text("<90°", 70, 70);
     pop();
 
     push();
     rotateY(PI / 4);
-    fill(100, 70);
+    fill(220, 120);
     arc(0, 0, 150, 150, -PI / 2, atan(40 / 100) - 0.1, PIE);
     text(">90°", 70, -70);
     pop();
@@ -41,7 +41,7 @@ function draw() {
     rotateX(PI / 2);
     rotateY(-0.4);
     rotateZ(3 * PI / 4);
-    fill(100, 70);
+    fill(220, 120);
     arc(0, 0, 150, 150, 0, PI / 2, PIE);
     text("<90°", 70, 70);
     pop();
