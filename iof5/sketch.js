@@ -1,5 +1,5 @@
 function preload() {
-  inconsolata = loadFont('https://github.com/brandon-gong/brandon-gong.github.io/blob/master/iof5/typestarblack.ttf?raw=true');
+  inconsolata = loadFont('typestarblack.ttf');
 }
 
 function setup() {
