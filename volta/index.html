@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;600&display=swap" rel="stylesheet">
+    <link href="index.css" rel="stylesheet">
+    <title>Volta</title>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-md navbar-dark" id="nbar">
+      <a class="navbar-brand" href="#">Volta</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="#">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="cars.html">Cars</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">TSA Chapter</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">CTE Program</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="contact.html">Contact Us</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <div id="fullsizelanding"></div>
+    <div id="tribrushlayer"></div>
+    <div id="textlayer">
+      <h1>Volta</h1>
+      <h2>A bold new car for the modern age</h2>
+      <div style="position: absolute; bottom: 40px;">
+        <h3>&raquo;</h3>
+      </div>
+    </div>
+
+    <div id="allwrapper">
+      <div id="naturecontainer" class="parallax-window container-fluid" data-parallax="scroll" data-image-src="forest.jpg">
+        <div class="row align-items-center justify-content-center">
+          <div class="col-lg-4"><h1>Nature<br>First.</h1></div>
+          <div class="col-lg-4"><p>With peak fossil fuel consumption on the horizon, electric cars have been put on the spotlight as a necessary transition to slow this disaster down. Almost 15 percent of all carbon emissions come from cars, so making this number smaller is key in the battle against global warming. The motivation behind each car Volta manufactures is to fuse the comfort expected in a car with a sleek, eco-friendly design. The majority of gasoline - based cars releases around 4.6 metric tons of CO2 whereas Volta’s electric automobiles produce only half as much. With an optimized battery and engine designed to get the most amount out of every resource used, Volta’s cars are the future of transportation.</p></div>
+        </div>
+      </div>
+      <div id="genesiscontainer" class="container-fluid">
+        <div class="row align-items-center justify-content-center">
+          <div class="col-lg-4"><img src="nebula.jpg" id="nebulaimage"></div>
+          <div class="col-lg-4">
+            <div>
+              <h1 style="font-size: 150px;">Our Genesis</h1>
+              <p style="color:white; font-family: 'Source Sans Pro', sans-serif; font-size: 20px; margin-top: 30px;">Volta was the brainchild of four close high school friends - Megan, Brandon, Emily, Subhash - who first met at their school’s TSA chapter. They realized the growing problem of pollution present in the society and decided to collaborate to create Volta. Through the expansion of this company, they hope to spread awareness of environmental concerns and to promote the use of electric cars. The four of them started to brainstorm ideas, meeting up with local car dealerships to discuss the current number of electric cars. With the determination to bring attention to the newer vehicles, they worked hard to develop their own electric models. Today, Volta’s cars can be found across the world, with consumers in more than 100 countries. Together, Volta’s consumers can help clean the environment, one electric car at a time. </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="carcontainer" class="parallax-window container-fluid" data-parallax="scroll" data-image-src="whiteroad.jpg">
+        <h1>Still Foggy?</h1>
+        <p>Not yet convinced? Browse our selection of world-class,<br>top-rated vehicles and decide for yourself.</p>
+        <a href="cars.html">Start your journey &raquo;</a>
+      </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.0.0/lib/p5.js"></script>
+    <script src="delaunay.min.js"></script>
+    <script src="parallax.min.js"></script>
+
+    <script>
+        let particles = [];
+        let tris = [];
+        let maxDepth = 4;
+
+        function setup() {
+          let x = createCanvas(windowWidth, windowHeight);
+          noFill();
+          colorMode(HSB, 360);
+          background(0, 0);
+          x.parent("tribrushlayer");
+        } 
+
+        function draw() {
+          clear();
+          for (let i = particles.length-1; i > -1; i--) {
+            particles[i].update();
+            if (particles[i].vel.mag() < 0.005) {
+              // remove all particles that basically aren't moving anymore
+              particles.splice(i, 1);
+            }
+          }
+          if (particles.length < 0) return;
+
+          // render delaunay tris
+          strokeWeight(0.5);
+          tris = Delaunay.triangulate(particles.map(function(p) {
+            return [p.pos.x, p.pos.y];
+          }));
+          for (let i = 0; i < tris.length; i += 3) {
+            let p1 = particles[tris[i]];
+            let p2 = particles[tris[i+1]];
+            let p3 = particles[tris[i+2]];
+            if ((dist(p1.pos.x, p1.pos.y, p2.pos.x, p2.pos.y) > 75) ||
+                (dist(p2.pos.x, p2.pos.y, p3.pos.x, p3.pos.y) > 75) ||
+                (dist(p1.pos.x, p1.pos.y, p3.pos.x, p3.pos.y) > 75)) {
+              continue;
+            }
+            stroke(p1.age*0.5, 360, 360);
+            triangle(p1.pos.x, p1.pos.y, p2.pos.x, p2.pos.y, p3.pos.x, p3.pos.y);
+          }
+        }
+
+        function Particle(x, y, depth) {
+          this.pos = new p5.Vector(x, y);
+          this.depth = depth;
+          this.age = 0;
+          this.vel = p5.Vector.random2D();
+          this.vel.mult(map(this.depth, 0, maxDepth, 7, 2));
+
+          this.update = function() {
+            this.age++;
+            this.vel.mult(0.9);
+            this.pos.add(this.vel);
+            if (this.age % 10 === 0 && this.depth > 0) {
+              this.depth -= 1;
+              let n = new Particle(this.pos.x, this.pos.y, this.depth-1);
+              particles.push(n);
+            }
+          }
+        }
+        function mouseMoved() {
+          particles.push(new Particle(mouseX, mouseY, maxDepth));
+        }
+        function windowResized() {
+          resizeCanvas(windowWidth, windowHeight);
+        }
+    </script>
+    <script>
+      $(window).scroll(function(){
+        if($(document).scrollTop() > 70) $('#nbar').addClass("fixed-top stickiednav");
+        else $('#nbar').removeClass("fixed-top stickiednav");
+      });
+    </script>
+  </body>
+</html>

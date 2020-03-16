@@ -1,0 +1,194 @@
+@font-face {
+    src: url("Rallifornia.otf");
+    font-family: "Rallifornia"; 
+  }
+
+body {
+    background-color: black; 
+    color: white; 
+    font-family: "Source Sans Pro", sans-serif;
+    overflow: hidden;
+}
+
+form { 
+    text-align: center;
+    font-size: 1.5em; 
+}
+
+img { 
+    height: 7em; 
+    width: relative; 
+    border-radius:.2em;  
+    border: .2em; 
+}
+
+.car { 
+    margin: 0 auto; 
+    text-align: center; 
+}
+
+nav {
+  margin: 0px;
+  z-index: 2;
+  background-color: black;
+  transition: 200ms;
+}
+.stickiednav {
+  background-color: black;
+  margin: 0px;
+}
+.stickiednav > .navbar-brand {
+  font-size: 30px;
+  margin-left: 40px;
+}
+.navbar-toggler, .navbar-toggler:focus {
+  color:white;
+  border: none;
+  outline: none;
+}
+.navbar-brand, .navbar-brand:hover {
+  font-family: "Rallifornia", sans-serif;
+  color: white;
+  font-size: 60px;
+  transform: rotate(-10deg);
+}
+.nav-link {
+  font-size: 20px;
+  color: white;
+  margin: 0px 40px;
+  font-family: "Source Sans Pro", sans-serif;
+  font-weight: 600;
+  margin-bottom: 4px;
+  line-height: 0.85;
+  transition: 200ms;
+}
+
+.nav-link:hover {
+  color: white;
+  border-bottom: 4px solid white;
+  margin-bottom: 0px;
+}
+
+#carslider {
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+}
+
+.shard {
+  background: black;
+  height: 50vh;
+  width: 100vw;
+  transform: rotate(0deg);
+  margin-left: 0vw;
+  margin-top: 0vh;
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  justify-content: center;
+}
+.backr {
+  transform: rotate(0deg);
+  margin-left: 50px;
+  margin-top: 20px;
+}
+
+#volta0pic {
+  width: 100vw;
+  height: 50vh;
+  background: url('pics/volta0.jpg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: scroll;
+  background-size: cover;
+}
+#volta1pic {
+  width: 100vw;
+  height: 50vh;
+  background: url('pics/volta1.jpg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: scroll;
+  background-size: cover;
+}
+#volta2pic {
+  width: 100vw;
+  height: 50vh;
+  background: url('pics/volta2.jpg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: scroll;
+  background-size: cover;
+}
+
+h1 {
+  font-family: "Rallifornia", sans-serif;
+  font-size: 70px;
+}
+
+td {
+  font-size: 15px;
+}
+td:nth-child(2n-1) {
+  font-weight: 600;
+}
+
+@media (min-width: 768px) {
+  nav {
+    margin: 30px 70px;
+    background-color: transparent;
+  }
+  .shard {
+    height: 200vh;
+    width: 100vw;
+    transform: rotate(-10deg);
+    margin-left: 50vw;
+    margin-top: -150vh;
+  }
+  .backr {
+    transform: rotate(10deg);
+    margin-left: 12vw;
+  }
+  
+  #volta0pic {
+    width: 75vw;
+    height: 100vh;
+    background: url('pics/volta0.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+    background-size: cover;
+  }
+  #volta1pic {
+    width: 75vw;
+    height: 100vh;
+    background: url('pics/volta1.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+    background-size: cover;
+  }
+  #volta2pic {
+    width: 75vw;
+    height: 100vh;
+    background: url('pics/volta2.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+    background-size: cover;
+  }
+  
+  h1 {
+    font-family: "Rallifornia", sans-serif;
+    font-size: 100px;
+  }
+  
+  td {
+    font-size: 20px;
+  }
+  td:nth-child(2n-1) {
+    font-weight: 600;
+  }
+}
