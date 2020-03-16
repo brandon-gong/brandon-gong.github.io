@@ -192,3 +192,10 @@ td:nth-child(2n-1) {
     font-weight: 600;
   }
 }
+
+li {
+  list-style:none;
+  background-image:none;
+  background-repeat:none;
+  background-position:0; 
+}
