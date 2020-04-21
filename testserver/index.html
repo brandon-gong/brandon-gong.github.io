@@ -51,7 +51,7 @@
             <a class="nav-link dropdown-toggle" href="#" id="navdonatebutton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="padding-left:15px; padding-right:15px">
               Learn More
             </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
               <a class="dropdown-item" href="thankyou.html">Our Donors</a>
               <a class="dropdown-item" href="#">Mask Delivery</a>
               <a class="dropdown-item" href="#">Transparency Report</a>
@@ -222,6 +222,7 @@
           } else {
             img.resize(sketch.width / 2, 0);
           }
+          numDots = sketch.floor(sketch.width * sketch.height / 8000);
           for(let i = 0; i < numDots; i++) {
             dots.push(new Dot());
           }

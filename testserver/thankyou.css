@@ -9,6 +9,7 @@ body {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+	margin-top: 100px;
 }
 
 .dividerContainer {
@@ -51,7 +52,14 @@ body {
 	margin: 6vw;
 }
 
-@media (min-width: 2000px) {
+#backbutton {
+	color: white;
+	font-family: "Source Sans Pro", sans-serif;
+	font-weight: 600;
+	font-size: 20px;
+}
+
+@media (min-width: 1081px) {
 	.dividerContainer {
 		width: 50%;
 	}
