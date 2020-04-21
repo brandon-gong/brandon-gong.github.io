@@ -14,7 +14,7 @@ body {
 .dividerContainer {
 	display: flex;
 	flex-direction: row;
-	width: 50%;
+	width: 100%;
 	align-items: center;
 	justify-content: center;
 	margin-top: 60px;
@@ -39,14 +39,32 @@ body {
 }
 
 #logosvg {
-	width: 200px;
+	width: 20vw;
 }
 
 #heartsvg {
-	width: 200px;
+	width: 20vw;
 }
 
 #plussvg {
-	width: 50px;
-	margin: 50px;
+	width: 12vw;
+	margin: 5vw;
+}
+
+@media (min-width: 1024px) {
+	.dividerContainer {
+		width: 50%;
+	}
+	#logosvg {
+		width: 200px;
+	}
+	
+	#heartsvg {
+		width: 200px;
+	}
+	
+	#plussvg {
+		width: 50px;
+		margin: 50px;
+	}
 }
