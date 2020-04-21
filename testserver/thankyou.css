@@ -51,20 +51,20 @@ body {
 	margin: 5vw;
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 2000px) {
 	.dividerContainer {
 		width: 50%;
 	}
 	#logosvg {
-		width: 200px;
+		width: 150px;
 	}
 	
 	#heartsvg {
-		width: 200px;
+		width: 150px;
 	}
 	
 	#plussvg {
-		width: 50px;
+		width: 40px;
 		margin: 50px;
 	}
 }
