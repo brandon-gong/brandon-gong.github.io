@@ -1,115 +1,366 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="utf-8">
-        <title>Brandon Gong</title>
-        <style>
-            @font-face {
-                font-family: "neptune";
-                src: url(neptune.otf);
-            }
-            html {
-                height: 100%;
-                width: 100%;
-                padding: 0;
-                margin: 0;
-            }
-            body {
-                background-color: black;
-                width: 100%;
-                min-height: 100%;
-                overflow: hidden;
-                padding: 0;
-                margin: 0;
-            }
-            h1 {
-                color: white;
-                font-family: "neptune", Helvetica, sans-serif;
-                font-size: 100px;
-                font-weight: 100;
-                display: block;
-                text-shadow: 0 0 12px white;
-                z-index: 2;
-            }
-            #wrapper {
-                display: flex;
-                width: 100%;
-                min-height: 100vh;
-                align-items: center;
-                justify-content: center;
-                flex-direction: column;
-            }   
-            #backgroundwrapper {
-                z-index: 1;
-            }
-        </style>
-    </head>
-    <body>
-        <div id="wrapper">
-            <div id="backgroundwrapper"></div>
-            <h1>BRANDON GONG</h1>
-        </div>
-    </body>
-    <script>
-        let chars = [
-            [0, "b", "B"],
-            [0, "r", "R"],
-            [0, "a", "A"],
-            [0, "n", "N"],
-            [0, "d", "D"],
-            [0, "o", "O"],
-            [0, "n", "N"],
-            [0, " ", " "],
-            [0, "g", "G"],
-            [0, "o", "O"],
-            [0, "n", "N"],
-            [0, "g", "G"]
-        ];
-        let m = document.getElementsByTagName("h1")[0];
-        let str = "BRANDON GONG";
-        setTimeout(
-            function() {
-                setInterval(function() {
-            let x = Math.floor(Math.random() * 30);
-            if(x > 11) return;
-            else {
-                let charToAdd = "";
-                if(chars[x][0] === 0) {
-                    charToAdd = chars[x][2];
-                    chars[x][0] = 1;
-                } else {
-                    charToAdd = chars[x][1];
-                    chars[x][0] = 0;
-                }
-                str = str.substring(0, x) + charToAdd + str.substring(x+1, 12);
-                m.innerHTML = str;
-            }
-        }, 200);
-            }, 3000);
+<html lang="en">
 
-    </script>
-    <script>
-        let size = window.innerWidth / 3;
-        function setup() {
-        let c = createCanvas(size, size);
-        c.parent('backgroundwrapper');
-        document.getElementsByTagName("h1")[0].style.marginTop = -1 * (size / 2 + document.getElementsByTagName("h1")[0].offsetHeight/2) + "px";
-        noStroke();
-        fill(20);
-        }
+<head>
+	<title>Brandon Gong</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Vollkorn:wght@700&display=swap" rel="stylesheet"> 
+	<style>
+		* {
+			box-sizing: border-box;
+		}
+		html,
+		body {
+			padding: 0;
+			margin: 0;
+			width: 100%;
+			height: 100%;
+		}
+		body {
+			overflow: hidden;
+			scrollbar-width: none;
+		}
+		body::-webkit-scrollbar {
+			display: none;
+		}
+		#content-container {
+			position: absolute;
+			color: white;
+			top: 0;
+			left: 0;
+			width: 100vw;
+			height: 100vh;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			pointer-events: none;
+			font-size: 5vw;
+			font-family: 'Montserrat';
+		}
+		#bigcontainer {
+			display: flex;
+			flex-direction: row;
+			position: absolute;
+			top: 0;
+			left: 0;
+		}
+		#transitiongradient {
+			height: 100vh;
+			width: 400px;
+			background: linear-gradient(90deg, rgba(187,187,187,1) 0%, rgba(37,37,37,1) 100%);
+		}
+		#box1 {
+			background-color: #252525;
+			width: 100vw;
+			height: 100vh;
+		}
+		.circle {
+			position: absolute;
+		border: solid 1px white;
+			width: 60px; 
+			height: 60px; 
+		/* border-radius: 50%; */
+		transform: rotate(45deg);
+		display: none;
+		}
+		#menubox {
+			position: absolute;
+			top: 50px;
+			right: 50px;
+			cursor: pointer;
+		}
+		#menubox:hover {
+			fill: #aaa;
+		}
+		#menubackground {
+			background-color: black;
+			border-radius: 50%;
+			position: absolute;
+			top: -50px;
+			right: -50px;
+			cursor: default;
+		}
+		#smallcircle {
+			height: 10px;
+			width: 10px;
+			background-color: white;
+			border-radius: 50%;
+			position: absolute;
+			display: none;
+		}
+		#menucontainer {
+			position: absolute;
+			top: 0;
+			left: 0;
+			height: 100vh;
+			width: 100vw;
+			background-color: black;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			color: white;
+			font-family: 'Vollkorn', serif;
+			font-size: 70px;
+		}
+		.ham {
+			width: 80px;
+			height: 4px;
+			background-color: black;
+			margin: 12px 0px;
+			animation: hamfade 2s infinite ease-in-out;
+		}
+		.ham-short {
+			width: 40px;
+			margin-left: 40px;
+		}
 
-        let z = 0.001;
-        function draw() {
-            background(0);
-            for(let i = 0; i < 10; i++) {
-                for(let j = 0; j < 10; j++) {
-                    let radius = noise(i/3, j/3, z) * size/10;
-                    ellipse((size-20)/10*i + 20, (size-20)/10*j + 20, radius, radius);
-                }
-            }
-            z += 0.01;
-        }
+		@keyframes hamfade {
+			0% {opacity: 1;}
+			50% {opacity: 0.5;}
+			100% {opacity: 1;}
+		}
+	</style>
+</head>
 
-    </script>
-    <script src="zencolors/js/vendor/p5.min.js"></script>
+<body>
+
+
+	
+	<div id="bigcontainer">
+		<div id="container" onmousemove="logPosition(event)"></div>
+		<div id="transitiongradient"></div>
+		<div id="box1"></div>
+	</div>
+	
+	<div id="content-container">
+		<h1>brandon gong</h1>
+	</div>
+
+	<div id="menubox" onclick="scaleMenu()">
+		<div id="hamburger">
+			<div class="ham" style="animation-delay: 0s;"></div>
+			<div class="ham" style="animation-delay: 0.33s;"></div>
+			<div class="ham ham-short"  style="animation-delay: 0.67s;"></div>
+		</div>
+		<div id="menubackground"></div>
+	</div>
+
+
+
+	<span class="circle" id="circle"></span>
+	<span id="smallcircle"></span>
+
+	<script src="js/three.min.js"></script>
+	<script src="js/STLLoader.js"></script>
+	<script src="js/OrbitControls.js"></script>
+	<script src="js/jquery-3.5.1.min.js"></script>
+	<script src="js/jquery.mousewheel.min.js"></script>
+
+	<script>
+
+		function scaleMenu() {
+			let dim = Math.sqrt(Math.pow(window.innerHeight, 2) + Math.pow(window.innerWidth, 2)) * 2;
+			$("#menubackground").animate({
+				height: dim + "px",
+				width: dim + "px",
+				top: -dim / 2 + "px",
+				right: -dim / 2 + "px"
+			}, 500, () => {
+				document.getElementById("menubox").innerHTML = "<div id='menucontainer'>asdf</div>";
+				$("#menubox").css({left: "0px", top: "0px"});
+			});
+			document.getElementById("circle").style.display = "unset";
+			document.getElementById("smallcircle").style.display = "unset";
+			document.body.style.cursor = "none";
+		}
+
+		var xpos = 0;
+
+		$(document).ready(function() {
+
+			var mouseX1 = 0, mouseY1 = 0;
+			var xp = 0, yp = 0;
+			
+			$(document).mousemove(function(e){
+				mouseX1 = e.pageX - 30;
+				mouseY1 = e.pageY - 30;
+				$('#smallcircle').css({left: e.pageX - 5 + 'px', top: e.pageY - 5 + 'px'});
+			});
+			
+			setInterval(function(){
+			xp += ((mouseX1 - xp)/6);
+			yp += ((mouseY1 - yp)/6);
+			$("#circle").css({left: xp +'px', top: yp +'px'});
+			}, 20);
+
+		});
+
+		// $(document).ready(function() {
+		// 	xpos = 0;
+		// 	$("body").mousewheel(function(e, delta) {
+		// 		xpos -= delta;
+		// 		e.preventDefault();
+		// 		if(xpos < -100) {
+		// 			$("#bigcontainer").animate({
+		// 				left: "+=50px"
+		// 			}, 200)
+		// 			xpos = 0
+		// 		}
+		// 	});
+		// });
+
+		var container, stats;
+
+		var camera, cameraTarget, scene, renderer;
+
+		var mouseX, mouseY, mx, my;
+
+
+		init();
+		animate();
+
+		function logPosition(e) {
+			mouseX = e.clientX;
+			mouseY = e.clientY;
+		}
+
+		function init() {
+
+			container = document.getElementById('container');
+
+			camera = new THREE.PerspectiveCamera(35, window.innerWidth / window.innerHeight, 1, 15);
+			camera.position.set(3, 0.15, 3);
+
+			cameraTarget = new THREE.Vector3(0, 0, 0);
+
+			scene = new THREE.Scene();
+			scene.background = new THREE.Color(0xbbbbbb);
+			scene.fog = new THREE.Fog(0xbbbbbb, 1.7, 2.0);
+
+			var loader = new THREE.STLLoader();
+			loader.load('./hilbert.stl', function (geometry) {
+
+				var material = new THREE.MeshPhongMaterial({
+					color: 0x030303,
+					specular: 0x111111,
+					shininess: 200
+				});
+				var mesh = new THREE.Mesh(geometry, material);
+
+				mesh.rotation.set(Math.PI / 4, -Math.PI / 4, Math.PI / 4);
+				mesh.scale.set(0.01, 0.01, 0.01);
+
+				mesh.castShadow = true;
+				mesh.receiveShadow = true;
+
+				scene.add(mesh);
+
+			});
+
+			// Lights
+
+			addShadowedLight(1, 1, 1, 0xffffff, 1.35);
+			addShadowedLight(0.5, 1, -1, 0xffffff, 1);
+			// renderer
+
+			renderer = new THREE.WebGLRenderer({
+				antialias: true
+			});
+			renderer.setPixelRatio(window.devicePixelRatio);
+			renderer.setSize(window.innerWidth, window.innerHeight);
+			renderer.outputEncoding = THREE.sRGBEncoding;
+
+			renderer.shadowMap.enabled = true;
+
+			container.appendChild(renderer.domElement);
+
+			window.addEventListener('resize', onWindowResize, false);
+
+		}
+
+		function addShadowedLight(x, y, z, color, intensity) {
+
+			var directionalLight = new THREE.DirectionalLight(color, intensity);
+			directionalLight.position.set(x, y, z);
+			scene.add(directionalLight);
+
+			directionalLight.castShadow = true;
+
+			var d = 1;
+			directionalLight.shadow.camera.left = -d;
+			directionalLight.shadow.camera.right = d;
+			directionalLight.shadow.camera.top = d;
+			directionalLight.shadow.camera.bottom = -d;
+
+			directionalLight.shadow.camera.near = 1;
+			directionalLight.shadow.camera.far = 4;
+
+			directionalLight.shadow.bias = -0.002;
+
+		}
+
+		function onWindowResize() {
+
+			camera.aspect = window.innerWidth / window.innerHeight;
+			camera.updateProjectionMatrix();
+
+			renderer.setSize(window.innerWidth, window.innerHeight);
+
+		}
+
+		function animate() {
+
+			requestAnimationFrame(animate);
+
+			render();
+
+		}
+
+		function render() {
+
+			// map mouseX, mouseY to [0, 2pi]
+			if(my === undefined || isNaN(my)) {
+				mx = mouseX / window.innerWidth * 3.1415927 + 3.1415926535 / 2;
+				my = (window.innerHeight - mouseY) / window.innerHeight * 3.1415927;
+			} else {
+				let nMx = mouseX / window.innerWidth * 3.1415927 + 3.1415926535 / 2;
+				let nMy = (window.innerHeight - mouseY) / window.innerHeight * 3.1415927;
+				mx = 0.95 * mx + 0.05 * nMx;
+				my = 0.95 * my + 0.05 * nMy;
+			}
+
+			let pos = [Math.cos(mx), Math.sin(mx), Math.cos(my)];
+			let norm = Math.sqrt(pos[0] * pos[0] + pos[1] * pos[1] + pos[2] * pos[2]);
+			for (let i = 0; i < pos.length; i++) {
+				pos[i] = pos[i] * 2 / norm;
+			}
+
+			let campos = new THREE.Vector3(0, 0, 0);
+			camera.getWorldPosition(campos);
+
+			let dx = [pos[0] - campos.x, pos[1] - campos.z, pos[2] - campos.y];
+
+			// converge by some ratio each frame
+			if(!isNaN(campos.x)) {
+				camera.position.x += dx[0];
+				camera.position.z += dx[1];
+				camera.position.y += dx[2];
+			} else {
+				camera.position.x = pos[0];
+				camera.position.z = pos[1];
+				camera.position.y = pos[2];
+			}
+			
+
+
+			camera.lookAt(cameraTarget);
+
+			renderer.render(scene, camera);
+
+		}
+	</script>
+</body>
+
 </html>
