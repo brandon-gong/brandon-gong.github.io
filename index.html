@@ -17,6 +17,7 @@
 			margin: 0;
 			width: 100%;
 			height: 100%;
+			cursor: none;
 		}
 		body {
 			overflow: hidden;
@@ -63,24 +64,6 @@
 			height: 60px; 
 		/* border-radius: 50%; */
 		transform: rotate(45deg);
-		display: none;
-		}
-		#menubox {
-			position: absolute;
-			top: 50px;
-			right: 50px;
-			cursor: pointer;
-		}
-		#menubox:hover {
-			fill: #aaa;
-		}
-		#menubackground {
-			background-color: black;
-			border-radius: 50%;
-			position: absolute;
-			top: -50px;
-			right: -50px;
-			cursor: default;
 		}
 		#smallcircle {
 			height: 10px;
@@ -88,66 +71,17 @@
 			background-color: white;
 			border-radius: 50%;
 			position: absolute;
-			display: none;
-		}
-		#menucontainer {
-			position: absolute;
-			top: 0;
-			left: 0;
-			height: 100vh;
-			width: 100vw;
-			background-color: black;
-			display: flex;
-			align-items: center;
-			justify-content: center;
-			color: white;
-			font-family: 'Vollkorn', serif;
-			font-size: 70px;
-		}
-		.ham {
-			width: 80px;
-			height: 4px;
-			background-color: black;
-			margin: 12px 0px;
-			animation: hamfade 2s infinite ease-in-out;
-		}
-		.ham-short {
-			width: 40px;
-			margin-left: 40px;
-		}
-
-		@keyframes hamfade {
-			0% {opacity: 1;}
-			50% {opacity: 0.5;}
-			100% {opacity: 1;}
 		}
 	</style>
 </head>
 
-<body>
+<body onload="logPosition(event)">
 
-
-	
-	<div id="bigcontainer">
 		<div id="container" onmousemove="logPosition(event)"></div>
-		<div id="transitiongradient"></div>
-		<div id="box1"></div>
-	</div>
-	
+	<img src="Hilbert_curve_3.svg" style="position: absolute; top: 20px; left: 20px;" width=80>
 	<div id="content-container">
 		<h1>brandon gong</h1>
 	</div>
-
-	<div id="menubox" onclick="scaleMenu()">
-		<div id="hamburger">
-			<div class="ham" style="animation-delay: 0s;"></div>
-			<div class="ham" style="animation-delay: 0.33s;"></div>
-			<div class="ham ham-short"  style="animation-delay: 0.67s;"></div>
-		</div>
-		<div id="menubackground"></div>
-	</div>
-
-
 
 	<span class="circle" id="circle"></span>
 	<span id="smallcircle"></span>
@@ -159,23 +93,6 @@
 	<script src="js/jquery.mousewheel.min.js"></script>
 
 	<script>
-
-		function scaleMenu() {
-			let dim = Math.sqrt(Math.pow(window.innerHeight, 2) + Math.pow(window.innerWidth, 2)) * 2;
-			$("#menubackground").animate({
-				height: dim + "px",
-				width: dim + "px",
-				top: -dim / 2 + "px",
-				right: -dim / 2 + "px"
-			}, 500, () => {
-				document.getElementById("menubox").innerHTML = "<div id='menucontainer'>asdf</div>";
-				$("#menubox").css({left: "0px", top: "0px"});
-			});
-			document.getElementById("circle").style.display = "unset";
-			document.getElementById("smallcircle").style.display = "unset";
-			document.body.style.cursor = "none";
-		}
-
 		var xpos = 0;
 
 		$(document).ready(function() {
@@ -319,9 +236,14 @@
 		}
 
 		function render() {
+			if(document.getElementById("menucontainer") !== null) return;
 
 			// map mouseX, mouseY to [0, 2pi]
 			if(my === undefined || isNaN(my)) {
+				if(mouseX === undefined) {
+					mouseX = window.innerWidth / 2;
+					mouseY = window.innerHeight / 2;
+				}
 				mx = mouseX / window.innerWidth * 3.1415927 + 3.1415926535 / 2;
 				my = (window.innerHeight - mouseY) / window.innerHeight * 3.1415927;
 			} else {
