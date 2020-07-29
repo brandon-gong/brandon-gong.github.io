@@ -377,12 +377,13 @@
 		function render() {
 			if(document.getElementById("menucontainer") !== null) return;
 
-			if(isMobile) {
+			if(true) {
 
-				let timer = Date.now() * 0.0005;
+				let timer = Date.now() * 0.0002;
 
-				camera.position.x = Math.cos( timer ) * 3;
-				camera.position.z = Math.sin( timer ) * 3;
+				camera.position.x = Math.cos( timer ) * 2;
+				camera.position.z = Math.sin( timer ) * 2;
+				camera.position.y = 0.5;
 
 			} else {
 // map mouseX, mouseY to [0, 2pi]
