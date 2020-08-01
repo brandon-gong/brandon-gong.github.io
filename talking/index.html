@@ -140,14 +140,29 @@
 		#maincontent {
 			margin-top: calc(100vh - 70px);
 			width: 100%;
-			position: relative;
 			height: calc(100vh + 70px);
+			position: relative;
+		}
+
+		#main-textbox {
+			width: 50vw;
+		}
+
+		#morebox {
+			width: 100vw; height: 100vh; display: flex; align-items: center; justify-content: center;
 		}
 
 		@media only screen and (max-width: 1000px) {
 			#content-container {
-				display: unset;
+				position: unset;
+				height: unset;
 				margin-top: 130px;
+			}
+
+			#maincontent {
+				margin-top: 0px;
+				height: unset;
+				margin-bottom: 70px;
 			}
 
 			#hbox {
@@ -162,6 +177,15 @@
 			#text-box {
 				width: 80vw;
 				margin-top: -30px;
+			}
+			#main-textbox {
+				width: 80vw;
+			}
+			#visualdown {
+				display: none;
+			}
+			#morebox {
+				height: unset;
 			}
 		}
 	</style>
@@ -190,12 +214,12 @@
 
 	<div id="maincontent">
 		<div style="width: 100%;display: flex;flex-direction: column;align-items: center;justify-content: center;">
-			<div id="visualdown">
+			<div id="visualdown" onclick="scrollDown()">
 				<img src="../arrow_down_black.svg">
 			</div>
 		</div>
-		<div style="width: 100vw; height: 100vh; display: flex; align-items: center; justify-content: center;" id="morebox">
-			<div style="width: 50vw">
+		<div style="" id="morebox">
+			<div id="main-textbox">
 				<h2>See My Resume.</h2>
 				<p>If you would like to look at my resume, you may download the file here.  I have also put up an online version for your convenience (if you don't want to deal with that extra file).  Thanks for reading!</p>
 				<h2>Let's Get in Touch.</h2>
@@ -273,6 +297,15 @@
 					`<img src="../Hilbert_curve_3_active.svg" width=50 id="icon">`;
 			});
 
+			$("#profile").mouseenter(function () {
+				$("#smallcircle").css({backgroundColor: "white"});
+				$("#circle").css({borderColor: "white"});
+			});
+			$("#profile").mouseleave(function () {
+				$("#smallcircle").css({backgroundColor: "black"});
+				$("#circle").css({borderColor: "black"});
+			});
+
 			$("#back").mouseenter(function () {
 				labeloffset = -150;
 				document.getElementById("cursor-caption").innerHTML = "Return&nbsp;to&nbsp;home";
@@ -335,13 +368,6 @@
 				toplabeloffset = 0;
 			});
 
-			$("visualdown").mouseup(function () {
-				$('html, body').animate({
-					scrollTop: $('#morebox').offset().top
-				}, 2000);
-				console.log("test");
-			});
-
 			setInterval(function () {
 				xp += ((mouseX1 - xp) / 6);
 				yp += ((mouseY1 - yp) / 6);
@@ -358,6 +384,13 @@
 			}, 20);
 
 		});
+
+
+		function scrollDown() {
+			$("body, html").animate({
+				scrollTop: $(document).height()
+			}, 1000);
+		}
 	</script>
 </body>
 
