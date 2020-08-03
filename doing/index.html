@@ -147,6 +147,10 @@
 			padding: 30px;
 		}
 
+		#icon {
+			pointer-events: none;
+		}
+
 		#box1_inner:hover,
 		#box2_inner:hover,
 		#box3_inner:hover,
@@ -243,6 +247,11 @@
 			font-size: 30px;
 		}
 
+		h3 {
+			font-family: "Montserrat", sans-serif;
+			font-size: 24px;
+		}
+
 		#close-x {
 			font-size: 30px;
 			margin-top: -5px;
@@ -254,7 +263,6 @@
 			flex-grow: 1;
 			padding: 40px;
 			padding-top: 20px;
-			padding-bottom: 60px;
 		}
 
 		#content-title {
@@ -414,7 +422,7 @@
 				document.getElementById("box2_inner").innerHTML = "CHS Math Bowl";
 				document.getElementById("box3_inner").innerHTML = "CRIS";
 				document.getElementById("box4_inner").innerHTML = "Robotics";
-				document.getElementById("box5_inner").innerHTML = "Processing Sketches";
+				document.getElementById("box5_inner").innerHTML = "Other Work";
 			}
 
 			var mouseX1 = 0,
@@ -527,8 +535,8 @@
 					fontSize: "40px"
 				});
 				toplabeloffset = 15;
-				labeloffset = -170;
-				document.getElementById("cursor-caption").innerHTML = "Processing&nbsp;sketches";
+				labeloffset = -90;
+				document.getElementById("cursor-caption").innerHTML = "Other&nbsp;Work";
 			});
 			$("#box5").mouseleave(function () {
 				$("#circle").css({
@@ -802,7 +810,7 @@
 							be a token of gratitude to the generous donors that made the project possible.
 						</p>
 						<p>
-							In designing the website, I took several key factors into consideration. The website:
+							In designing the website, I considered several key factors. The website:
 							<ul style="font-size: 20px; font-family: 'Source Serif Pro', serif">
 								<li>
 									Had to be visually impactful. If it did not grab attention immediately, potential
@@ -879,7 +887,7 @@
 						<p>You may access the website <a href="https://901ppe.org/">here</a> and the fundraising page <a
 								href="https://www.gofundme.com/f/help-provide-masks-for-officers-in-shelby-county">here</a>.
 						</p>
-						<div style="height: 40px"></div>
+						<div style="height: 20px"></div>
 					`);
 					progressshim = 40;
 					break;
@@ -1055,7 +1063,7 @@
 							participants, volunteers, parents, or teachers.  And it is this feeling that will continue to motivate me to keep
 							creating and building in the future.
 						</p>
-						<div style="height: 40px"></div>
+						<div style="height: 20px"></div>
 					`);
 					progressshim = 45;
 					break;
@@ -1127,9 +1135,227 @@
 							CRIS was awarded the Collierville Forward Award by the Collierville Environmental Commission
 							in 2019 for its contributions towards encouraging a more environmentally-friendly community.
 						</p>
-						<div style="height: 40px"></div>
+						<div style="height: 20px"></div>
 					`);
 					progressshim = 45;
+					break;
+				case 4:
+					$("#header-title").html("Robotics");
+					$("#content-title").html("Robotics");
+					$("#content-text").html(`
+						<a href="https://github.com/brandon-gong/ftc-mecanum">ftc-mecanum</a>
+						• 
+						<a href="https://github.com/dragonrobotics/2018-PowerUp">2018-PowerUp</a>
+						•
+						<a href="https://github.com/dragonrobotics/2019-DeepSpace">2019-DeepSpace</a>
+						• 
+						<a href="https://github.com/brandon-gong/2020-TowerTakeover">2020-TowerTakeover</a>
+						<p>
+							Starting in 7th grade, I have been a part of some form of robotics team every
+							year.  I started in 7th grade with an FTC team in its first year; in 8th grade,
+							I became the captain of the team.  In my freshman year of high school, I joined
+							the school's FRC team as a programmer, and in 10th grade I became the lead
+							programmer.  In 11th grade, I helped form a new independent VEX Robotics team.
+						</p>
+						<p>
+							You can find a more general account of my experience on <a href="#">my blog</a>.
+							I highly encourage you to read it; it provides more context and backstory for my
+							time in robotics.
+						</p>
+						<h3>ftc-mecanum</h3>
+						<p>
+							While I had left the FTC team that I helped create when I moved on to high school,
+							I never lost my connection to the team. I continued to volunteer
+							hundreds of hours of my spare time to serving as a programming mentor, teaching
+							middle school students who had never programmed before in their lives how to write
+							basic Java.
+						<p>
+							This repository contains well-documented,
+							clean Java code for programming a mecanum drive base.  
+							As a mecanum base is one of the more complicated (or arguably the most
+							complicated, for FTC) drive bases to program, it was necessary to guide them at
+							every step of the way.
+						</p>
+						<h3>2018-PowerUp</h3>
+						<p>
+							2017 was the year I entered 9th grade and joined the Dragon Robotics FRC team. Despite
+							being completely new to the organization, I immediately began to help create a major
+							change within the programming team. Instead of using Java, as the team had for its
+							entire history, I helped transition the team into using Python for the robot instead.
+						</p>
+						<img src="robot/1.jpg" class="fullimg">
+						<p class="caption">Our 2017-2018 bot, nicknamed "Toothless" for its dragon-like yet derpy appearance.</p>
+						<p>
+							Python is good for several reasons.  For one, it is much easier to read and write,
+							meaning more inexperienced programmers could have a chance to contribute.  In addition,
+							it is more flexible than Java (dynamic types and first-class functions), enabling us
+							to more easily take advantage of programming patterns such as finite-state automata and
+							pipelines.
+						</p>
+						<p>
+							I also implemented a <i>swerve</i> drivetrain in Python.  Swerve drive is the most complex
+							base, using 8 motors; for each corner of the robot, there is a motor that turns the wheel,
+							and another motor that turns the entire module, enabling the wheel to have 360° of pivot freedom.
+						</p>
+						<p>
+							Because of this, swerve drive can enable the robot to move with ultimate freedom; it can pivot around one corner,
+							drive in a straight line while rotating, drive in smooth arcs, or even lock itself in place to avoid
+							being pushed around by moving its wheels into an X formation.
+						</p>
+						<p>
+							As mentioned earlier, the autonomous code took advantage of finite-state automata, a pattern
+							made a lot more elegant using Python's first class functions.  This enabled a great degree
+							of flexibility and ensured coordination between the different subsystems on the robot.
+						</p>
+						<img src="robot/2.jpg" class="fullimg">
+						<p class="caption">The team at the 2018 Rock City Regional.</p>
+						<h3>2019-DeepSpace</h3>
+						<p>
+							When the previous programming lead graduated, I had the most experience with programming the robot on
+							the team; as a result, I took over the programming lead position.
+						</p>
+						<p>
+							I opted to continue using Python for the 2018-2019 season with a focus on user-friendliness, flexibility,
+							and modularity.  I used the state machine pattern in driver-controlled code for the first time to control
+							the lift and the claw; this allowed for extremely safe yet responsive control of those subsystems.
+							Additionally, I introduced the idea of a <i>config.py</i> file, which contained only global constants used to
+							control settings like how sensitive a control was, or what a certain button mapped to.  This was important
+							because it meant that even non-programmers, especially the drivers, who were often from the build team, could
+							adjust and modify how the robot behaved to their liking without having to sift through code.
+						</p>
+						<img src="robot/5.jpg" class="fullimg">
+						<p class="caption">The 2018-2019 bot, with its unique expanding claw and LED's on the side (off in this picture).</p>
+						<p>
+							Finally, we implemented code to control LED strips on our robot for the first time.  The LEDs are intended
+							to communicate to the driver different statuses on the robot. But, as a side bonus, they just look super cool
+							too.
+						</p>
+						<img src="robot/4.jpg" class="fullimg">
+						<p class="caption">The two bots of my FRC career; on the left, the Deep Space bot; on the right, the Power Up bot.  Countless
+						hours of hard work and good memories captured in one image!</p>
+						<h3>2020-TowerTakeover</h3>
+						<p>
+							After the 2018-2019 season, for various reasons (which you can find on my blog), I decided to leave the FRC team
+							and help form a new independent VEX program outside of the school.
+						</p>
+						<p>
+							This was my first year doing VEX, and I served as the sole programmer on the team.  Despite this, I adapted quickly
+							to the C++-based programming environment and brought over many of the principles that I had carefully enforced in my
+							time on FRC: flexibility, modularity, and statefulness.
+						</p>
+						<p>
+							Although the robot design was constantly in flux, as different iterations were tested and failed, the code itself was
+							extremely easy to work with due to the modularity built into the code.  Code for different modules was always
+							separated like oil and water; when the design of the robot was changed, all that needed to be done was simply
+							swap one of the modules out, and the robot would function exactly as expected.
+						</p>
+						<div style="height: 20px"></div>
+					`);
+					break;
+				case 5:
+					$("#header-title").html("Other Work");
+					$("#content-title").html("Other Work");
+					$("#content-text").html(`
+						<a href="https://github.com/brandon-gong/processing-sketches">Processing sketches</a>
+						• 
+						<a href="https://github.com/brandon-gong/web2anki">Web2Anki</a>
+						•
+						<a href="https://github.com/brandon-gong/MathTrainer">MathTrainer</a>
+						<p>
+							These are smaller side-projects that I wrote mostly for my own use.  However,
+							I thought it would be nice to give examples of how I use programming as a tool in my daily life.
+						</p>
+						<h3>Processing Sketches</h3>
+						<p>
+							Okay, so maybe the whole right-brain/left-brain thing is a myth, but I'm definitely the kind of
+							person who is better at the concrete — math, science, programming — than the abstract.  My
+							creativity skills are sorely lacking.
+						</p>
+						<p>
+							In order to remedy this, I occasionally do a sketch using <a href="https://processing.org/">Processing</a>,
+							a graphics program built on Java.  Besides being exercises in code, the sketches also force me to flex my
+							creative muscles; I imagine an end result (or see some inspiring art online that I would like to replicate)
+							and try to create it using code.
+						</p>
+						<img src="etc/sketch1.png" class="fullimg">
+						<p class="caption">One of my sketches, called "ripples" for its fabric-like appearance. Based on random noise generation.</p>
+						<img src="etc/sketch2.png" class="fullimg">
+						<p class="caption">A bit of a different style of sketch, this one draws from real photos to generate spiral artwork.</p>
+						<p> 
+							This repository is an incomplete archive of my sketches.  They are not particularly awe-inspiring by any means, and I would
+							hesitate to even call them <i>art</i>, but they are an example of exercises I do in my own time to simultaneously
+							get faster at programming and become more creative.
+						</p>
+						<h3>Web2Anki</h3>
+						<p>
+							This python script arose from my personal efforts to get better at reading and writing Chinese.  My strategy
+							was to memorize the 1,000 most common Hanzi characters and then gradually learn the rest by reading and using
+							context clues.
+						</p>
+						<p>
+						The flashcards software I planned to use was Anki, a spaced-recognition software that allows for greater long-term
+						retention of material by ordering cards based on how frequently you miss them.
+						</p>
+						<p>
+						However, 1,000 flash cards is an amount that I have neither the time nor the motivation to make.  So, I wrote a script
+						that did it for me.
+						</p>
+						<img src="etc/anki.png" class="fullimg">
+						<p class="caption">A deck generated by Web2Anki. The formatting is fully flexible, and you can easily tweak formatting
+						for all of the cards even after the deck is imported into Anki.</p>
+						<p>
+						Web2Anki converts Wikipedia tables and Quizlet flashcards to Anki decks.  It is actually quite flexible in doing so;
+						the columns of the Wikipedia table can be used in any way, and the formatting can be customized.  For example,
+						I can create a deck of Chinese characters from <a href="https://en.wiktionary.org/wiki/Appendix:Mandarin_Frequency_lists/1-1000">this Wiktionary page</a> using this command:
+						</p>
+						<code>./web2anki.py https://en.wiktionary.org/wiki/Appendix:Mandarin_Frequency_lists/1-1000 "{{col1}}" "{{col2}}: {{col3}}" "1000 Hanzi" output.apkg</code>
+						<p>
+							which will output a deck with cards formatted like so:
+							<ul style="font-size: 20px; font-family: 'Source Serif Pro', serif">
+								<li>Front of card: <code>我</code></li>
+								<li>Back of card: <code>wǒ: I, me, ego, self</code></li>
+							</ul>
+						</p>
+						<p>
+							Note how columns 3 and 4 of the table were combined for the back of the card.
+						</p>
+						<p>
+							I used this script for more than studying Chinese; when studying for Science Olympiad or the Tennessee Science Bowl,
+							I frequently created decks to memorize tables of information using this script.  Furthermore, this script
+							can easily be extended to support additional websites in the future if I need to.
+						</p>
+						<h3>MathTrainer</h3>
+						<p>
+							Though my symbolic math strength is quite well-developed, I can't say the same for my numerical strength; in other words,
+							while I can solve algebraic equations, manipulate matrices, integrate expressions, and solve differential equations just 
+							fine, I'm quite slow when adding, subtracting, multiplying, and dividing actual numbers compared to some of my math 
+							friends.
+						</p>
+						<p>
+							Especially for contest math tests like the AMC and the AIME, not being able to quickly bash out numbers can be a huge
+							bottleneck.  And because I'm very inexperienced with contest math, I need all the time I can get to think about the 
+							problems.
+						</p>
+						<p>
+							That means I needed to get faster at working with numbers.
+						</p>
+						<p>
+							MathTrainer was a program that I wrote that would randomly generate mental math problems for me to solve.
+							I can customize what types of problems are included or excluded, as well as the number of problems per sprint.
+							After each sprint, MathTrainer reports back to me with all of the problems, whether I got them wrong or right,
+							and my average time overall.
+						</p>
+						<p>
+							It is an extremely flexible tool, either when I want to grind a specific topic or work on quickly switching gears
+							and solve a wide range of problems.
+						</p>
+						<p>
+							In addition, I find it a great way to "gamify" my math preparation; I compete against my old fastest records and see
+							if I can push the time even lower.  By taking this competitive mindset, I become incentivized to constantly improve.
+						</p>
+						<div style="height: 20px"></div>
+					`);
+
 					break;
 			}
 
@@ -1145,9 +1371,9 @@
 		}
 
 		function updateProgress() {
-			let scrollpct = $("#content").scrollTop() / ($("#content-inner").height() - $("#content").height() - progressshim);
+			let scrollpct = $("#content").scrollTop() / ($("#content-inner").outerHeight(true) - $("#content").outerHeight(true) + 40);
 			$("#scroll-progress").css({
-				width: scrollpct * 800 + 'px'
+				width: Math.min(scrollpct, 1) * document.getElementById("detailcontainer").clientWidth + 'px'
 			});
 		}
 
