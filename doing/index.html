@@ -235,8 +235,6 @@
 			flex-direction: row;
 			justify-content: space-between;
 			align-items: center;
-			padding: 15px;
-			padding-bottom: 12px;
 			border-bottom: 1px solid #aaa;
 			position: relative;
 			padding-left: 20px;
@@ -246,6 +244,8 @@
 		#header-title {
 			font-family: "Montserrat", sans-serif;
 			font-size: 30px;
+			padding-top: 10px;
+			padding-bottom: 10px;
 		}
 
 		h3 {
@@ -1360,11 +1360,15 @@
 					break;
 			}
 
+			$("body").css({
+				pointerEvents: "none"
+			});
 
 			$("#detailwrapper").css({
 				pointerEvents: "auto",
 				display: "flex"
 			});
+			document.getElementById("content").scrollTop = 0;
 			$("#detailwrapper").css({
 				backgroundColor: "rgba(0,0,0,0.25)",
 				backdropFilter: "blur(10px)"
@@ -1379,6 +1383,7 @@
 		}
 
 		function detrigger() {
+			document.getElementById("content").scrollTop = 0;
 			$("#detailwrapper").css({
 				backgroundColor: "rgba(0,0,0,0)",
 				backdropFilter: "blur(0px)"
@@ -1387,6 +1392,10 @@
 				pointerEvents: "none",
 				display: "none"
 			});
+			$("body").css({
+				pointerEvents: "unset"
+			});
+
 			// not actually necessary, just makes me happy
 			$("#header-title").html("");
 			$("#content-title").html("");
