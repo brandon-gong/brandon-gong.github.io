@@ -361,12 +361,12 @@
 <body>
 
 	<div id="nav">
-		<a href="../../" style="cursor: none">
+		<a href="../../index.html" style="cursor: none">
 			<div id="logocontainer" style="padding: 15px; padding-top: 16px; padding-bottom: 14px;">
 				<img src="../../Hilbert_curve_3.svg" width=32 id="icon">
 			</div>
 		</a>
-		<div id="nav-header">Exploring Scheme (and a new way to think)</div>
+		<div id="nav-header">Integrating, with Mr. Feynman</div>
 		<a onclick="window.history.back()">
 			<div id="x-close" class="no-select">⨉</div>
 		</a>
@@ -376,14 +376,14 @@
 	<div id="wrapper">
 		<div id="container">
 			<div class="no-select">
-				<h1>Exploring Scheme (and a new way to think)</h1>
-				<h2>Learning a new programming language shouldn't be that hard, right...?</h2>
+				<h1>Integrating, with Mr. Feynman</h1>
+				<h2>Adventures in integration with a calculus newbie</h2>
 				<div style="display: flex; flex-direction: row;align-items: center; margin-bottom: 50px;">
 					<img src="profile.jpg" id="pfp">
 					<div style="width: 15px"></div>
 					<div>
 						<div id="name">Brandon Gong</div>
-						<div id="date">August 3rd, 2020</div>
+						<div id="date">August 8th, 2020</div>
 					</div>
 					<div style="flex-grow: 1;"></div>
 					<div id="controls">
@@ -392,100 +392,198 @@
 					</div>
 				</div>
 			</div>
-			<img src="https://via.placeholder.com/800x600.png" class="article-image">
-			<p class="img-caption">Sample caption goes here</p>
+			<img src="001/feynman.jpg" class="article-image">
+			<p class="img-caption">Richard Feynman, the great physicist and legendary teacher</p>
 			<p>
-				<span class="drop">W</span>orem ipsum dolor sit amet, consectetur adipiscing elit. Praesent venenatis
-				convallis ligula in rhoncus. Donec dapibus lacus eget libero porta luctus. Proin tristique felis augue,
-				sit amet gravida diam aliquam sed. Donec nec sodales turpis, quis maximus felis. Etiam tellus lectus,
-				volutpat ac aliquam sed, dictum id ligula. Aliquam id consectetur nunc. In auctor mauris risus, quis
-				suscipit quam pulvinar quis. Cras pharetra urna at ante scelerisque efficitur. Aliquam scelerisque
-				libero vitae risus molestie, nec efficitur urna auctor.
-			</p>
-			<pre><code class="language-java">public abstract class Test {
-	/* testing comments */
-	public void funcName(int x) {
-		double y = (double) x / 0.5;
-		String test = "This is a test of a string";
-		return y;
-	}
-}</code></pre>
-			<p>
-				Fusce justo sapien, molestie eu lacus placerat, elementum dignissim dolor. Nullam sem ex, pellentesque
-				eget tincidunt eu, consectetur vel velit. Donec ante tellus, consequat vitae lorem suscipit, interdum
-				feugiat lectus. Donec tristique odio vitae ante tristique, et varius magna vestibulum. Ut velit diam,
-				blandit quis aliquet eget, posuere sed enim. Integer at nibh vehicula, varius purus non, fringilla nibh.
-				Praesent viverra nulla at nunc tempor, vitae interdum arcu malesuada. Proin eu ante bibendum, euismod
-				felis nec, iaculis libero. Nunc id interdum urna. Donec dignissim libero eget orci gravida sodales.
+				<span class="drop">A</span>s a fledgeling math student, with only Calculus III and a semester of introductory ODE material under
+				my belt, I'm often afraid to stray away from my comfortable set of integration techniques; if I throw u-substitution,
+				integration by parts, and trigonometric substitution at a certain expression and nothing comes out of it, my best hope is to
+				simply set the problem aside and ask my instructor if there was a mistake or a typo.
 			</p>
 			<p>
-				Donec sed metus sem. Morbi tincidunt massa nisi, et molestie metus vestibulum vel. Donec sit amet nisi
-				vitae ligula aliquam pretium. Donec maximus quis ipsum nec gravida. Sed faucibus ligula et interdum
-				venenatis. Vestibulum quis sapien a neque consequat molestie vitae ut dui. Donec volutpat sollicitudin
-				vehicula.
+				So far, this strategy has worked.  In my classroom environment, problems are constructed in a way that makes use of one of those
+				integration techniques covered in Calculus I or II, and so — provided there were no typos that occurred when typesetting the problem —
+				I remained blissfully unexposed to trickier expressions.  However, I can't help but feel deeply unsatisfied with the limited power of
+				what I know.  Sure, integration working out symbolically is definitely a rare phenomenon compared to those problems where the only
+				way forward is to bash the decimal approximation out using a computer; nevertheless, learning about a new, creative technique for
+				solving integrals by hand is still a very exciting experience.
+			</p>
+			<h3>Starting out</h3>
+			<p>
+				Let's warm up with an easy integral that I know I can solve using integration by parts.  From there, we'll tweak it until it
+				becomes a bit more nontrivial.  For demonstration purposes, I'm going to solve this definite integral via IBP:
 			</p>
 			<p>
-				When \(a \ne 0\), there are two solutions to \(ax^2 + bx + c = 0\) and they are
-				\[x = {-b \pm \sqrt{b^2-4ac} \over 2a}.\]
+				\[\begin{align*}
+				\int_0^1x\ln{x}\,dx
+				\end{align*}\]
 			</p>
 			<p>
-				Duis ultricies laoreet quam, id dictum tellus tempor vitae. Vestibulum elementum ipsum dolor, vitae
-				sodales nibh vehicula egestas. Donec neque turpis, tincidunt eget pharetra vel, dapibus ut ex. Proin et
-				sollicitudin augue, eget congue velit. Etiam a fermentum enim, in iaculis lorem. Curabitur iaculis
-				tellus nec dapibus sollicitudin. Morbi dui neque, sollicitudin ut placerat ut, luctus sed magna. Aenean
-				elementum est in enim molestie consequat. Donec vitae justo nulla. Vestibulum sodales aliquam libero eu
-				condimentum.
+				Because the behavior of \(f(x) = x\ln{x}\) is not so clear on the left bound of \(x = 0\), I'm going to use an improper integral for correctness's sake.
 			</p>
 			<p>
-				Quisque posuere consequat magna in malesuada. Mauris tempus lectus vel elit sodales, ac venenatis quam
-				lacinia. Nullam ac massa in est tempus rhoncus non sed lorem. Mauris rutrum arcu a nulla volutpat, sit
-				amet sodales sem ultrices. Fusce et ullamcorper massa. Phasellus aliquam vestibulum lacinia. Aliquam
-				vitae pulvinar ipsum. Sed condimentum risus in nibh congue porta. Nulla finibus massa erat, eget
-				lobortis quam venenatis in.
+				\[\begin{align*}
+				\int_0^1x\ln{x}\,dx &= \lim_{a \to 0}\int_a^1x\ln{x}\,dx. \text{ Let }u=\ln{x}\text{, } dv=x\,dx. \\
+				&= \lim_{a \to 0}\left[ \frac{1}{2}x^2\ln{x}-\int_a^1\frac{1}{2}x\,dx\right] \\
+				&= \lim_{a \to 0}\left[ \frac{1}{2}x^2\ln{x}-\frac{x^2}{4}\right]^1_a
+				\end{align*}\]
 			</p>
 			<p>
-				Nunc dolor velit, rutrum sit amet mauris ut, pulvinar elementum dolor. Curabitur posuere iaculis lectus,
-				eu scelerisque lacus tincidunt et. Aenean sed finibus libero. Duis mattis bibendum odio et volutpat.
-				Pellentesque tempus velit nibh, vel finibus metus eleifend ut. Etiam ut pellentesque libero. Maecenas
-				hendrerit enim eget dolor congue, vel dictum leo tempor. Suspendisse et dictum urna. Vivamus tincidunt
-				tincidunt imperdiet. Etiam luctus, nisi vitae luctus ultrices, mauris mauris rutrum erat, in dapibus
-				ante ipsum at arcu. Integer vitae condimentum nunc. Ut malesuada lacinia libero, vel semper erat pretium
-				congue. Donec eu efficitur urna.
+				The behavior of the \(\frac{1}{2}x^2\ln{x}\) term is a bit unclear as we approach 0, but no worries: L'Hospital's Rule is here to help.
 			</p>
 			<p>
-				Aliquam pharetra accumsan libero ut consectetur. Sed auctor ante in turpis pellentesque rutrum vel eget
-				est. Integer libero metus, bibendum nec diam tristique, mattis porttitor tortor. Donec scelerisque
-				vulputate ligula, a dapibus odio. Aliquam imperdiet tincidunt tellus id cursus. Interdum et malesuada
-				fames ac ante ipsum primis in faucibus. Curabitur mollis, justo non ultricies pulvinar, arcu dui
-				tincidunt risus, eleifend tincidunt libero felis suscipit turpis. Nam vitae dui sagittis, ornare odio
-				pretium, fermentum ipsum.
+				\[\begin{align*}
+				\lim_{a \to 0}\left[ \frac{1}{2}a^2\ln{a}\right] &= \frac{1}{2}\lim_{a \to 0}\left[\frac{\ln{a}}{\frac{1}{a^2}}\right] \rightarrow\frac{\infty}{\infty}\\
+				&=\frac{1}{2}\lim_{a \to 0}\left[\frac{\frac{1}{a}}{-\frac{2}{a^3}}\right]\\
+				&=\frac{1}{2}\lim_{a \to 0}\left[-\frac{a^2}{2}\right]\\
+				&=0.
+				\end{align*}\]
 			</p>
 			<p>
-				Nulla blandit, dolor euismod mattis ultricies, dui sapien ultrices erat, quis finibus purus dolor non
-				neque. Curabitur et placerat nisi. Sed vestibulum libero eu turpis ultricies aliquam. Curabitur dictum
-				ac lectus ut pharetra. Nullam a lorem at turpis cursus ullamcorper. In convallis congue enim, at finibus
-				ante tempus et. Suspendisse rutrum, leo id pellentesque hendrerit, magna eros tincidunt sapien, nec
-				cursus est ipsum sed odio.
+				Knowing this, we have
 			</p>
 			<p>
-				Quisque volutpat diam sed felis lobortis, at mollis sapien gravida. Sed eros neque, imperdiet
-				consectetur pretium et, venenatis id massa. Donec eget eleifend sapien. Praesent placerat sagittis odio,
-				sed imperdiet sapien tempor quis. Sed odio ligula, porttitor vitae iaculis lacinia, dictum in mi. Nam
-				vitae turpis felis. In tincidunt elit non dolor luctus iaculis. Suspendisse eget orci molestie,
-				facilisis ante quis, volutpat leo. Aenean feugiat interdum vehicula. In vitae elit ac ipsum fringilla
-				molestie vitae id ex. Morbi vestibulum aliquet faucibus. Duis eget elit ac diam congue lobortis.
+				\[\begin{align*}
+				\lim_{a \to 0}\left[ \frac{1}{2}x^2\ln{x}-\frac{x^2}{4}\right]^1_a&=\left(0-\frac{1}{4}\right)-(0-0)\\
+				&=-\frac{1}{4}.
+				\end{align*}\]
 			</p>
 			<p>
-				Integer maximus justo condimentum faucibus finibus. Fusce porta mauris dui, quis euismod ligula volutpat
-				ut. Cras luctus sagittis turpis ac sodales. Etiam hendrerit at eros eget auctor. Cras consequat, ligula
-				in congue tempus, orci est dictum libero, a placerat erat odio et justo. Pellentesque dictum condimentum
-				posuere. Donec mattis dolor ut ante venenatis auctor. Cras at massa lacinia, scelerisque orci ac,
-				egestas velit. Morbi lacus est, hendrerit et magna quis, convallis mollis ipsum. Nulla placerat, lacus
-				eget tristique ullamcorper, diam nunc sagittis velit, quis bibendum dui mauris quis tortor. Morbi
-				lacinia augue turpis, nec laoreet quam semper sed. Nam semper sem sit amet auctor condimentum. Nullam
-				quis euismod sem. Maecenas in ipsum nisl. Integer lobortis non erat sit amet tincidunt. Sed sit amet
-				nisi condimentum, luctus purus quis, finibus tortor.
+				That wasn't so bad!  Let's try, however, making the integral a <i>bit</i> more complicated, by squaring
+				the integrand:
 			</p>
+			<p>
+				\[\begin{align*}
+				\int_0^1\left(x\ln{x}\right)^2\,dx
+				\end{align*}\]
+			</p>
+			<p>
+				This integral indeed remains solvable using IBP, though this time you would have to do <i>two</i> IBPs instead
+				of just one. I'm going to show it below, but to avoid being too repetitive I'm going to be a bit loose with
+				the notation; just like before, this is technically an improper integral, but using L'Hospital's Rule all of
+				the natural log terms will end up evaluating to 0.
+			</p>
+			<p>
+				\[\begin{align*}
+				\int_0^1\left(x\ln{x}\right)^2\,dx &= \int_0^1x^2\ln^2{x}\,dx\\
+				&= \frac{1}{3}x^3\ln^2{x} - \int_0^1\frac{2}{3}x^2\ln{x}\,dx\\
+				&= \frac{1}{3}x^3\ln^2{x} - \frac{2}{9}\left(x^3\ln{x}-\int_0^1x^2\,dx\right)\\
+				&= \left[\frac{1}{3}x^3\ln^2{x} - \frac{2}{9}x^3\ln{x}+\frac{2}{27}x^3\right]^1_0\\
+				&= \frac{2}{27}.
+				\end{align*}\]
+			</p>
+			<p>
+				But instead of squaring the integrand, what if we raise it to the 10th power? 100th?  To evaluate \(
+				\int_0^1\left(x\ln{x}\right)^n\,dx\), we would have to do IBP \(n\) times; sure, we can use tabular integration
+				to save some time, but is there a better way?  Can we get a general expression for \(\int_0^1\left(x\ln{x}\right)^n\,dx\)
+				in terms of \(n\)?
+			</p>
+			<h3>Enter Feynman</h3>
+			<p>
+				Feynman's trick, also known as differentiating under the integral sign, is a fairly simple yet powerful technique for
+				evaluating definite integrals.  When using Feynman's trick, we will define a function by paramaterizing some part of the integral, 
+				taking the derivative of both sides, <i>interchanging the derivative and the integral sign</i> (by the Leibniz integral rule), and 
+				magic will happen.
+			</p>
+			<p>
+				Let us start by defining a function \(I(\alpha)\) that will help us in our journey to finding the general form of
+				\(\int_0^1\left(x\ln{x}\right)^n\,dx\):
+			</p>
+			<p>
+				\[\begin{align*}
+				I(\alpha) = \int_0^1x^\alpha\,dx
+				\end{align*}\]
+			</p>
+			<p>Note that this also simplifies, like so:</p>
+			<p>
+				\[\begin{align*}
+				\int_0^1x^\alpha\,dx = \left[\frac{x^{\alpha+1}}{\alpha+1}\right]^1_0 = \frac{1}{\alpha+1} - \frac{0}{\alpha+1} = \frac{1}{\alpha+1}
+				\end{align*}\]
+			</p>
+			<p>
+				So we have
+			</p>
+			<p>
+				\[\begin{align*}
+				I(\alpha) = \int_0^1x^\alpha\,dx = \frac{1}{\alpha+1}.
+				\end{align*}\]
+			</p>
+			<p>
+				It may be confusing why I am choosing to define an \(I(\alpha)\) like this, but hopefully it will become more clear in a moment.
+				For now, let's examine an interesting property of this function.  If we take the derivative of both sides with respect
+				to \(\alpha\) (noting how we exchange the derivative and integral signs on the second line), we get:
+			</p>
+			<p>
+				\[\begin{align*}
+				I'(\alpha) &= \frac{\mathrm{d}}{\mathrm{d}\alpha}\int_0^1x^\alpha\,dx\\
+					&= \int_0^1\frac{\partial}{\partial \alpha}x^\alpha\,dx\\
+					&= \int_0^1x^\alpha\ln x\,dx.
+				\end{align*}\]
+			</p>
+			<p>
+				Which is starting to look a little familiar! Except, we want the natural log to also be raised to a higher power.  Let's try
+				taking the derivative of both sides again, and see what we get.
+			</p>
+			<p>
+				\[\begin{align*}
+				I''(\alpha) &= \frac{\mathrm{d}}{\mathrm{d}\alpha}\int_0^1x^\alpha\ln x\,dx\\
+				&= \int_0^1\frac{\partial}{\partial\alpha}x^\alpha\ln x\,dx\\
+				&= \int_0^1x^\alpha(\ln x)(\ln x)\,dx\\
+				&= \int_0^1x^\alpha\ln^2x\,dx.
+				\end{align*}\]
+			</p>
+			<p>
+				So there's the exponent on the natural log that we are looking for!  It is clear that as we take higher derivatives of \(I\), we
+				get higher powers of \(\ln(x)\).
+			</p>
+			<p>
+				\[\begin{align*}
+				I^{(\beta)}(\alpha) = \int_0^1x^\alpha\ln^\beta(x)\,dx
+				\end{align*}\]
+			</p>
+			<p>
+				We see that to find \(\int_0^1\left(x\ln{x}\right)^n\,dx\), we simply need to make the substitution \(\alpha = \beta = n\).
+				Going back to our other form of \(I\), let's work on finding a general form for the \(\beta\)th derivative of \(I\).
+			</p>
+			<p>
+				\[\begin{align*}
+				I(\alpha) &= \frac{1}{\alpha+1}\\\\
+				I'(\alpha) &= -\frac{1}{\left(\alpha+1\right)^2}\\\\
+				I''(\alpha) &= \frac{1\cdot2}{\left(\alpha+1\right)^3}\\\\
+				I^{(3)}(\alpha) &= -\frac{1\cdot2\cdot3}{\left(\alpha+1\right)^4}\\\\
+				I^{(\beta)}(\alpha) &= \frac{(-1)^\beta\beta!}{(\alpha+1)^{\beta+1}}
+				\end{align*}\]
+			</p>
+			<p>Now, we just need to make that last substitution...</p>
+			<p>
+				\[\begin{align*}
+				I^{(n)}(n) = \int_0^1\left(x\ln{x}\right)^n\,dx = (-1)^n\frac{n!}{(n+1)^{n+1}}
+				\end{align*}\]
+			</p>
+			<p>
+				...and we are done!  Now, we can take on whatever power we want, avoiding the tedious integration by parts with one
+				clean equation.  Let's try it out on some powers of \(n\).
+			</p>
+			<p>
+				\[\begin{align*}
+				\int_0^1\left(x\ln{x}\right)^1\,dx &= (-1)^1\frac{1!}{(1+1)^{2}} = -\frac{1}{4}\\
+				\int_0^1\left(x\ln{x}\right)^2\,dx &= (-1)^2\frac{2!}{(2+1)^{3}} = \frac{2}{27}\\
+				\int_0^1\left(x\ln{x}\right)^{10}\,dx &= (-1)^{10}\frac{10!}{(10+1)^{10+1}}=\frac{10!}{11^{11}}\\
+				\int_0^1\left(x\ln{x}\right)^{89}\,dx &= (-1)^{89}\frac{89!}{(89+1)^{89+1}}=-\frac{89!}{90^{90}}\\
+				\end{align*}\]
+			</p>
+			<p>
+				Differentiating under the integral sign can also be used to solve problems that would be not at all possible using the standard
+				set of techniques that I've learned so far.  In a later blog post, I'll solve some more interesting integrals using this
+				technique (once I get the time to work them out myself!).  For now though, I am very happy to have learned about this neat trick.
+			</p>
+			<p>
+				Feynman's trick reminds me why I am passionate about math.  There are always so many new tools and areas to explore, and so
+				much room for creativity and discovery.  I hope to continue studying math well into college and even in my adult life,
+				to continue this process of learning, puzzling, and problem-solving.
+			</p>
+			<p>UPDATE: You may view Part 2 of this blog <a href="dirichlet-and-gauss.html" class="lighta">here</a>.</p>
+			
 		</div>
 	</div>
 
