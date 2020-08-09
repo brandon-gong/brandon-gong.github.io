@@ -163,6 +163,7 @@
 			font-size: 22px;
 			font-family: "Source Serif Pro", serif;
 			overflow-x: auto;
+			line-height: 1.5;
 		}
 
 		.img-caption {
@@ -368,7 +369,7 @@
 			</div>
 		</a>
 		<div id="nav-header">Exploring Scheme (and a new way to think)</div>
-		<a href="../index.html">
+		<a onclick="window.history.back()">
 			<div id="x-close" class="no-select">⨉</div>
 		</a>
 		<div id="progressbar"></div>
@@ -533,7 +534,7 @@
 		(if (null? lst)
 			rev
 			(sub-rev (cdr lst) (cons (car lst) rev))))
-	(sub-rev lst ’()))</code></pre>
+	(sub-rev lst '()))</code></pre>
 			<p class="img-caption">Reversing a list in Java and then in Scheme.  Since we’re working with lists, it’s only natural that
 				car and cdr make an appearance.
 			</p>
