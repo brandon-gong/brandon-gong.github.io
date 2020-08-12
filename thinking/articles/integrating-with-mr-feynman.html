@@ -5,7 +5,7 @@
 	<title>Blog | Brandon Gong</title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
-	<link rel="shortcut icon" href="../favicon.ico">
+	<link rel="shortcut icon" href="../../favicon.ico">
 	<link
 		href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;700&family=Source+Serif+Pro:ital,wght@0,400;0,700;1,300;1,400&display=swap"
 		rel="stylesheet">
@@ -396,22 +396,22 @@
 			<p class="img-caption">Richard Feynman, the great physicist and legendary teacher</p>
 			<p>
 				<span class="drop">A</span>s a fledgeling math student, with only Calculus III and a semester of introductory ODE material under
-				my belt, I'm often afraid to stray away from my comfortable set of integration techniques; if I throw u-substitution,
+				my belt, I’m often afraid to stray away from my comfortable set of integration techniques; if I throw u-substitution,
 				integration by parts, and trigonometric substitution at a certain expression and nothing comes out of it, my best hope is to
 				simply set the problem aside and ask my instructor if there was a mistake or a typo.
 			</p>
 			<p>
 				So far, this strategy has worked.  In my classroom environment, problems are constructed in a way that makes use of one of those
 				integration techniques covered in Calculus I or II, and so — provided there were no typos that occurred when typesetting the problem —
-				I remained blissfully unexposed to trickier expressions.  However, I can't help but feel deeply unsatisfied with the limited power of
+				I remained blissfully unexposed to trickier expressions.  However, I can’t help but feel deeply unsatisfied with the limited power of
 				what I know.  Sure, integration working out symbolically is definitely a rare phenomenon compared to those problems where the only
 				way forward is to bash the decimal approximation out using a computer; nevertheless, learning about a new, creative technique for
 				solving integrals by hand is still a very exciting experience.
 			</p>
 			<h3>Starting out</h3>
 			<p>
-				Let's warm up with an easy integral that I know I can solve using integration by parts.  From there, we'll tweak it until it
-				becomes a bit more nontrivial.  For demonstration purposes, I'm going to solve this definite integral via IBP:
+				Let’s warm up with an easy integral that I know I can solve using integration by parts.  From there, we’ll tweak it until it
+				becomes a bit more nontrivial.  For demonstration purposes, I’m going to solve this definite integral via IBP:
 			</p>
 			<p>
 				\[\begin{align*}
@@ -419,7 +419,7 @@
 				\end{align*}\]
 			</p>
 			<p>
-				Because the behavior of \(f(x) = x\ln{x}\) is not so clear on the left bound of \(x = 0\), I'm going to use an improper integral for correctness's sake.
+				Because the behavior of \(f(x) = x\ln{x}\) is not so clear on the left bound of \(x = 0\), I’m going to use an improper integral for correctness’s sake.
 			</p>
 			<p>
 				\[\begin{align*}
@@ -429,7 +429,7 @@
 				\end{align*}\]
 			</p>
 			<p>
-				The behavior of the \(\frac{1}{2}x^2\ln{x}\) term is a bit unclear as we approach 0, but no worries: L'Hospital's Rule is here to help.
+				The behavior of the \(\frac{1}{2}x^2\ln{x}\) term is a bit unclear as we approach 0, but no worries: L’ Hospital’s Rule is here to help.
 			</p>
 			<p>
 				\[\begin{align*}
@@ -449,7 +449,7 @@
 				\end{align*}\]
 			</p>
 			<p>
-				That wasn't so bad!  Let's try, however, making the integral a <i>bit</i> more complicated, by squaring
+				That wasn’t so bad!  Let’s try, however, making the integral a <i>bit</i> more complicated, by squaring
 				the integrand:
 			</p>
 			<p>
@@ -459,8 +459,8 @@
 			</p>
 			<p>
 				This integral indeed remains solvable using IBP, though this time you would have to do <i>two</i> IBPs instead
-				of just one. I'm going to show it below, but to avoid being too repetitive I'm going to be a bit loose with
-				the notation; just like before, this is technically an improper integral, but using L'Hospital's Rule all of
+				of just one. I’m going to show it below, but to avoid being too repetitive I’m going to be a bit loose with
+				the notation; just like before, this is technically an improper integral, but using L’ Hospital’s Rule all of
 				the natural log terms will end up evaluating to 0.
 			</p>
 			<p>
@@ -480,8 +480,8 @@
 			</p>
 			<h3>Enter Feynman</h3>
 			<p>
-				Feynman's trick, also known as differentiating under the integral sign, is a fairly simple yet powerful technique for
-				evaluating definite integrals.  When using Feynman's trick, we will define a function by paramaterizing some part of the integral, 
+				Feynman’s trick, also known as differentiating under the integral sign, is a fairly simple yet powerful technique for
+				evaluating definite integrals.  When using Feynman’s trick, we will define a function by paramaterizing some part of the integral, 
 				taking the derivative of both sides, <i>interchanging the derivative and the integral sign</i> (by the Leibniz integral rule), and 
 				magic will happen.
 			</p>
@@ -510,7 +510,7 @@
 			</p>
 			<p>
 				It may be confusing why I am choosing to define an \(I(\alpha)\) like this, but hopefully it will become more clear in a moment.
-				For now, let's examine an interesting property of this function.  If we take the derivative of both sides with respect
+				For now, let’s examine an interesting property of this function.  If we take the derivative of both sides with respect
 				to \(\alpha\) (noting how we exchange the derivative and integral signs on the second line), we get:
 			</p>
 			<p>
@@ -521,7 +521,7 @@
 				\end{align*}\]
 			</p>
 			<p>
-				Which is starting to look a little familiar! Except, we want the natural log to also be raised to a higher power.  Let's try
+				Which is starting to look a little familiar! Except, we want the natural log to also be raised to a higher power.  Let’s try
 				taking the derivative of both sides again, and see what we get.
 			</p>
 			<p>
@@ -533,7 +533,7 @@
 				\end{align*}\]
 			</p>
 			<p>
-				So there's the exponent on the natural log that we are looking for!  It is clear that as we take higher derivatives of \(I\), we
+				So there’s the exponent on the natural log that we are looking for!  It is clear that as we take higher derivatives of \(I\), we
 				get higher powers of \(\ln(x)\).
 			</p>
 			<p>
@@ -543,7 +543,7 @@
 			</p>
 			<p>
 				We see that to find \(\int_0^1\left(x\ln{x}\right)^n\,dx\), we simply need to make the substitution \(\alpha = \beta = n\).
-				Going back to our other form of \(I\), let's work on finding a general form for the \(\beta\)th derivative of \(I\).
+				Going back to our other form of \(I\), let’s work on finding a general form for the \(\beta\)th derivative of \(I\).
 			</p>
 			<p>
 				\[\begin{align*}
@@ -562,7 +562,7 @@
 			</p>
 			<p>
 				...and we are done!  Now, we can take on whatever power we want, avoiding the tedious integration by parts with one
-				clean equation.  Let's try it out on some powers of \(n\).
+				clean equation.  Let’s try it out on some powers of \(n\).
 			</p>
 			<p>
 				\[\begin{align*}
@@ -574,11 +574,11 @@
 			</p>
 			<p>
 				Differentiating under the integral sign can also be used to solve problems that would be not at all possible using the standard
-				set of techniques that I've learned so far.  In a later blog post, I'll solve some more interesting integrals using this
+				set of techniques that I’ve learned so far.  In a later blog post, I’ll solve some more interesting integrals using this
 				technique (once I get the time to work them out myself!).  For now though, I am very happy to have learned about this neat trick.
 			</p>
 			<p>
-				Feynman's trick reminds me why I am passionate about math.  There are always so many new tools and areas to explore, and so
+				Feynman’s trick reminds me why I am passionate about math.  There are always so many new tools and areas to explore, and so
 				much room for creativity and discovery.  I hope to continue studying math well into college and even in my adult life,
 				to continue this process of learning, puzzling, and problem-solving.
 			</p>
@@ -861,6 +861,10 @@
 				color: "white"
 			});
 			$("#x-close").css({color: "white"});
+			Array.from(document.getElementsByClassName("lighta")).forEach(element => {
+				element.classList.remove("lighta");
+				element.classList.add("darka");
+			});
 			document.getElementById("logocontainer").removeChild(document.getElementById("icon"));
 			document.getElementById("logocontainer").innerHTML = `<img src="../../Hilbert_curve_3_white.svg" width=32 id="icon">`;
 			$("#prism-styles").text("code[class*=language-],pre[class*=language-]{color:#b3b1ad;background:0 0;font-family:Monaco,'Andale Mono','Ubuntu Mono',monospace;font-size:1em;text-align:left;white-space:pre;word-spacing:normal;word-break:normal;word-wrap:normal;line-height:1.5;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-hyphens:none;-moz-hyphens:none;-ms-hyphens:none;hyphens:none}code[class*=language-] ::-moz-selection,code[class*=language-]::-moz-selection,pre[class*=language-] ::-moz-selection,pre[class*=language-]::-moz-selection{text-shadow:none;background:#8a9199}code[class*=language-] ::selection,code[class*=language-]::selection,pre[class*=language-] ::selection,pre[class*=language-]::selection{text-shadow:none;background:#8a9199}@media print{code[class*=language-],pre[class*=language-]{text-shadow:none}}pre[class*=language-]{padding:1em;margin:.5em 0;overflow:auto;border-radius:10px}:not(pre)>code[class*=language-],pre[class*=language-]{background:#191919}:not(pre)>code[class*=language-]{padding:.1em;border-radius:.3em;white-space:normal}.token.cdata,.token.comment,.token.doctype,.token.prolog{color:#626a73}.token.punctuation{color:#b3b1ad}.token.namespace{opacity:.7}.token.boolean,.token.constant,.token.deleted,.token.number,.token.property,.token.symbol{color:#fe9}.token.tag{color:#39bae6}.token.attr-name,.token.builtin,.token.char,.token.inserted,.token.selector,.token.string{color:#c2d94c}.language-css .token.string,.style .token.string,.token.operator,.token.url{color:#f29668}.token.entity{color:#ffb454}.token.atrule,.token.attr-value,.token.keyword{color:#fa8d3e}.token.class-name,.token.function{color:#59c2ff}.token.important,.token.regex,.token.variable{color:#95e6cb}.token.bold,.token.important{font-weight:700}.token.italic{font-style:italic}.token.entity{cursor:help}");
@@ -890,6 +894,10 @@
 				color: "black"
 			});
 			$("#x-close").css({color: "black"});
+			Array.from(document.getElementsByClassName("darka")).forEach(element => {
+				element.classList.remove("darka");
+				element.classList.add("lighta");
+			});
 			document.getElementById("logocontainer").removeChild(document.getElementById("icon"));
 			document.getElementById("logocontainer").innerHTML = `<img src="../../Hilbert_curve_3.svg" width=32 id="icon">`;
 			$("#prism-styles").text("code[class*=language-],pre[class*=language-]{color:#575f66;background:0 0;font-family:Monaco,'Andale Mono','Ubuntu Mono',monospace;font-size:1em;text-align:left;white-space:pre;word-spacing:normal;word-break:normal;word-wrap:normal;line-height:1.5;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-hyphens:none;-moz-hyphens:none;-ms-hyphens:none;hyphens:none}code[class*=language-] ::-moz-selection,code[class*=language-]::-moz-selection,pre[class*=language-] ::-moz-selection,pre[class*=language-]::-moz-selection{text-shadow:none;background:#8a9199}code[class*=language-] ::selection,code[class*=language-]::selection,pre[class*=language-] ::selection,pre[class*=language-]::selection{text-shadow:none;background:#8a9199}@media print{code[class*=language-],pre[class*=language-]{text-shadow:none}}pre[class*=language-]{padding:1em;margin:.5em 0;overflow:auto;border-radius:10px}:not(pre)>code[class*=language-],pre[class*=language-]{background:#fafafa}:not(pre)>code[class*=language-]{padding:.1em;border-radius:.3em;white-space:normal}.token.cdata,.token.comment,.token.doctype,.token.prolog{color:#abb0b6}.token.punctuation{color:#575f66}.token.namespace{opacity:.7}.token.boolean,.token.constant,.token.deleted,.token.number,.token.property,.token.symbol{color:#a37acc}.token.tag{color:#55b4d4}.token.attr-name,.token.builtin,.token.char,.token.inserted,.token.selector,.token.string{color:#86b300}.language-css .token.string,.style .token.string,.token.operator,.token.url{color:#ed9366}.token.entity{color:#399ee6}.token.atrule,.token.attr-value,.token.keyword{color:#fa8d3e}.token.class-name,.token.function{color:#399ee6}.token.important,.token.regex,.token.variable{color:#4cbf99}.token.bold,.token.important{font-weight:700}.token.italic{font-style:italic}.token.entity{cursor:help}");

@@ -5,7 +5,7 @@
 	<title>Blog | Brandon Gong</title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
-	<link rel="shortcut icon" href="../favicon.ico">
+	<link rel="shortcut icon" href="../../favicon.ico">
 	<link
 		href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;700&family=Source+Serif+Pro:ital,wght@0,400;0,700;1,300;1,400&display=swap"
 		rel="stylesheet">
@@ -398,96 +398,302 @@
 				be integrating in the Gaussian integral.
 			</p>
 			<p>
-				<span class="drop">W</span>orem ipsum dolor sit amet, consectetur adipiscing elit. Praesent venenatis
-				convallis ligula in rhoncus. Donec dapibus lacus eget libero porta luctus. Proin tristique felis augue,
-				sit amet gravida diam aliquam sed. Donec nec sodales turpis, quis maximus felis. Etiam tellus lectus,
-				volutpat ac aliquam sed, dictum id ligula. Aliquam id consectetur nunc. In auctor mauris risus, quis
-				suscipit quam pulvinar quis. Cras pharetra urna at ante scelerisque efficitur. Aliquam scelerisque
-				libero vitae risus molestie, nec efficitur urna auctor.
-			</p>
-			<pre><code class="language-java">public abstract class Test {
-	/* testing comments */
-	public void funcName(int x) {
-		double y = (double) x / 0.5;
-		String test = "This is a test of a string";
-		return y;
-	}
-}</code></pre>
-			<p>
-				Fusce justo sapien, molestie eu lacus placerat, elementum dignissim dolor. Nullam sem ex, pellentesque
-				eget tincidunt eu, consectetur vel velit. Donec ante tellus, consequat vitae lorem suscipit, interdum
-				feugiat lectus. Donec tristique odio vitae ante tristique, et varius magna vestibulum. Ut velit diam,
-				blandit quis aliquet eget, posuere sed enim. Integer at nibh vehicula, varius purus non, fringilla nibh.
-				Praesent viverra nulla at nunc tempor, vitae interdum arcu malesuada. Proin eu ante bibendum, euismod
-				felis nec, iaculis libero. Nunc id interdum urna. Donec dignissim libero eget orci gravida sodales.
+				(If you haven't read the prequel to this blog yet, I highly encourage you to check it out
+				<a href="integrating-with-mr-feynman.html" class="lighta">here</a> for some background.)
 			</p>
 			<p>
-				Donec sed metus sem. Morbi tincidunt massa nisi, et molestie metus vestibulum vel. Donec sit amet nisi
-				vitae ligula aliquam pretium. Donec maximus quis ipsum nec gravida. Sed faucibus ligula et interdum
-				venenatis. Vestibulum quis sapien a neque consequat molestie vitae ut dui. Donec volutpat sollicitudin
-				vehicula.
+				<span class="drop">R</span>ecently, I discovered Feynman's trick for evaluating integrals, and it blew my mind.  Today,
+				I will use this same method of interchanging the integral and the derivative to tackle two of the most famous
+				integrals in math: the Dirichlet integral and the Gaussian integral.
 			</p>
 			<p>
-				When \(a \ne 0\), there are two solutions to \(ax^2 + bx + c = 0\) and they are
-				\[x = {-b \pm \sqrt{b^2-4ac} \over 2a}.\]
+				While neither of my solutions are unique, the process of working through each one and solving it on my own was immensely
+				rewarding, so I hope I can relay some of that excitement here as I go through my thought process for each of the problems.
+				I'll start with the simpler of the two:
+			</p>
+			<h3>The Dirichlet Integral</h3>
+			<p>There are several integrals named after Peter Gustav Lejeune Dirichlet, but the most famous one takes the form</p>
+			<p>
+				\[\int_0^{\infty}\frac{\sin{x}}{x}\,dx.\]
 			</p>
 			<p>
-				Duis ultricies laoreet quam, id dictum tellus tempor vitae. Vestibulum elementum ipsum dolor, vitae
-				sodales nibh vehicula egestas. Donec neque turpis, tincidunt eget pharetra vel, dapibus ut ex. Proin et
-				sollicitudin augue, eget congue velit. Etiam a fermentum enim, in iaculis lorem. Curabitur iaculis
-				tellus nec dapibus sollicitudin. Morbi dui neque, sollicitudin ut placerat ut, luctus sed magna. Aenean
-				elementum est in enim molestie consequat. Donec vitae justo nulla. Vestibulum sodales aliquam libero eu
-				condimentum.
+				Immediately, we can see that our usual methods — u-substitution, integration by parts, partial fractions, etc. — fall flat
+				against this integral.  The annoying \(x\) in the denominator gets in the way of our hopes of IBP or u-sub, so why don't
+				we try to get rid of it somehow?
 			</p>
 			<p>
-				Quisque posuere consequat magna in malesuada. Mauris tempus lectus vel elit sodales, ac venenatis quam
-				lacinia. Nullam ac massa in est tempus rhoncus non sed lorem. Mauris rutrum arcu a nulla volutpat, sit
-				amet sodales sem ultrices. Fusce et ullamcorper massa. Phasellus aliquam vestibulum lacinia. Aliquam
-				vitae pulvinar ipsum. Sed condimentum risus in nibh congue porta. Nulla finibus massa erat, eget
-				lobortis quam venenatis in.
+				We want to somehow introduce an \(x\) to the numerator so that it will cancel with the denominator and we will be left with
+				an easy integral from there.  Why don't we try parameterizing the coefficient of the \(x\) inside the sine, and applying
+				differentiation under the integral sign from there?
 			</p>
 			<p>
-				Nunc dolor velit, rutrum sit amet mauris ut, pulvinar elementum dolor. Curabitur posuere iaculis lectus,
-				eu scelerisque lacus tincidunt et. Aenean sed finibus libero. Duis mattis bibendum odio et volutpat.
-				Pellentesque tempus velit nibh, vel finibus metus eleifend ut. Etiam ut pellentesque libero. Maecenas
-				hendrerit enim eget dolor congue, vel dictum leo tempor. Suspendisse et dictum urna. Vivamus tincidunt
-				tincidunt imperdiet. Etiam luctus, nisi vitae luctus ultrices, mauris mauris rutrum erat, in dapibus
-				ante ipsum at arcu. Integer vitae condimentum nunc. Ut malesuada lacinia libero, vel semper erat pretium
-				congue. Donec eu efficitur urna.
+				Let \(I(\alpha)=\int_0^{\infty}\frac{\sin{\left(\alpha x\right)}}{x}\,dx\). Then
 			</p>
 			<p>
-				Aliquam pharetra accumsan libero ut consectetur. Sed auctor ante in turpis pellentesque rutrum vel eget
-				est. Integer libero metus, bibendum nec diam tristique, mattis porttitor tortor. Donec scelerisque
-				vulputate ligula, a dapibus odio. Aliquam imperdiet tincidunt tellus id cursus. Interdum et malesuada
-				fames ac ante ipsum primis in faucibus. Curabitur mollis, justo non ultricies pulvinar, arcu dui
-				tincidunt risus, eleifend tincidunt libero felis suscipit turpis. Nam vitae dui sagittis, ornare odio
-				pretium, fermentum ipsum.
+				\[\begin{align*}
+				I'(\alpha)&=\frac{\mathrm{d}}{\mathrm{d}\alpha}\int_0^\infty\frac{\sin{\left(\alpha x\right)}}{x}\,dx\\
+				&=\int_0^\infty\frac{\partial}{\partial\alpha}\frac{\sin{\left(\alpha x\right)}}{x}\,dx\\
+				&=\int_0^\infty\frac{x\cos{\left(\alpha x\right)}}{x}\,dx\\
+				&=\int_0^\infty \cos{\left(\alpha x\right)}\,dx.
+				\end{align*}\]
 			</p>
 			<p>
-				Nulla blandit, dolor euismod mattis ultricies, dui sapien ultrices erat, quis finibus purus dolor non
-				neque. Curabitur et placerat nisi. Sed vestibulum libero eu turpis ultricies aliquam. Curabitur dictum
-				ac lectus ut pharetra. Nullam a lorem at turpis cursus ullamcorper. In convallis congue enim, at finibus
-				ante tempus et. Suspendisse rutrum, leo id pellentesque hendrerit, magna eros tincidunt sapien, nec
-				cursus est ipsum sed odio.
-			</p>
-			<p>
-				Quisque volutpat diam sed felis lobortis, at mollis sapien gravida. Sed eros neque, imperdiet
-				consectetur pretium et, venenatis id massa. Donec eget eleifend sapien. Praesent placerat sagittis odio,
-				sed imperdiet sapien tempor quis. Sed odio ligula, porttitor vitae iaculis lacinia, dictum in mi. Nam
-				vitae turpis felis. In tincidunt elit non dolor luctus iaculis. Suspendisse eget orci molestie,
-				facilisis ante quis, volutpat leo. Aenean feugiat interdum vehicula. In vitae elit ac ipsum fringilla
-				molestie vitae id ex. Morbi vestibulum aliquet faucibus. Duis eget elit ac diam congue lobortis.
-			</p>
-			<p>
-				Integer maximus justo condimentum faucibus finibus. Fusce porta mauris dui, quis euismod ligula volutpat
-				ut. Cras luctus sagittis turpis ac sodales. Etiam hendrerit at eros eget auctor. Cras consequat, ligula
-				in congue tempus, orci est dictum libero, a placerat erat odio et justo. Pellentesque dictum condimentum
-				posuere. Donec mattis dolor ut ante venenatis auctor. Cras at massa lacinia, scelerisque orci ac,
-				egestas velit. Morbi lacus est, hendrerit et magna quis, convallis mollis ipsum. Nulla placerat, lacus
-				eget tristique ullamcorper, diam nunc sagittis velit, quis bibendum dui mauris quis tortor. Morbi
-				lacinia augue turpis, nec laoreet quam semper sed. Nam semper sem sit amet auctor condimentum. Nullam
-				quis euismod sem. Maecenas in ipsum nisl. Integer lobortis non erat sit amet tincidunt. Sed sit amet
-				nisi condimentum, luctus purus quis, finibus tortor.
+				The problem with this parameterization is that though we can find an antiderivative now, the improper integral does not converge due 
+				to the periodic behavior of cosine.  So, we need to find something else to parameterize that
+				<ul style="margin-top: -10px;font-size: 22px;font-family: 'Source Serif Pro', serif;">
+					<li>will produce an \(x\) for us when we take the partial derivative with respect to \(\alpha\),</li>
+					<li>makes the integral converge, and</li>
+					<li>is easy to integrate next to the trig function.</li>
+				</ul>
+				<p>
+					For me, one of the big things that comes to mind is the exponential function \(e^{-\alpha x}.\)  It has all of the
+					properties that we want: taking its derivative with respect to \(\alpha\) will yield a \(-x\); it approaches 0
+					as \(x \rightarrow \infty\), and if everything works out we can definitely integrate some kind of exponential-times-trig
+					expression.
+				</p>
+				<p>
+					So, we make a new parameterization, this time parameterizing the coefficient of the sine.  Our new function is
+				</p>
+				<p>
+					\[\begin{align*}
+					I(\alpha)&=\int_0^\infty \frac{e^{-\alpha x}\sin{x}}{x}\,dx.
+					\end{align*}\]
+				</p>
+				<p>
+					Before I move on, I want to make a quick note of a few things.  First of all,
+				</p>
+				<p>
+					\[\begin{align*}
+					I(0)&=\int_0^\infty \frac{e^{0 \cdot x}\sin{x}}{x}\,dx = \int_0^\infty \frac{\sin{x}}{x}\,dx,
+					\end{align*}\]
+				</p>
+				<p>
+					Which is the end result that we want.  So, once we figure out what \(I\) is, we just need to plug in 0 for \(\alpha\)
+					for our final answer. Additionally,
+				</p>
+				<p>
+					\[\begin{align*}
+					\lim_{\alpha\to\infty} I(\alpha)&=\int_0^\infty \frac{e^{-\infty}\sin{x}}{x}\,dx = \int_0^\infty \frac{0 \cdot \sin{x}}{x}\,dx = 0.
+					\end{align*}\]
+				</p>
+				<p>
+					We will need this additional data point later on to solve for our constant of integration once we reconstruct the
+					antiderivative of \(I\) after performing the differentiation under the integral sign.
+				</p>
+				<p>
+					Ok, let's do it!  Again, with (for \(\alpha \geq 0\)) \(I(\alpha)=\int_0^\infty \frac{e^{-\alpha x}\sin{x}}{x}\,dx\):
+				</p>
+				<p>
+					\[\begin{align*}
+					I'(\alpha) &= \frac{\mathrm{d}}{\mathrm{d}\alpha}\int_0^\infty\frac{e^{-\alpha x}\sin{x}}{x}\,dx\\
+					&=\int_0^\infty\frac{\partial}{\partial\alpha}\frac{e^{-\alpha x}\sin{x}}{x}\,dx\\
+					&=\int_0^\infty\frac{-xe^{-\alpha x}\sin{x}}{x}\,dx\\
+					&=-\int_0^\infty e^{-\alpha x}\sin{x}\,dx.
+					\end{align*}\]
+				</p>
+				<p>
+					This expression is integrable via integration by parts.  Let \(M=\int e^{-\alpha x}\sin{x}\,dx\), \(u = e^{-\alpha x}\), and \(dv = \sin{x}\,dx.\)
+				</p>
+				<p>
+					\[\begin{align*}
+					M &= -e^{-\alpha x}\cos{x} - \alpha\int e^{-\alpha x}\cos{x}\,dx\\
+					\Rightarrow M&= -e^{-\alpha x}\cos{x}-\alpha e^{-\alpha x}\sin{x}-\alpha^2\int e^{-\alpha x}\sin{x}\,dx\\
+					\Rightarrow M&= -e^{-\alpha x}\cos{x}-\alpha e^{-\alpha x}\sin{x}-\alpha^2M\\
+					\Rightarrow M\left(1 + \alpha^2\right)&=-e^{-\alpha x}\cos{x}-\alpha e^{-\alpha x}\sin{x}\\
+					\Rightarrow M&=-\frac{e^{-\alpha x}\left(\cos{x}+\alpha\sin{x}\right)}{1+\alpha^2}.
+					\end{align*}\]
+				</p>
+				<p>
+					And so
+				</p>
+				<p>
+					\[\begin{align*}
+					I'(\alpha) = \left[-M\right]^{x=\infty}_{x=0} &= \left[\frac{e^{-\alpha x}\left(\cos{x}+\alpha\sin{x}\right)}{1+\alpha^2}\right]^{x=\infty}_{x=0}\\
+					I'(\alpha) &= \frac{0}{1+\alpha^2} - \frac{1}{1+\alpha^2}\\
+					I'(\alpha) &= -\frac{1}{1+\alpha^2}.
+					\end{align*}\]
+				</p>
+				<p>
+					Now, we simply need to integrate both sides with respect to \(\alpha\) to get back our \(I\)!  Isn't that so cool?  Here is
+					where that initial condition \(I(\infty)=0\) comes back into play.
+				</p>
+				<p>
+					\[\begin{align*}
+					\int I'(\alpha) \,d\alpha &= -\int \frac{1}{1+\alpha^2} \,d\alpha\\
+					\Rightarrow I(\alpha) &= -\arctan{\alpha} + C.
+					\end{align*}\]
+				</p>
+				<p>Solving for the constant of integration and plugging back in:</p>
+				<p>
+					\[\begin{align*}
+					I(\infty) &= -\arctan{\infty} + C\\
+					\Rightarrow 0 &= -\frac{\pi}{2}+C\\
+					\Rightarrow C &= \frac{\pi}{2}.\\
+					\Rightarrow I(\alpha) &= -\arctan{\alpha}+\frac{\pi}{2}
+					\end{align*}\]
+				</p>
+				<p>
+					And the final step, plugging in 0 for \(\alpha\) to get the final solution to the Dirichlet integral.
+					I've included the entire process below to recap!
+				</p>
+				<p>
+					\[\begin{align*}
+					\int_0^{\infty}\frac{\sin{x}}{x}\,dx &= \int_0^\infty \frac{e^{-0 \cdot x}\sin{x}}{x}\,dx\\
+					\Rightarrow\int_0^{\infty}\frac{\sin{x}}{x}\,dx&= I(0)\\
+					\Rightarrow\int_0^{\infty}\frac{\sin{x}}{x}\,dx&= -\arctan{0}+\frac{\pi}{2}\\
+					\Rightarrow\int_0^{\infty}\frac{\sin{x}}{x}\,dx&= 0 + \frac{\pi}{2}\\
+					\Rightarrow\int_0^{\infty}\frac{\sin{x}}{x}\,dx&= \frac{\pi}{2}.
+					\end{align*}\]
+				</p>
+				<p>
+					With Feynman's trick, we've taken an integral originally impervious to our tools, transformed it into a simpler
+					problem, and ended up with a beautifully simple solution.  Very satisfying!  Next, we'll take a look at
+					the <i>Gaussian integral</i>, perhaps one of the most famous integrals.  It's a bit more involved, so
+					get ready!
+				</p>
+				<h3>The Gaussian Integral</h3>
+				<p>
+					The Gaussian integral (named after the great Carl Friedrich Gauss) takes on the form
+				</p>
+				<p>
+					\[\int_{-\infty}^{+\infty}e^{-x^2}\,dx.\]
+				</p>
+				<p>
+					Its signature bell curve shape is used frequently in statistics and physics for various distribution functions.
+					The classic solution to the Gaussian integral involves a simple change of variables to cylindrical coordinates.
+					We start with squaring the entire integral, and then tweaking it until a familiar substitution \(r^2 = x^2 + y^2\)
+					appears:
+				</p>
+				<p>
+					\[\begin{align*}
+					\left(\int_{-\infty}^{\infty}e^{-x^2}\,dx\right)^2 &= \left(\int_{-\infty}^{\infty}e^{-x^2}\,dx\right)\left(\int_{-\infty}^{\infty}e^{-x^2}\,dx\right)\\
+					&= \left(\int_{-\infty}^{\infty}e^{-x^2}\,dx\right)\left(\int_{-\infty}^{\infty}e^{-y^2}\,dy\right)\\
+					&= \int_{-\infty}^{\infty}\int_{-\infty}^{\infty}e^{-x^2}e^{-y^2}\,dx\,dy\\
+					&= \iint_{\mathbb{R}^2}e^{-\left(x^2+y^2\right)}\,dx\,dy.
+					\end{align*}\]
+				</p>
+				<p>
+					After that first trick, evaluating this integral is fairly trivial, provided we don't forget the Jacobian when we
+					perform the change of variables (the Jacobian is the whole reason we go through this trouble in the first place, so
+					we can have that extra \(r\) to u-sub with):
+				</p>
+				<p>
+					\[\begin{align*}
+					\iint_{\mathbb{R}^2}e^{-\left(x^2+y^2\right)}\,dx\,dy &= \int_0^\infty\int_0^{2\pi}re^{-r^2}\,d\theta\,dr\\
+					&=2\pi\int_0^\infty re^{-r^2}\,dr\\
+					&\text{ Let }u=-r^2\Rightarrow du = -2r\,dr.\\
+					&=-\pi\int_0^{-\infty} e^{u}\,du\\
+					&=\pi\left[e^0-e^{-\infty}\right]\\
+					&=\pi.
+					\end{align*}\]
+				</p>
+				<p>
+					We squared the whole integral in the beginning, so we need to take the square root in the end, giving us a final answer of
+				</p>
+				<p>
+					\[\begin{align*}
+					\sqrt{\pi}.
+					\end{align*}\]
+				</p>
+				<p>
+					This is a nice solution and all, but I wanted to see if I could find a solution using differentiation under the integral
+					and avoid going into the multivariate world at all if possible.  This turned out to be a long and difficult process with
+					many dead ends, and I'll be the first to admit that this solution is far more convoluted and nowhere near as satisfying
+					as the cylindrical change of variables solution above; still though, I'm glad I achieved my goal of using Feynman's trick
+					to avoid higher-dimensional integration.
+				</p>
+				<p>
+					Using the same approach as before, we are going to attempt to use Feynman's trick to "create" new \(x\) terms; the most
+					obvious thing to try is to parameterize the coefficient of the exponent.
+				</p>
+				<p>
+					\[\begin{align*}
+					\int_{-\infty}^{\infty}e^{-x^2}\,dx &= 2\int_{0}^{\infty}e^{-x^2}\,dx.\\
+					\end{align*}\]
+				</p>
+				<p>
+					Let \(I(\alpha)=\int_{0}^{\infty}e^{-\alpha x^2}\,dx.\)  In this way, \(2I(1)\) will give us back our original Gaussian integral.  Again, we use \(\infty\) to determine the initial conditions:
+				</p>
+				<p>
+					\[\begin{align*}
+					\lim_{\alpha\to\infty}I(\alpha) &= \lim_{\alpha\to\infty}\int_{0}^{\infty}e^{-\alpha x^2}\,dx\\&=\int_{0}^{\infty}e^{-\infty}\,dx\\&=0.
+					\end{align*}\]
+				</p>
+				<p>
+					As usual, we proceed with differentiating both sides with respect to \(\alpha\):
+				</p>
+				<p>
+					\[\begin{align*}
+					I'(\alpha) &= \frac{\mathrm{d}}{\mathrm{d}\alpha}\int_{0}^{\infty}e^{-\alpha x^2}\,dx\\
+					&=\int_{0}^{\infty} \frac{\partial}{\partial\alpha}e^{-\alpha x^2}\,dx\\
+					&= \int_{0}^{\infty}-x^2e^{-\alpha x^2}\,dx.
+					\end{align*}\]
+				</p>
+				<p>And then we evaluate the integral via u-substitution, with \(u=\alpha x^2\).  Note that \(du=2\alpha x\,dx\) and \(x=\sqrt{\frac{u}{\alpha}}\):</p>
+				<p>
+					\[\begin{align*}
+					I'(\alpha) &= \int_{0}^{\infty}-\frac{x^2e^{-u}}{2\alpha x}\,du\\
+					&= -\frac{1}{2\alpha}\int_{0}^{\infty}xe^{-u}du\\
+					&= -\frac{1}{2\alpha}\int_{0}^{\infty}\sqrt{\frac{u}{\alpha}}e^{-u}du\\
+					&= -\frac{1}{2\alpha^{3/2}}\int_{0}^{\infty}u^{1/2}e^{-u}du\\
+					&= -\frac{1}{2\alpha^{3/2}}\,\Gamma\left(\frac{3}{2}\right),
+					\end{align*}\]
+				</p>
+				<p>
+					where \(\Gamma\) denotes the <a href="https://en.wikipedia.org/wiki/Gamma_function" class="lighta">Gamma function</a> \(
+					\Gamma(z)=\int_0^\infty x^{z-1}e^{-x}\,dx\).  We further simplify this expression using the properties of the Gamma function.
+				</p>
+				<p>
+					\[\begin{align*}
+					I'(\alpha) &= -\frac{1}{2\alpha^{3/2}}\,\Gamma\left(\frac{3}{2}\right)\\
+					&=-\frac{1}{2\alpha^{3/2}}\,\Gamma\left(\frac{1}{2}+1\right)\\
+					&=-\frac{1}{4\alpha^{3/2}}\,\Gamma\left(\frac{1}{2}\right).
+					\end{align*}\]
+				</p>
+				<p>By Euler's reflection formula, we know that</p>
+				<p>
+					\[\begin{align*}
+					\Gamma\left(1-\frac{1}{2}\right)\Gamma\left(\frac{1}{2}\right)&=\frac{\pi}{\sin{\frac{\pi}{2}}}\\
+					\Rightarrow\Gamma^2\left(\frac{1}{2}\right)&=\pi\\
+					\Rightarrow\Gamma\left(\frac{1}{2}\right)&=\sqrt\pi.
+					\end{align*}\]
+				</p>
+				<p>Substituting back in to \(I'(\alpha)\):</p>
+				<p>
+					\[\begin{align*}
+					I'(\alpha) &=-\frac{\sqrt{\pi}}{4\alpha^{3/2}}.
+					\end{align*}\]
+				</p>
+				<p>
+					Once again, through differentiation under the integral sign we have been able to evaluate the problematic integral
+					and obtain a simpler solution purely in terms of \(\alpha\).  Now, the only step that remains is to
+					integrate again with respect to \(\alpha\) to get \(I\) back.  This is fairly trivial, using our initial condition of
+					\(I(\infty)=0\) from before:
+				</p>
+				<p>
+					\[\begin{align*}
+					\int I'(\alpha)\,d\alpha &= -\frac{\sqrt{\pi}}{4}\int \alpha^{-3/2}\,d\alpha\\
+					&=\frac{\sqrt{\pi}}{2}\alpha^{-1/2}+C.\\\\
+					I(\infty) &= \frac{\sqrt{\pi}}{2}\infty^{-1/2}+C\\
+					\Rightarrow 0 &= 0 + C\\
+					\Rightarrow C &= 0.
+					\\\\
+					I(\alpha) = \frac{\sqrt{\pi}}{2}\alpha^{-1/2} &= \frac{1}{2}\sqrt{\frac{\pi}{\alpha}}.
+					\end{align*}\]
+				</p>
+				<p>And the grand finale, finding the evaluation of the Gaussian integral by substituting \(2I(1)\)...</p>
+				<p>
+					\[\begin{align*}
+					\int_{-\infty}^{\infty}e^{-x^2}\,dx = 2I(1) = 2\cdot\frac{1}{2}\sqrt{\frac{\pi}{1}} = \sqrt{\pi}
+					\end{align*}\]
+				</p>
+				<p>
+					Finally arriving at our intended result!  Solving these two integrals would have been impossible without the help of
+					differentiating under the integral sign.  Sometimes, I can only be amazed at how perfect math is; despite taking
+					radically different approaches to both of these integrals, we end up with the exact same result at the end.  It's always
+					reassuring to find an alternate solution to a problem, one that views the problem in a different light and attacks it
+					from a different angle.
+				</p>
 			</p>
 		</div>
 	</div>
@@ -766,6 +972,10 @@
 				color: "white"
 			});
 			$("#x-close").css({color: "white"});
+			Array.from(document.getElementsByClassName("lighta")).forEach(element => {
+				element.classList.remove("lighta");
+				element.classList.add("darka");
+			});
 			document.getElementById("logocontainer").removeChild(document.getElementById("icon"));
 			document.getElementById("logocontainer").innerHTML = `<img src="../../Hilbert_curve_3_white.svg" width=32 id="icon">`;
 			$("#prism-styles").text("code[class*=language-],pre[class*=language-]{color:#b3b1ad;background:0 0;font-family:Monaco,'Andale Mono','Ubuntu Mono',monospace;font-size:1em;text-align:left;white-space:pre;word-spacing:normal;word-break:normal;word-wrap:normal;line-height:1.5;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-hyphens:none;-moz-hyphens:none;-ms-hyphens:none;hyphens:none}code[class*=language-] ::-moz-selection,code[class*=language-]::-moz-selection,pre[class*=language-] ::-moz-selection,pre[class*=language-]::-moz-selection{text-shadow:none;background:#8a9199}code[class*=language-] ::selection,code[class*=language-]::selection,pre[class*=language-] ::selection,pre[class*=language-]::selection{text-shadow:none;background:#8a9199}@media print{code[class*=language-],pre[class*=language-]{text-shadow:none}}pre[class*=language-]{padding:1em;margin:.5em 0;overflow:auto;border-radius:10px}:not(pre)>code[class*=language-],pre[class*=language-]{background:#191919}:not(pre)>code[class*=language-]{padding:.1em;border-radius:.3em;white-space:normal}.token.cdata,.token.comment,.token.doctype,.token.prolog{color:#626a73}.token.punctuation{color:#b3b1ad}.token.namespace{opacity:.7}.token.boolean,.token.constant,.token.deleted,.token.number,.token.property,.token.symbol{color:#fe9}.token.tag{color:#39bae6}.token.attr-name,.token.builtin,.token.char,.token.inserted,.token.selector,.token.string{color:#c2d94c}.language-css .token.string,.style .token.string,.token.operator,.token.url{color:#f29668}.token.entity{color:#ffb454}.token.atrule,.token.attr-value,.token.keyword{color:#fa8d3e}.token.class-name,.token.function{color:#59c2ff}.token.important,.token.regex,.token.variable{color:#95e6cb}.token.bold,.token.important{font-weight:700}.token.italic{font-style:italic}.token.entity{cursor:help}");
@@ -795,6 +1005,10 @@
 				color: "black"
 			});
 			$("#x-close").css({color: "black"});
+			Array.from(document.getElementsByClassName("darka")).forEach(element => {
+				element.classList.remove("darka");
+				element.classList.add("lighta");
+			});
 			document.getElementById("logocontainer").removeChild(document.getElementById("icon"));
 			document.getElementById("logocontainer").innerHTML = `<img src="../../Hilbert_curve_3.svg" width=32 id="icon">`;
 			$("#prism-styles").text("code[class*=language-],pre[class*=language-]{color:#575f66;background:0 0;font-family:Monaco,'Andale Mono','Ubuntu Mono',monospace;font-size:1em;text-align:left;white-space:pre;word-spacing:normal;word-break:normal;word-wrap:normal;line-height:1.5;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-hyphens:none;-moz-hyphens:none;-ms-hyphens:none;hyphens:none}code[class*=language-] ::-moz-selection,code[class*=language-]::-moz-selection,pre[class*=language-] ::-moz-selection,pre[class*=language-]::-moz-selection{text-shadow:none;background:#8a9199}code[class*=language-] ::selection,code[class*=language-]::selection,pre[class*=language-] ::selection,pre[class*=language-]::selection{text-shadow:none;background:#8a9199}@media print{code[class*=language-],pre[class*=language-]{text-shadow:none}}pre[class*=language-]{padding:1em;margin:.5em 0;overflow:auto;border-radius:10px}:not(pre)>code[class*=language-],pre[class*=language-]{background:#fafafa}:not(pre)>code[class*=language-]{padding:.1em;border-radius:.3em;white-space:normal}.token.cdata,.token.comment,.token.doctype,.token.prolog{color:#abb0b6}.token.punctuation{color:#575f66}.token.namespace{opacity:.7}.token.boolean,.token.constant,.token.deleted,.token.number,.token.property,.token.symbol{color:#a37acc}.token.tag{color:#55b4d4}.token.attr-name,.token.builtin,.token.char,.token.inserted,.token.selector,.token.string{color:#86b300}.language-css .token.string,.style .token.string,.token.operator,.token.url{color:#ed9366}.token.entity{color:#399ee6}.token.atrule,.token.attr-value,.token.keyword{color:#fa8d3e}.token.class-name,.token.function{color:#399ee6}.token.important,.token.regex,.token.variable{color:#4cbf99}.token.bold,.token.important{font-weight:700}.token.italic{font-style:italic}.token.entity{cursor:help}");
