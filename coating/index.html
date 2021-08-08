@@ -1,0 +1,55 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>ZIP Code Search</title>
+		<link rel="stylesheet" href="index.css">
+	</head>
+	<body>
+		<div id="wrap">
+			<h1>Should I add a protective coating to the MCHE?</h1>
+			<input type="text" value="" placeholder="Enter your ZIP code here..." oninput="update(this)" id="zipinput">
+			<div id="spacer"></div>
+			<div id="res">&nbsp;</div>
+			<div id="inf">&nbsp;<br>&nbsp;</div>
+		</div>
+		
+		<script>
+			var data = [];
+			var r = new XMLHttpRequest();
+			r.open("GET", "/data.bin", true);
+			r.responseType = "arraybuffer";
+			r.onload = function (e) {
+				var arrayBuffer = r.response;
+				if (arrayBuffer) {
+					data = new Uint8Array(arrayBuffer);
+					update();
+				}
+			};
+			r.send(null);
+
+			function update() {
+				var n = document.getElementById("zipinput");
+				n.value = n.value.replace(/[^0-9]+/g, '');
+				n.value = n.value.substring(0,5);
+				if(n.value.length != 5) {
+					document.getElementById("res").innerHTML = "&nbsp;"
+					document.getElementById("inf").innerHTML = "&nbsp;<br>&nbsp;"
+					return;
+				}
+				var x = parseInt(n.value);
+				if(!isNaN(x)) {
+					if((data[Math.floor(x / 8)] >> (x % 8)) & 1) {
+						document.getElementById("res").textContent = "Yes."
+						document.getElementById("inf").textContent = 
+							"Because of your location, the MCHE is at risk of damage due to corrosion."
+					} else {
+						document.getElementById("res").textContent = "No."
+						document.getElementById("inf").textContent = 
+							"Coating is not strictly necessary, as the risk of damage due to corrosion is low in your area."
+					}
+				}
+			}
+		</script>
+	</body>
+</html>
