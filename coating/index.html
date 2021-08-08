@@ -10,12 +10,13 @@
 			<h1>Should I add a protective coating to the MCHE?</h1>
 			<input type="text" value="" placeholder="Enter your ZIP code here..." oninput="update(this)" id="zipinput">
 			<div id="spacer"></div>
-			<div id="res">&nbsp;</div>
+			<div id="res">Loading...</div>
 			<div id="inf">&nbsp;<br>&nbsp;</div>
 		</div>
 		
 		<script>
 			var data = [];
+			var loaded = false;
 			var r = new XMLHttpRequest();
 			r.open("GET", "./data.bin", true);
 			r.responseType = "arraybuffer";
@@ -23,12 +24,14 @@
 				var arrayBuffer = r.response;
 				if (arrayBuffer) {
 					data = new Uint8Array(arrayBuffer);
+					loaded = true;
 					update();
 				}
 			};
 			r.send(null);
 
 			function update() {
+				if(!loaded) return;
 				var n = document.getElementById("zipinput");
 				n.value = n.value.replace(/[^0-9]+/g, '');
 				n.value = n.value.substring(0,5);
