@@ -17,7 +17,7 @@
 		<script>
 			var data = [];
 			var r = new XMLHttpRequest();
-			r.open("GET", "/data.bin", true);
+			r.open("GET", "./data.bin", true);
 			r.responseType = "arraybuffer";
 			r.onload = function (e) {
 				var arrayBuffer = r.response;
