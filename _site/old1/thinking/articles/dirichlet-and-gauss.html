@@ -1,0 +1,1041 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Dirichlet and Gauss | Brandon Gong</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<link rel="shortcut icon" href="../../favicon.ico">
+	<link
+		href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;700&family=Source+Serif+Pro:ital,wght@0,400;0,700;1,300;1,400&display=swap"
+		rel="stylesheet">
+	<style>
+		* {
+			box-sizing: border-box;
+		}
+
+		html,
+		body {
+			padding: 0;
+			margin: 0;
+			width: 100%;
+			height: 100%;
+			cursor: none;
+		}
+
+		body {
+			overflow-x: hidden;
+			overflow-y: auto;
+			scrollbar-width: none;
+		}
+
+		#icon {
+			pointer-events: none;
+		}
+
+		body::-webkit-scrollbar {
+			display: none;
+		}
+
+		.circle {
+			position: absolute;
+			border: solid 2px black;
+			transition: border-color 200ms ease;
+			width: 60px;
+			height: 60px;
+			/* border-radius: 50%; */
+			transform: rotate(45deg);
+			pointer-events: none;
+			z-index: 1000;
+		}
+
+		#cursor-caption {
+			position: absolute;
+			pointer-events: none;
+			color: #ffcc00;
+			font-family: "Montserrat";
+			font-weight: 600;
+			font-size: 15px;
+		}
+
+		#smallcircle {
+			height: 10px;
+			width: 10px;
+			background-color: black;
+			border-radius: 50%;
+			position: absolute;
+			pointer-events: none;
+			transition: background-color 200ms ease;
+			z-index: 1000;
+		}
+
+		#nav {
+			display: flex;
+			flex-direction: row;
+			align-items: center;
+			justify-content: space-between;
+			border-bottom: 1px solid #eee;
+			position: fixed;
+			top: 0;
+			left: 0;
+			width: 100vw;
+			background-color: white;
+			z-index: 100;
+		}
+
+		#x-close {
+			font-size: 20px;
+			text-decoration: none;
+			cursor: none;
+			padding: 15px;
+			padding-right: 30px;
+		}
+		#x-close,
+		#x-close:hover,
+		#x-close:active,
+		#x-close:visited {
+			color: black;
+		}
+
+		a,
+		a:hover,
+		a:active,
+		a:visited {
+			text-decoration: none;
+		}
+
+		#nav-header {
+			font-family: "Montserrat", sans-serif;
+			font-weight: 700;
+			font-size: 20px;
+			white-space: nowrap;
+			max-width: calc(100vw - 160px);
+			text-overflow: ellipsis;
+			overflow: hidden;
+		}
+
+		#wrapper {
+			width: 100vw;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			margin-top: 120px;
+		}
+
+		#container {
+			width: 800px;
+			margin-bottom: 70px;
+		}
+
+		h1 {
+			font-family: "Montserrat", sans-serif;
+			font-weight: 700;
+			font-size: 60px;
+			margin-bottom: 0;
+		}
+
+		h2 {
+			font-family: "Montserrat", sans-serif;
+			font-weight: 300;
+			font-size: 25px;
+			color: #777;
+		}
+
+		#pfp {
+			width: 80px;
+			height: 80px;
+			border-radius: 50%;
+		}
+
+		#name {
+			font-family: "Montserrat", sans-serif;
+			font-weight: 700;
+			font-size: 25px;
+		}
+
+		#date {
+			font-family: "Montserrat", sans-serif;
+			font-weight: 300;
+			font-size: 15px;
+		}
+
+		p {
+			font-size: 22px;
+			font-family: "Source Serif Pro", serif;
+		}
+
+		.img-caption {
+			width: 100%;
+			text-align: center;
+			margin-top: 5px;
+			font-family: "Source Serif Pro", serif;
+			color: #888;
+			font-style: italic;
+			font-size: 18px;
+		}
+
+		::selection {
+			background: #ffcc00;
+			/* WebKit/Blink Browsers */
+			color: black;
+		}
+
+		::-moz-selection {
+			background: #ffcc00;
+			/* Gecko Browsers */
+			color: black;
+		}
+
+		.no-select {
+			-webkit-touch-callout: none;
+			-webkit-user-select: none;
+			-khtml-user-select: none;
+			-moz-user-select: none;
+			-ms-user-select: none;
+			user-select: none;
+		}
+
+		.drop {
+			color: #ffcc00;
+			float: left;
+			font-weight: 700;
+			font-size: 75px;
+			line-height: 50px;
+			padding-top: 4px;
+			padding-right: 4px;
+			padding-left: 3px;
+		}
+
+		#share {
+			position: fixed;
+			bottom: 90px;
+			right: 25px;
+			stroke-width: 0.2;
+			transition: stroke 200ms ease,
+						fill   200ms ease;
+			fill: #000000;
+			stroke: #000000;
+
+		}
+		#theme-toggle {
+			position: fixed;
+			bottom: 25px;
+			right: 25px;
+			transition: stroke 200ms ease,
+						fill   200ms ease;
+			stroke: #000000;
+		}
+
+		#progressbar {
+			position: absolute;
+			width: 0vw;
+			height: 5px;
+			bottom: -5px;
+			left: 0px;
+			background-color: #ffcc00;
+		}
+
+		.article-image {
+			width: 80%;
+			margin-left: 10%;
+		}
+
+		#share-wrapper {
+			position: fixed;
+			top: 0; left: 0;
+			width: 100vw;
+			height: 100vh;
+			background-color: rgba(0, 0, 0, 0.5);
+			z-index: 101;
+			align-items: center;
+			justify-content: center;
+			pointer-events: none;
+			display: none;
+		}
+		#share-container {
+			background-color: white;
+			position: relative;
+			display: flex;
+			flex-direction: column;
+			padding: 20px;
+			justify-content: center;
+			width: 50%;
+			border-radius: 5px;
+		}
+
+		#copybtn {
+			font-family: 'Montserrat', sans-serif;
+			font-weight: 700;
+			color: #ffcc00;
+			border: 1px solid #ffcc00;
+			padding: 11px 10px;
+			font-size: 14px;
+			transition: 200ms ease;
+		}
+		#copybtn:hover {
+			font-family: 'Montserrat', sans-serif;
+			color: white;
+			border: 1px solid #ffcc00;
+			padding: 11px 10px;
+			font-size: 14px;
+			background-color: #ffcc00;
+		}
+
+		#share-header {
+			font-family: 'Montserrat', sans-serif;
+			font-size: 30px;
+			padding: 0;
+			margin: 0;
+			margin-bottom: 20px;
+		}
+
+		#share-components {
+			display: flex;
+			flex-direction: row;
+			align-items: center;
+			justify-content: center;
+			width: 100%;
+		}
+
+		#urlcopy {
+			background-color: white;
+			border: 1px solid black;
+			padding: 10px;
+			font-family: 'Source Serif Pro', serif;
+			font-size: 14px;
+			flex-grow: 1;
+			margin-right: 20px;
+			min-width: 0;
+			cursor: none;
+		}
+
+		#x-copy {
+			position: absolute;
+			top: 20px;
+			right: 20px;
+			font-size: 20px;
+		}
+
+		h3 {
+			font-family: "Montserrat", sans-serif;
+			font-size: 30px;
+			margin-top: 50px;
+			margin-bottom: 10px;
+		}
+
+		p > a.lighta, p > a.lighta:visited {
+			color: black;
+			text-decoration: underline;
+			cursor: none;
+		}
+
+		p > a.darka, p > a.darka:visited {
+			color: white;
+			text-decoration: underline;
+			cursor: none;
+		}
+
+		p > a.lighta:hover, p > a.lighta:active, p > a.darka:hover, p > a.darka:active {
+			color: #ffcc00;
+			text-decoration: underline;
+			cursor: none;
+		}
+
+		@media only screen and (max-width: 1000px) {
+			#container {
+				width: calc(100vw - 70px);
+			}
+			#controls > #theme-toggle {
+				position: unset;
+			}
+			#controls > #share {
+				position: unset;
+			}
+		}
+
+	</style>
+	<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+	<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+
+<body>
+
+	<div id="nav">
+		<a href="../../" style="cursor: none">
+			<div id="logocontainer" style="padding: 15px; padding-top: 16px; padding-bottom: 14px;">
+				<img src="../../Hilbert_curve_3.svg" width=32 id="icon">
+			</div>
+		</a>
+		<div id="nav-header">Dirichlet and Gauss</div>
+		<a onclick="window.history.back()">
+			<div id="x-close" class="no-select">⨉</div>
+		</a>
+		<div id="progressbar"></div>
+	</div>
+	
+	<div id="wrapper">
+		<div id="container">
+			<div class="no-select">
+				<h1>Dirichlet and Gauss</h1>
+				<h2>Taking on more problems with Feynman's trick</h2>
+				<div style="display: flex; flex-direction: row;align-items: center; margin-bottom: 50px;">
+					<img src="profile.jpg" id="pfp">
+					<div style="width: 15px"></div>
+					<div>
+						<div id="name">Brandon Gong</div>
+						<div id="date">August 16th, 2020</div>
+					</div>
+					<div style="flex-grow: 1;"></div>
+					<div id="controls">
+						<svg viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" width="35" height="35" id="share" onclick="triggerCopy()"><path d="M14.5.5l.46.197a.5.5 0 00-.657-.657L14.5.5zm-14 6l-.197-.46a.5.5 0 00-.06.889L.5 6.5zm8 8l-.429.257a.5.5 0 00.889-.06L8.5 14.5zM14.303.04l-14 6 .394.92 14-6-.394-.92zM.243 6.93l5 3 .514-.858-5-3-.514.858zM5.07 9.757l3 5 .858-.514-3-5-.858.514zm3.889 4.94l6-14-.92-.394-6 14 .92.394zM14.146.147l-9 9 .708.707 9-9-.708-.708z"></path></svg>
+						<svg viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" width="35" height="35" id="theme-toggle" onclick="todark()"><path d="M1.66 11.362A6.5 6.5 0 007.693.502a7 7 0 11-6.031 10.86z" stroke-linejoin="round"></path></svg>
+					</div>
+				</div>
+			</div>
+			<img src="001/dng.png" class="article-image">
+			<p class="img-caption">
+				In blue, the function we will be integrating in Dirichlet's integral; in green, the function we will
+				be integrating in the Gaussian integral.
+			</p>
+			<p>
+				(If you haven't read the prequel to this blog yet, I highly encourage you to check it out
+				<a href="integrating-with-mr-feynman.html" class="lighta">here</a> for some background.)
+			</p>
+			<p>
+				<span class="drop">R</span>ecently, I discovered Feynman's trick for evaluating integrals, and it blew my mind.  Today,
+				I will use this same method of interchanging the integral and the derivative to tackle two of the most famous
+				integrals in math: the Dirichlet integral and the Gaussian integral.
+			</p>
+			<p>
+				While neither of my solutions are unique, the process of working through each one and solving it on my own was immensely
+				rewarding, so I hope I can relay some of that excitement here as I go through my thought process for each of the problems.
+				I'll start with the simpler of the two:
+			</p>
+			<h3>The Dirichlet Integral</h3>
+			<p>There are several integrals named after Peter Gustav Lejeune Dirichlet, but the most famous one takes the form</p>
+			<p>
+				\[\int_0^{\infty}\frac{\sin{x}}{x}\,dx.\]
+			</p>
+			<p>
+				Immediately, we can see that our usual methods — u-substitution, integration by parts, partial fractions, etc. — fall flat
+				against this integral.  The annoying \(x\) in the denominator gets in the way of our hopes of IBP or u-sub, so why don't
+				we try to get rid of it somehow?
+			</p>
+			<p>
+				We want to somehow introduce an \(x\) to the numerator so that it will cancel with the denominator and we will be left with
+				an easy integral from there.  Why don't we try parameterizing the coefficient of the \(x\) inside the sine, and applying
+				differentiation under the integral sign from there?
+			</p>
+			<p>
+				Let \(I(\alpha)=\int_0^{\infty}\frac{\sin{\left(\alpha x\right)}}{x}\,dx\). Then
+			</p>
+			<p>
+				\[\begin{align*}
+				I'(\alpha)&=\frac{\mathrm{d}}{\mathrm{d}\alpha}\int_0^\infty\frac{\sin{\left(\alpha x\right)}}{x}\,dx\\
+				&=\int_0^\infty\frac{\partial}{\partial\alpha}\frac{\sin{\left(\alpha x\right)}}{x}\,dx\\
+				&=\int_0^\infty\frac{x\cos{\left(\alpha x\right)}}{x}\,dx\\
+				&=\int_0^\infty \cos{\left(\alpha x\right)}\,dx.
+				\end{align*}\]
+			</p>
+			<p>
+				The problem with this parameterization is that though we can find an antiderivative now, the improper integral does not converge due 
+				to the periodic behavior of cosine.  So, we need to find something else to parameterize that
+				<ul style="margin-top: -10px;font-size: 22px;font-family: 'Source Serif Pro', serif;">
+					<li>will produce an \(x\) for us when we take the partial derivative with respect to \(\alpha\),</li>
+					<li>makes the integral converge, and</li>
+					<li>is easy to integrate next to the trig function.</li>
+				</ul>
+				<p>
+					For me, one of the big things that comes to mind is the exponential function \(e^{-\alpha x}.\)  It has all of the
+					properties that we want: taking its derivative with respect to \(\alpha\) will yield a \(-x\); it approaches 0
+					as \(x \rightarrow \infty\), and if everything works out we can definitely integrate some kind of exponential-times-trig
+					expression.
+				</p>
+				<p>
+					So, we make a new parameterization, this time parameterizing the coefficient of the sine.  Our new function is
+				</p>
+				<p>
+					\[\begin{align*}
+					I(\alpha)&=\int_0^\infty \frac{e^{-\alpha x}\sin{x}}{x}\,dx.
+					\end{align*}\]
+				</p>
+				<p>
+					Before I move on, I want to make a quick note of a few things.  First of all,
+				</p>
+				<p>
+					\[\begin{align*}
+					I(0)&=\int_0^\infty \frac{e^{0 \cdot x}\sin{x}}{x}\,dx = \int_0^\infty \frac{\sin{x}}{x}\,dx,
+					\end{align*}\]
+				</p>
+				<p>
+					Which is the end result that we want.  So, once we figure out what \(I\) is, we just need to plug in 0 for \(\alpha\)
+					for our final answer. Additionally,
+				</p>
+				<p>
+					\[\begin{align*}
+					\lim_{\alpha\to\infty} I(\alpha)&=\int_0^\infty \frac{e^{-\infty}\sin{x}}{x}\,dx = \int_0^\infty \frac{0 \cdot \sin{x}}{x}\,dx = 0.
+					\end{align*}\]
+				</p>
+				<p>
+					We will need this additional data point later on to solve for our constant of integration once we reconstruct the
+					antiderivative of \(I\) after performing the differentiation under the integral sign.
+				</p>
+				<p>
+					Ok, let's do it!  Again, with (for \(\alpha \geq 0\)) \(I(\alpha)=\int_0^\infty \frac{e^{-\alpha x}\sin{x}}{x}\,dx\):
+				</p>
+				<p>
+					\[\begin{align*}
+					I'(\alpha) &= \frac{\mathrm{d}}{\mathrm{d}\alpha}\int_0^\infty\frac{e^{-\alpha x}\sin{x}}{x}\,dx\\
+					&=\int_0^\infty\frac{\partial}{\partial\alpha}\frac{e^{-\alpha x}\sin{x}}{x}\,dx\\
+					&=\int_0^\infty\frac{-xe^{-\alpha x}\sin{x}}{x}\,dx\\
+					&=-\int_0^\infty e^{-\alpha x}\sin{x}\,dx.
+					\end{align*}\]
+				</p>
+				<p>
+					This expression is integrable via integration by parts.  Let \(M=\int e^{-\alpha x}\sin{x}\,dx\), \(u = e^{-\alpha x}\), and \(dv = \sin{x}\,dx.\)
+				</p>
+				<p>
+					\[\begin{align*}
+					M &= -e^{-\alpha x}\cos{x} - \alpha\int e^{-\alpha x}\cos{x}\,dx\\
+					\Rightarrow M&= -e^{-\alpha x}\cos{x}-\alpha e^{-\alpha x}\sin{x}-\alpha^2\int e^{-\alpha x}\sin{x}\,dx\\
+					\Rightarrow M&= -e^{-\alpha x}\cos{x}-\alpha e^{-\alpha x}\sin{x}-\alpha^2M\\
+					\Rightarrow M\left(1 + \alpha^2\right)&=-e^{-\alpha x}\cos{x}-\alpha e^{-\alpha x}\sin{x}\\
+					\Rightarrow M&=-\frac{e^{-\alpha x}\left(\cos{x}+\alpha\sin{x}\right)}{1+\alpha^2}.
+					\end{align*}\]
+				</p>
+				<p>
+					And so
+				</p>
+				<p>
+					\[\begin{align*}
+					I'(\alpha) = \left[-M\right]^{x=\infty}_{x=0} &= \left[\frac{e^{-\alpha x}\left(\cos{x}+\alpha\sin{x}\right)}{1+\alpha^2}\right]^{x=\infty}_{x=0}\\
+					I'(\alpha) &= \frac{0}{1+\alpha^2} - \frac{1}{1+\alpha^2}\\
+					I'(\alpha) &= -\frac{1}{1+\alpha^2}.
+					\end{align*}\]
+				</p>
+				<p>
+					Now, we simply need to integrate both sides with respect to \(\alpha\) to get back our \(I\)!  Isn't that so cool?  Here is
+					where that initial condition \(I(\infty)=0\) comes back into play.
+				</p>
+				<p>
+					\[\begin{align*}
+					\int I'(\alpha) \,d\alpha &= -\int \frac{1}{1+\alpha^2} \,d\alpha\\
+					\Rightarrow I(\alpha) &= -\arctan{\alpha} + C.
+					\end{align*}\]
+				</p>
+				<p>Solving for the constant of integration and plugging back in:</p>
+				<p>
+					\[\begin{align*}
+					I(\infty) &= -\arctan{\infty} + C\\
+					\Rightarrow 0 &= -\frac{\pi}{2}+C\\
+					\Rightarrow C &= \frac{\pi}{2}.\\
+					\Rightarrow I(\alpha) &= -\arctan{\alpha}+\frac{\pi}{2}
+					\end{align*}\]
+				</p>
+				<p>
+					And the final step, plugging in 0 for \(\alpha\) to get the final solution to the Dirichlet integral.
+					I've included the entire process below to recap!
+				</p>
+				<p>
+					\[\begin{align*}
+					\int_0^{\infty}\frac{\sin{x}}{x}\,dx &= \int_0^\infty \frac{e^{-0 \cdot x}\sin{x}}{x}\,dx\\
+					\Rightarrow\int_0^{\infty}\frac{\sin{x}}{x}\,dx&= I(0)\\
+					\Rightarrow\int_0^{\infty}\frac{\sin{x}}{x}\,dx&= -\arctan{0}+\frac{\pi}{2}\\
+					\Rightarrow\int_0^{\infty}\frac{\sin{x}}{x}\,dx&= 0 + \frac{\pi}{2}\\
+					\Rightarrow\int_0^{\infty}\frac{\sin{x}}{x}\,dx&= \frac{\pi}{2}.
+					\end{align*}\]
+				</p>
+				<p>
+					With Feynman's trick, we've taken an integral originally impervious to our tools, transformed it into a simpler
+					problem, and ended up with a beautifully simple solution.  Very satisfying!  Next, we'll take a look at
+					the <i>Gaussian integral</i>, perhaps one of the most famous integrals.  It's a bit more involved, so
+					get ready!
+				</p>
+				<h3>The Gaussian Integral</h3>
+				<p>
+					The Gaussian integral (named after the great Carl Friedrich Gauss) takes on the form
+				</p>
+				<p>
+					\[\int_{-\infty}^{+\infty}e^{-x^2}\,dx.\]
+				</p>
+				<p>
+					Its signature bell curve shape is used frequently in statistics and physics for various distribution functions.
+					The classic solution to the Gaussian integral involves a simple change of variables to cylindrical coordinates.
+					We start with squaring the entire integral, and then tweaking it until a familiar substitution \(r^2 = x^2 + y^2\)
+					appears:
+				</p>
+				<p>
+					\[\begin{align*}
+					\left(\int_{-\infty}^{\infty}e^{-x^2}\,dx\right)^2 &= \left(\int_{-\infty}^{\infty}e^{-x^2}\,dx\right)\left(\int_{-\infty}^{\infty}e^{-x^2}\,dx\right)\\
+					&= \left(\int_{-\infty}^{\infty}e^{-x^2}\,dx\right)\left(\int_{-\infty}^{\infty}e^{-y^2}\,dy\right)\\
+					&= \int_{-\infty}^{\infty}\int_{-\infty}^{\infty}e^{-x^2}e^{-y^2}\,dx\,dy\\
+					&= \iint_{\mathbb{R}^2}e^{-\left(x^2+y^2\right)}\,dx\,dy.
+					\end{align*}\]
+				</p>
+				<p>
+					After that first trick, evaluating this integral is fairly trivial, provided we don't forget the Jacobian when we
+					perform the change of variables (the Jacobian is the whole reason we go through this trouble in the first place, so
+					we can have that extra \(r\) to u-sub with):
+				</p>
+				<p>
+					\[\begin{align*}
+					\iint_{\mathbb{R}^2}e^{-\left(x^2+y^2\right)}\,dx\,dy &= \int_0^\infty\int_0^{2\pi}re^{-r^2}\,d\theta\,dr\\
+					&=2\pi\int_0^\infty re^{-r^2}\,dr\\
+					&\text{ Let }u=-r^2\Rightarrow du = -2r\,dr.\\
+					&=-\pi\int_0^{-\infty} e^{u}\,du\\
+					&=\pi\left[e^0-e^{-\infty}\right]\\
+					&=\pi.
+					\end{align*}\]
+				</p>
+				<p>
+					We squared the whole integral in the beginning, so we need to take the square root in the end, giving us a final answer of
+				</p>
+				<p>
+					\[\begin{align*}
+					\sqrt{\pi}.
+					\end{align*}\]
+				</p>
+				<p>
+					This is a nice solution and all, but I wanted to see if I could find a solution using differentiation under the integral
+					and avoid going into the multivariate world at all if possible.  This turned out to be a long and difficult process with
+					many dead ends, and I'll be the first to admit that this solution is far more convoluted and nowhere near as satisfying
+					as the cylindrical change of variables solution above; still though, I'm glad I achieved my goal of using Feynman's trick
+					to avoid higher-dimensional integration.
+				</p>
+				<p>
+					Using the same approach as before, we are going to attempt to use Feynman's trick to "create" new \(x\) terms; the most
+					obvious thing to try is to parameterize the coefficient of the exponent.
+				</p>
+				<p>
+					\[\begin{align*}
+					\int_{-\infty}^{\infty}e^{-x^2}\,dx &= 2\int_{0}^{\infty}e^{-x^2}\,dx.\\
+					\end{align*}\]
+				</p>
+				<p>
+					Let \(I(\alpha)=\int_{0}^{\infty}e^{-\alpha x^2}\,dx.\)  In this way, \(2I(1)\) will give us back our original Gaussian integral.  Again, we use \(\infty\) to determine the initial conditions:
+				</p>
+				<p>
+					\[\begin{align*}
+					\lim_{\alpha\to\infty}I(\alpha) &= \lim_{\alpha\to\infty}\int_{0}^{\infty}e^{-\alpha x^2}\,dx\\&=\int_{0}^{\infty}e^{-\infty}\,dx\\&=0.
+					\end{align*}\]
+				</p>
+				<p>
+					As usual, we proceed with differentiating both sides with respect to \(\alpha\):
+				</p>
+				<p>
+					\[\begin{align*}
+					I'(\alpha) &= \frac{\mathrm{d}}{\mathrm{d}\alpha}\int_{0}^{\infty}e^{-\alpha x^2}\,dx\\
+					&=\int_{0}^{\infty} \frac{\partial}{\partial\alpha}e^{-\alpha x^2}\,dx\\
+					&= \int_{0}^{\infty}-x^2e^{-\alpha x^2}\,dx.
+					\end{align*}\]
+				</p>
+				<p>And then we evaluate the integral via u-substitution, with \(u=\alpha x^2\).  Note that \(du=2\alpha x\,dx\) and \(x=\sqrt{\frac{u}{\alpha}}\):</p>
+				<p>
+					\[\begin{align*}
+					I'(\alpha) &= \int_{0}^{\infty}-\frac{x^2e^{-u}}{2\alpha x}\,du\\
+					&= -\frac{1}{2\alpha}\int_{0}^{\infty}xe^{-u}du\\
+					&= -\frac{1}{2\alpha}\int_{0}^{\infty}\sqrt{\frac{u}{\alpha}}e^{-u}du\\
+					&= -\frac{1}{2\alpha^{3/2}}\int_{0}^{\infty}u^{1/2}e^{-u}du\\
+					&= -\frac{1}{2\alpha^{3/2}}\,\Gamma\left(\frac{3}{2}\right),
+					\end{align*}\]
+				</p>
+				<p>
+					where \(\Gamma\) denotes the <a href="https://en.wikipedia.org/wiki/Gamma_function" class="lighta">Gamma function</a> \(
+					\Gamma(z)=\int_0^\infty x^{z-1}e^{-x}\,dx\).  We further simplify this expression using the properties of the Gamma function.
+				</p>
+				<p>
+					\[\begin{align*}
+					I'(\alpha) &= -\frac{1}{2\alpha^{3/2}}\,\Gamma\left(\frac{3}{2}\right)\\
+					&=-\frac{1}{2\alpha^{3/2}}\,\Gamma\left(\frac{1}{2}+1\right)\\
+					&=-\frac{1}{4\alpha^{3/2}}\,\Gamma\left(\frac{1}{2}\right).
+					\end{align*}\]
+				</p>
+				<p>By Euler's reflection formula, we know that</p>
+				<p>
+					\[\begin{align*}
+					\Gamma\left(1-\frac{1}{2}\right)\Gamma\left(\frac{1}{2}\right)&=\frac{\pi}{\sin{\frac{\pi}{2}}}\\
+					\Rightarrow\Gamma^2\left(\frac{1}{2}\right)&=\pi\\
+					\Rightarrow\Gamma\left(\frac{1}{2}\right)&=\sqrt\pi.
+					\end{align*}\]
+				</p>
+				<p>Substituting back in to \(I'(\alpha)\):</p>
+				<p>
+					\[\begin{align*}
+					I'(\alpha) &=-\frac{\sqrt{\pi}}{4\alpha^{3/2}}.
+					\end{align*}\]
+				</p>
+				<p>
+					Once again, through differentiation under the integral sign we have been able to evaluate the problematic integral
+					and obtain a simpler solution purely in terms of \(\alpha\).  Now, the only step that remains is to
+					integrate again with respect to \(\alpha\) to get \(I\) back.  This is fairly trivial, using our initial condition of
+					\(I(\infty)=0\) from before:
+				</p>
+				<p>
+					\[\begin{align*}
+					\int I'(\alpha)\,d\alpha &= -\frac{\sqrt{\pi}}{4}\int \alpha^{-3/2}\,d\alpha\\
+					&=\frac{\sqrt{\pi}}{2}\alpha^{-1/2}+C.\\\\
+					I(\infty) &= \frac{\sqrt{\pi}}{2}\infty^{-1/2}+C\\
+					\Rightarrow 0 &= 0 + C\\
+					\Rightarrow C &= 0.
+					\\\\
+					I(\alpha) = \frac{\sqrt{\pi}}{2}\alpha^{-1/2} &= \frac{1}{2}\sqrt{\frac{\pi}{\alpha}}.
+					\end{align*}\]
+				</p>
+				<p>And the grand finale, finding the evaluation of the Gaussian integral by substituting \(2I(1)\)...</p>
+				<p>
+					\[\begin{align*}
+					\int_{-\infty}^{\infty}e^{-x^2}\,dx = 2I(1) = 2\cdot\frac{1}{2}\sqrt{\frac{\pi}{1}} = \sqrt{\pi}
+					\end{align*}\]
+				</p>
+				<p>
+					Finally arriving at our intended result!  Solving these two integrals would have been impossible without the help of
+					differentiating under the integral sign.  Sometimes, I can only be amazed at how perfect math is; despite taking
+					radically different approaches to both of these integrals, we end up with the exact same result at the end.  It's always
+					reassuring to find an alternate solution to a problem, one that views the problem in a different light and attacks it
+					from a different angle.
+				</p>
+			</p>
+		</div>
+	</div>
+
+	<div id="share-wrapper">
+		<div id="share-container">
+			<p id="share-header" class="no-select">Share this article</p>
+			<div id="share-components">
+				<input type="text" id="urlcopy" value="" readonly><br><br>
+				<div id="copybtn" onclick="copyUrl()" class="no-select">Copy link</div>
+			</div>
+			<div class="no-select" onclick="detriggerCopy()" id="x-copy">⨉</div>
+		</div>
+	</div>
+
+
+	<div id="cursor">
+		<span id="smallcircle"></span>
+		<span class="circle" id="circle"></span>
+		<div id="cursor-caption"></div>
+	</div>
+
+	<style id="prism-styles">
+		code[class*=language-],pre[class*=language-]{color:#575f66;background:0 0;font-family:Monaco,'Andale Mono','Ubuntu Mono',monospace;font-size:1em;text-align:left;white-space:pre;word-spacing:normal;word-break:normal;word-wrap:normal;line-height:1.5;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-hyphens:none;-moz-hyphens:none;-ms-hyphens:none;hyphens:none}code[class*=language-] ::-moz-selection,code[class*=language-]::-moz-selection,pre[class*=language-] ::-moz-selection,pre[class*=language-]::-moz-selection{text-shadow:none;background:#8a9199}code[class*=language-] ::selection,code[class*=language-]::selection,pre[class*=language-] ::selection,pre[class*=language-]::selection{text-shadow:none;background:#8a9199}@media print{code[class*=language-],pre[class*=language-]{text-shadow:none}}pre[class*=language-]{padding:1em;margin:.5em 0;overflow:auto;border-radius:10px}:not(pre)>code[class*=language-],pre[class*=language-]{background:#fafafa}:not(pre)>code[class*=language-]{padding:.1em;border-radius:.3em;white-space:normal}.token.cdata,.token.comment,.token.doctype,.token.prolog{color:#abb0b6}.token.punctuation{color:#575f66}.token.namespace{opacity:.7}.token.boolean,.token.constant,.token.deleted,.token.number,.token.property,.token.symbol{color:#a37acc}.token.tag{color:#55b4d4}.token.attr-name,.token.builtin,.token.char,.token.inserted,.token.selector,.token.string{color:#86b300}.language-css .token.string,.style .token.string,.token.operator,.token.url{color:#ed9366}.token.entity{color:#399ee6}.token.atrule,.token.attr-value,.token.keyword{color:#fa8d3e}.token.class-name,.token.function{color:#399ee6}.token.important,.token.regex,.token.variable{color:#4cbf99}.token.bold,.token.important{font-weight:700}.token.italic{font-style:italic}.token.entity{cursor:help}
+	</style>
+	<script src="../../js/jquery-3.5.1.min.js"></script>
+	<script src="../../js/jquery.mousewheel.min.js"></script>
+	<script src="prism.js"></script>
+	<script>
+		var isMobile = false;
+		var labeloffset = 0;
+		var smalloffset = 5;
+		var toplabeloffset = 0;
+		var isdark = false;
+
+		$(document).ready(function () {
+			(function (a) {
+				if (/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od)|iris|kindle|lge |maemo|midp|mmp|mobile.+firefox|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\/|plucker|pocket|psp|series(4|6)0|symbian|treo|up\.(browser|link)|vodafone|wap|windows ce|xda|xiino|android|ipad|playbook|silk/i
+					.test(a) ||
+					/1207|6310|6590|3gso|4thp|50[1-6]i|770s|802s|a wa|abac|ac(er|oo|s\-)|ai(ko|rn)|al(av|ca|co)|amoi|an(ex|ny|yw)|aptu|ar(ch|go)|as(te|us)|attw|au(di|\-m|r |s )|avan|be(ck|ll|nq)|bi(lb|rd)|bl(ac|az)|br(e|v)w|bumb|bw\-(n|u)|c55\/|capi|ccwa|cdm\-|cell|chtm|cldc|cmd\-|co(mp|nd)|craw|da(it|ll|ng)|dbte|dc\-s|devi|dica|dmob|do(c|p)o|ds(12|\-d)|el(49|ai)|em(l2|ul)|er(ic|k0)|esl8|ez([4-7]0|os|wa|ze)|fetc|fly(\-|_)|g1 u|g560|gene|gf\-5|g\-mo|go(\.w|od)|gr(ad|un)|haie|hcit|hd\-(m|p|t)|hei\-|hi(pt|ta)|hp( i|ip)|hs\-c|ht(c(\-| |_|a|g|p|s|t)|tp)|hu(aw|tc)|i\-(20|go|ma)|i230|iac( |\-|\/)|ibro|idea|ig01|ikom|im1k|inno|ipaq|iris|ja(t|v)a|jbro|jemu|jigs|kddi|keji|kgt( |\/)|klon|kpt |kwc\-|kyo(c|k)|le(no|xi)|lg( g|\/(k|l|u)|50|54|\-[a-w])|libw|lynx|m1\-w|m3ga|m50\/|ma(te|ui|xo)|mc(01|21|ca)|m\-cr|me(rc|ri)|mi(o8|oa|ts)|mmef|mo(01|02|bi|de|do|t(\-| |o|v)|zz)|mt(50|p1|v )|mwbp|mywa|n10[0-2]|n20[2-3]|n30(0|2)|n50(0|2|5)|n7(0(0|1)|10)|ne((c|m)\-|on|tf|wf|wg|wt)|nok(6|i)|nzph|o2im|op(ti|wv)|oran|owg1|p800|pan(a|d|t)|pdxg|pg(13|\-([1-8]|c))|phil|pire|pl(ay|uc)|pn\-2|po(ck|rt|se)|prox|psio|pt\-g|qa\-a|qc(07|12|21|32|60|\-[2-7]|i\-)|qtek|r380|r600|raks|rim9|ro(ve|zo)|s55\/|sa(ge|ma|mm|ms|ny|va)|sc(01|h\-|oo|p\-)|sdk\/|se(c(\-|0|1)|47|mc|nd|ri)|sgh\-|shar|sie(\-|m)|sk\-0|sl(45|id)|sm(al|ar|b3|it|t5)|so(ft|ny)|sp(01|h\-|v\-|v )|sy(01|mb)|t2(18|50)|t6(00|10|18)|ta(gt|lk)|tcl\-|tdg\-|tel(i|m)|tim\-|t\-mo|to(pl|sh)|ts(70|m\-|m3|m5)|tx\-9|up(\.b|g1|si)|utst|v400|v750|veri|vi(rg|te)|vk(40|5[0-3]|\-v)|vm40|voda|vulc|vx(52|53|60|61|70|80|81|83|85|98)|w3c(\-| )|webc|whit|wi(g |nc|nw)|wmlb|wonu|x700|yas\-|your|zeto|zte\-/i
+					.test(a.substr(0, 4))) isMobile = true;
+			})(navigator.userAgent || navigator.vendor || window.opera);
+
+			if (isMobile) {
+				document.getElementById("cursor").style.display = "none";
+			}
+
+			var mouseX1 = 0,
+				mouseY1 = 0;
+			var xp = 0,
+				yp = 0;
+
+			document.getElementById("urlcopy").setAttribute("value", window.location.href);
+
+			$(document).mousemove(function (e) {
+				mouseX1 = e.pageX - 30;
+				mouseY1 = e.pageY - 30;
+				$('#smallcircle').css({
+					left: e.pageX - smalloffset + 'px',
+					top: e.pageY - smalloffset + 'px'
+				});
+			});
+
+			$("#logocontainer").mouseenter(function () {
+				document.getElementById("logocontainer").innerHTML =
+					`<img src="../../Hilbert_curve_3_active.svg" width=32 id="icon">`;
+			});
+			$("#logocontainer").mouseleave(function () {
+				if(isdark) {
+					document.getElementById("logocontainer").innerHTML =
+					`<img src="../../Hilbert_curve_3_white.svg" width=32 id="icon">`;
+				} else {
+					document.getElementById("logocontainer").innerHTML =
+					`<img src="../../Hilbert_curve_3.svg" width=32 id="icon">`;
+				}
+				
+			});
+			$("#logocontainer").mousedown(function () {
+				document.getElementById("logocontainer").innerHTML =
+					`<img src="../../Hilbert_curve_3_active.svg" width=32 id="icon">`;
+			});
+			$("#x-close").mouseenter(function () {
+				$("#circle").css({
+					border: "solid 2px #ffcc00"
+				});
+				$("#smallcircle").css({
+					backgroundColor: "#ffcc00"
+				});
+			});
+			$("#x-close").mouseleave(function () {
+				if(isdark) {
+					$("#circle").css({
+						border: "solid 2px white"
+					});
+					$("#smallcircle").css({
+						backgroundColor: "white"
+					});
+				} else {
+					$("#circle").css({
+						border: "solid 2px black"
+					});
+					$("#smallcircle").css({
+						backgroundColor: "black"
+					});
+				}
+			});
+			$("#x-copy").mouseenter(function () {
+				$("#circle").css({
+					border: "solid 2px #ffcc00"
+				});
+				$("#smallcircle").css({
+					backgroundColor: "#ffcc00"
+				});
+			});
+			$("#x-copy").mouseleave(function () {
+				if(isdark) {
+					$("#circle").css({
+						border: "solid 2px white"
+					});
+					$("#smallcircle").css({
+						backgroundColor: "white"
+					});
+				} else {
+					$("#circle").css({
+						border: "solid 2px black"
+					});
+					$("#smallcircle").css({
+						backgroundColor: "black"
+					});
+				}
+			});
+
+			$("#share").mouseenter(function () {
+				labeloffset = -145;
+				$("#share").css({
+					fill: "#ffcc00",
+					stroke: "#ffcc00"
+				});
+				document.getElementById("cursor-caption").innerHTML = "Share&nbsp;this&nbsp;page";
+				let sms = document.getElementById("smallcircle");
+				if (sms) sms.parentNode.removeChild(sms);
+				$("#smallcircle").css({
+					width: "unset",
+					height: "unset",
+					backgroundColor: "unset"
+				});
+				document.getElementById("circle").style.borderColor = "#ffcc00";
+				smalloffset = 15;
+			});
+			$("#share").mouseleave(function () {
+				document.getElementById("cursor-caption").innerHTML = "";
+				labeloffset = undefined;
+				smalloffset = 5;
+				let sms = document.getElementById("smallcircle");
+				if (sms) sms.parentNode.removeChild(sms);
+				document.getElementById("cursor").innerHTML = '<span id="smallcircle"></span>' + document
+					.getElementById("cursor").innerHTML;
+				toplabeloffset = 0;
+				if(isdark) {
+					$("#share").css({
+						fill: "#ffffff",
+						stroke: "#ffffff"
+					});
+					$("#smallcircle").css({
+						width: "10px",
+						height: "10px",
+						backgroundColor: "white"
+					});
+					document.getElementById("circle").style.borderColor = "white";
+				} else {
+					$("#share").css({
+						fill: "#000000",
+						stroke: "#000000"
+					});
+					$("#smallcircle").css({
+						width: "10px",
+						height: "10px",
+						backgroundColor: "black"
+					});
+					document.getElementById("circle").style.borderColor = "#000";
+				}
+			});
+			$("#theme-toggle").mouseenter(function () {
+				$("#theme-toggle").css({
+					stroke: "#ffcc00"
+				});
+				labeloffset = -165;
+				document.getElementById("cursor-caption").innerHTML = "Toggle&nbsp;dark&nbsp;mode";
+				let sms = document.getElementById("smallcircle");
+				if (sms) sms.parentNode.removeChild(sms);
+				$("#smallcircle").css({
+					width: "unset",
+					height: "unset",
+					backgroundColor: "unset"
+				});
+				document.getElementById("circle").style.borderColor = "#ffcc00";
+				smalloffset = 15;
+			});
+			$("#theme-toggle").mouseleave(function () {
+				document.getElementById("cursor-caption").innerHTML = "";
+				labeloffset = undefined;
+				smalloffset = 5;
+				let sms = document.getElementById("smallcircle");
+				if (sms) sms.parentNode.removeChild(sms);
+				document.getElementById("cursor").innerHTML = '<span id="smallcircle"></span>' + document
+					.getElementById("cursor").innerHTML;
+				
+				toplabeloffset = 0;
+				if(isdark) {
+					$("#theme-toggle").css({
+						stroke: "#ffffff"
+					});
+					$("#smallcircle").css({
+						width: "10px",
+						height: "10px",
+						backgroundColor: "white"
+					});
+					document.getElementById("circle").style.borderColor = "white";
+				} else {
+					$("#theme-toggle").css({
+						stroke: "#000000"
+					});
+					$("#smallcircle").css({
+						width: "10px",
+						height: "10px",
+						backgroundColor: "black"
+					});
+					document.getElementById("circle").style.borderColor = "#000";
+				}
+			});
+
+			setInterval(function () {
+				xp += ((mouseX1 - xp) / 6);
+				yp += ((mouseY1 - yp) / 6);
+				$("#circle").css({
+					left: xp + 'px',
+					top: yp + 'px'
+				});
+				if (labeloffset !== undefined) {
+					$("#cursor-caption").css({
+						left: xp + labeloffset + 'px',
+						top: yp + +toplabeloffset + 20 + 'px'
+					});
+				}
+			}, 20);
+
+		});
+		window.onscroll = function() {myFunction()};
+
+		function myFunction() {
+			var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+			var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+			var scrolled = (winScroll / height) * 100;
+			document.getElementById("progressbar").style.width = scrolled + "vw";
+		} 
+
+		function todark() {
+			isdark = true;
+			$("body").css({
+				backgroundColor: "#222222",
+				color: "#d5d5d5"
+			});
+			$("#share").css({
+				fill: "#ffffff",
+				stroke: "#ffffff"
+			});
+			$("#nav").css({
+				backgroundColor: "#1d1d1d",
+				borderColor: "#1a1a1a"
+			});
+			$("#share-container").css({
+				backgroundColor: "#222222"
+			});
+			$("#urlcopy").css({
+				backgroundColor: "#1d1d1d",
+				color: "white"
+			});
+			$("#x-close").css({color: "white"});
+			Array.from(document.getElementsByClassName("lighta")).forEach(element => {
+				element.classList.remove("lighta");
+				element.classList.add("darka");
+			});
+			document.getElementById("logocontainer").removeChild(document.getElementById("icon"));
+			document.getElementById("logocontainer").innerHTML = `<img src="../../Hilbert_curve_3_white.svg" width=32 id="icon">`;
+			$("#prism-styles").text("code[class*=language-],pre[class*=language-]{color:#b3b1ad;background:0 0;font-family:Monaco,'Andale Mono','Ubuntu Mono',monospace;font-size:1em;text-align:left;white-space:pre;word-spacing:normal;word-break:normal;word-wrap:normal;line-height:1.5;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-hyphens:none;-moz-hyphens:none;-ms-hyphens:none;hyphens:none}code[class*=language-] ::-moz-selection,code[class*=language-]::-moz-selection,pre[class*=language-] ::-moz-selection,pre[class*=language-]::-moz-selection{text-shadow:none;background:#8a9199}code[class*=language-] ::selection,code[class*=language-]::selection,pre[class*=language-] ::selection,pre[class*=language-]::selection{text-shadow:none;background:#8a9199}@media print{code[class*=language-],pre[class*=language-]{text-shadow:none}}pre[class*=language-]{padding:1em;margin:.5em 0;overflow:auto;border-radius:10px}:not(pre)>code[class*=language-],pre[class*=language-]{background:#191919}:not(pre)>code[class*=language-]{padding:.1em;border-radius:.3em;white-space:normal}.token.cdata,.token.comment,.token.doctype,.token.prolog{color:#626a73}.token.punctuation{color:#b3b1ad}.token.namespace{opacity:.7}.token.boolean,.token.constant,.token.deleted,.token.number,.token.property,.token.symbol{color:#fe9}.token.tag{color:#39bae6}.token.attr-name,.token.builtin,.token.char,.token.inserted,.token.selector,.token.string{color:#c2d94c}.language-css .token.string,.style .token.string,.token.operator,.token.url{color:#f29668}.token.entity{color:#ffb454}.token.atrule,.token.attr-value,.token.keyword{color:#fa8d3e}.token.class-name,.token.function{color:#59c2ff}.token.important,.token.regex,.token.variable{color:#95e6cb}.token.bold,.token.important{font-weight:700}.token.italic{font-style:italic}.token.entity{cursor:help}");
+			document.getElementById("theme-toggle").innerHTML = `<path d="M7.5 1.5v-1m0 13.99v-.998m6-5.997h1m-13 0h-1m2-4.996l-1-1m12 0l-1 1m-10 9.993l-1 1m12 0l-1-1m-2-4.997a2.999 2.999 0 01-3 2.998 2.999 2.999 0 113-2.998z" stroke-linecap="square"></path>`;
+			document.getElementById("theme-toggle").setAttribute("onclick", "tolight()");
+		}
+
+		function tolight() {
+			isdark = false;
+			$("body").css({
+				backgroundColor: "white",
+				color: "black"
+			});
+			$("#share").css({
+				fill: "#000000",
+				stroke: "#000000"
+			});
+			$("#nav").css({
+				backgroundColor: "white",
+				borderColor: "#eee"
+			});
+			$("#share-container").css({
+				backgroundColor: "white"
+			});
+			$("#urlcopy").css({
+				backgroundColor: "white",
+				color: "black"
+			});
+			$("#x-close").css({color: "black"});
+			Array.from(document.getElementsByClassName("darka")).forEach(element => {
+				element.classList.remove("darka");
+				element.classList.add("lighta");
+			});
+			document.getElementById("logocontainer").removeChild(document.getElementById("icon"));
+			document.getElementById("logocontainer").innerHTML = `<img src="../../Hilbert_curve_3.svg" width=32 id="icon">`;
+			$("#prism-styles").text("code[class*=language-],pre[class*=language-]{color:#575f66;background:0 0;font-family:Monaco,'Andale Mono','Ubuntu Mono',monospace;font-size:1em;text-align:left;white-space:pre;word-spacing:normal;word-break:normal;word-wrap:normal;line-height:1.5;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-hyphens:none;-moz-hyphens:none;-ms-hyphens:none;hyphens:none}code[class*=language-] ::-moz-selection,code[class*=language-]::-moz-selection,pre[class*=language-] ::-moz-selection,pre[class*=language-]::-moz-selection{text-shadow:none;background:#8a9199}code[class*=language-] ::selection,code[class*=language-]::selection,pre[class*=language-] ::selection,pre[class*=language-]::selection{text-shadow:none;background:#8a9199}@media print{code[class*=language-],pre[class*=language-]{text-shadow:none}}pre[class*=language-]{padding:1em;margin:.5em 0;overflow:auto;border-radius:10px}:not(pre)>code[class*=language-],pre[class*=language-]{background:#fafafa}:not(pre)>code[class*=language-]{padding:.1em;border-radius:.3em;white-space:normal}.token.cdata,.token.comment,.token.doctype,.token.prolog{color:#abb0b6}.token.punctuation{color:#575f66}.token.namespace{opacity:.7}.token.boolean,.token.constant,.token.deleted,.token.number,.token.property,.token.symbol{color:#a37acc}.token.tag{color:#55b4d4}.token.attr-name,.token.builtin,.token.char,.token.inserted,.token.selector,.token.string{color:#86b300}.language-css .token.string,.style .token.string,.token.operator,.token.url{color:#ed9366}.token.entity{color:#399ee6}.token.atrule,.token.attr-value,.token.keyword{color:#fa8d3e}.token.class-name,.token.function{color:#399ee6}.token.important,.token.regex,.token.variable{color:#4cbf99}.token.bold,.token.important{font-weight:700}.token.italic{font-style:italic}.token.entity{cursor:help}");
+			document.getElementById("theme-toggle").innerHTML = `<path d="M1.66 11.362A6.5 6.5 0 007.693.502a7 7 0 11-6.031 10.86z" stroke-linejoin="round"></path>`;
+			document.getElementById("theme-toggle").setAttribute("onclick", "todark()");
+		}
+
+		function copyUrl() {
+			document.getElementById("urlcopy").select();
+			document.getElementById("urlcopy").setSelectionRange(0, 99999);
+			document.execCommand("copy");
+			document.getElementById("copybtn").innerHTML = "Copied!";
+		}
+
+		function triggerCopy() {
+			$("#share-wrapper").css({
+				pointerEvents: "unset",
+				display: "flex"
+			});
+		}
+		function detriggerCopy() {
+			$("#share-wrapper").css({
+				pointerEvents: "none",
+				display: "none"
+			});
+		}
+	</script>
+</body>
+
+</html>

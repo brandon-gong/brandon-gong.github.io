@@ -1,0 +1,217 @@
+body {
+  overflow-x: hidden;
+}
+
+nav {
+  margin: 0px;
+  z-index: 2;
+  background-color: black;
+  transition: 200ms;
+}
+
+.stickiednav {
+  background-color: black;
+  margin: 0px;
+}
+.stickiednav > .navbar-brand {
+  font-size: 30px;
+  margin-left: 40px;
+}
+
+#fullsizelanding {
+  width: 100vw;
+  height: 100vh;
+  min-height: 35rem;
+  position: absolute;
+  top: 0px; left: 0px;
+  z-index: -2;
+  background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('backing.jpg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: scroll;
+  background-size: cover;
+}
+
+#tribrushlayer {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  z-index: -1;
+  width: 100vw;
+  height: 100vh;
+}
+
+#textlayer {
+  position: absolute;
+  top: 0px; left: 0px;
+  z-index: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100vw;
+  height: 100vh;
+  padding: 20px;
+}
+@font-face {
+  src: url('Rallifornia.otf');
+  font-family: "Rallifornia";
+}
+
+.navbar-toggler, .navbar-toggler:focus {
+  color:white;
+  border: none;
+  outline: none;
+}
+
+.navbar-brand, .navbar-brand:hover {
+  font-family: "Rallifornia", sans-serif;
+  color: white;
+  font-size: 60px;
+  transform: rotate(-10deg);
+}
+.nav-link {
+  font-size: 20px;
+  color: white;
+  margin: 0px 40px;
+  font-family: "Source Sans Pro", sans-serif;
+  font-weight: 600;
+  margin-bottom: 4px;
+  line-height: 0.85;
+  transition: 200ms;
+}
+
+.nav-link:hover {
+  color: white;
+  border-bottom: 4px solid white;
+  margin-bottom: 0px;
+}
+
+h1 {
+  font-family: "Rallifornia", sans-serif;
+  color: white;
+  font-size: 100px;
+  transform: rotate(-10deg);
+}
+h2 {
+  color: white;
+  letter-spacing: 7px;
+  text-transform: uppercase;
+  font-size: 15px;
+  margin-top: 5px;
+  font-family: "Source Sans Pro", sans-serif;
+  font-weight: 300;
+  text-align: center;
+}
+h3 {
+  color: white;
+  font-size: 50px;
+  transform: rotate(90deg);
+}
+
+#allwrapper {
+  position: absolute;
+  width: 100%;
+  top: 100vh;
+  left: 0px;
+}
+
+@media (min-width: 768px) {
+  nav {
+    margin: 30px 70px;
+    background-color: transparent;
+  }
+  h1 {
+    font-size: 250px;
+  }
+  h2 {
+    font-size: 20px;
+  }
+  .col-lg-4 > p {
+    margin-top: 0px;
+  }
+}
+
+
+#naturecontainer {
+  min-height: calc(100vh + 100px);
+  width: 100vw;
+  margin-top: -50px;
+  padding: 50px;
+  padding-top: 100px;
+  font-family: "Source Sans Pro", sans-serif;
+  font-weight: 300;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.col-lg-4 > p {
+  font-size: 20px;
+  margin-top: 50px;
+}
+
+.col-lg-4 > h1 {
+  font-size: 150px;
+}
+
+#genesiscontainer {
+  width: 100vw;
+  min-height: 100vh;
+  background-color: black;
+  padding: 50px;
+  margin-top:-50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+}
+
+#nebulaimage {
+  height: 60vh;
+}
+
+#carcontainer {
+  min-height: calc(100vh + 100px);
+  width: 100vw;
+  margin-top: -50px;
+  padding: 50px;
+  padding-top: 100px;
+  font-family: "Source Sans Pro", sans-serif;
+  font-weight: 300;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  z-index: -1;
+}
+
+#carcontainer > h1 {
+  font-size:150px;
+  color: #1c273b;
+}
+
+#carcontainer > p {
+  font-size: 30px;
+  color: #1c273b;
+  margin-top: 20px;
+  text-align: center;
+}
+
+#carcontainer > a {
+  font-size: 30px;
+  border: 2px solid #1c273b;
+  padding: 5px 15px;
+  margin-top: 20px;
+  color: #1c273b;
+}
+
+#carcontainer > a:hover {
+  cursor: pointer;
+  border: none;
+  padding: 7px 17px;
+  color: white;
+  text-decoration: none;
+  background: linear-gradient(to right, rgba(255, 0, 0, 1), rgb(255, 166, 0));
+}
