@@ -4,7 +4,7 @@ title: A hanzi graphics renderer
 tags: [processing, java, graphics]
 ---
 
-![]({{site.baseurl}}assets/monalisa.png)
+![]({{site.baseurl}}/assets/monalisa.png)
 *The end goal in action: Mona Lisa as drawn by the hanzi graphics renderer*
 
 Dithering, the process by which the number of colors in an image is reduced
@@ -28,7 +28,7 @@ I spent some time looking around online for bitmap Chinese fonts, and eventually
 settled on [Zpix](https://github.com/SolidZORO/zpix-pixel-font), which manages
 to support English, Chinese, and Japanese characters within an 11x11 pixel grid.
 
-![]({{site.baseurl}}assets/zpix-specimen.png)
+![]({{site.baseurl}}/assets/zpix-specimen.png)
 *Zpix (bottom) compared to a typical sans-serif Chinese font (top).*
 
 The basic idea now is to pull out all of the Chinese characters that the font
@@ -235,7 +235,7 @@ void draw() {
 
 And the result:
 
-![]({{site.baseurl}}assets/dbgrenderer.gif)
+![]({{site.baseurl}}/assets/dbgrenderer.gif)
 *Ignore the dithering -- converting it into a gif isn't great.*
 
 Looks good! Pixelated Perlin noise, drawn to a `PGraphics` object and blown up
@@ -574,11 +574,11 @@ void draw(PGraphics pg) {
 
 And here's our hanzi graphics renderer at work, drawing some Perlin noise:
 
-![]({{site.baseurl}}assets/glyphrenderer.gif)
+![]({{site.baseurl}}/assets/glyphrenderer.gif)
 
 Slowed down, so it's a bit easier to see the individual glyphs that go into
 building up the smooth gradients between different darknesses:
 
-![]({{site.baseurl}}assets/glyphrenderer_slow.gif)
+![]({{site.baseurl}}/assets/glyphrenderer_slow.gif)
 
 That's all.

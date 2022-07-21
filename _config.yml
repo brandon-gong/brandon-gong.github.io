@@ -2,4 +2,5 @@ plugins: [jekyll-gist]
 markdown:         kramdown
 permalink:        pretty
 title:            Brandon Gong
-baseurl:          /
+baseurl:          ''
+

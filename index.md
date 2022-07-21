@@ -21,7 +21,7 @@ When I'm not sitting at the computer, I enjoy cooking, practicing piano, hiking,
 and playing tennis.
 
 Let's get in touch! You can find me at any of my [links]({% link links.md %}),
-grab a copy of my [resume]({{site.baseurl}}resume.pdf), or reach out to me via
+grab a copy of my [resume]({{site.baseurl}}/resume.pdf), or reach out to me via
 email at _brandon \[dot] gong \[at] brandongong.org_.
 
 ## Recent posts

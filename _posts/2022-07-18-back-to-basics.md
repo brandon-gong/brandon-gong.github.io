@@ -13,19 +13,19 @@ back on some old designs, and consider future additions to the site.
 The old versions of my site are still online! Feel free to click the links in
 each header and explore what it was like. I'm still quite proud of them!
 
-## The progenitor ([visit]({{site.baseurl}}old1))
+## The progenitor ([visit]({{site.baseurl}}/old1))
 The first version of brandongong.org, designed in early high school, was a
 beefy, shiny, all-the-bells-and-whistles rendition of a website. It featured
 an interactive [three.js](https://threejs.org/) landing page, custom cursor that
 changed depending on what was hovered, and tons of CSS.
 
-![]({{site.baseurl}}assets/old1_1.png)
+![]({{site.baseurl}}/assets/old1_1.png)
 *The landing page, featuring an interactive three.js background*
 
-![]({{site.baseurl}}assets/old1_2.png)
+![]({{site.baseurl}}/assets/old1_2.png)
 *The projects page, with a diamond-grid layout and context-aware cursor*
 
-![]({{site.baseurl}}assets/old1_3.png)
+![]({{site.baseurl}}/assets/old1_3.png)
 *This website even featured a rudimentary blog, with dark mode! (note the
 context-aware cursor in the bottom-right)*
 
@@ -46,7 +46,7 @@ to 99% of the web. But there are some major drawbacks:
 - Adding onto the previous point, search engine crawlers also get super confused
 	about the layout, and I'm sure there's accessibility issues as well.
 
-## The minimalist ([visit]({{site.baseurl}}old2))
+## The minimalist ([visit]({{site.baseurl}}/old2))
 Following the first design, I started to dislike how over-the-top it was with
 all of its glamorous and wholly unnecessary JavaScript animations and quirky
 layouts. The second iteration is thus a stark contrast from the first, with
@@ -54,15 +54,15 @@ flat colors and a single-page layout. I also tried to make it a little
 "friendlier" by incorporating some more organic features, i.e. the
 subtle roughness in the background and the flower theme.
 
-![]({{site.baseurl}}assets/old2_1.png)
+![]({{site.baseurl}}/assets/old2_1.png)
 *The top of the page.*
 
-![]({{site.baseurl}}assets/old2_2.png)
+![]({{site.baseurl}}/assets/old2_2.png)
 *As you scroll, the colors fade and change. The site is grid-like, but not
 organized into strict columns, which gives it a bit more order than the
 previous design.*
 
-![]({{site.baseurl}}assets/old2_3.png)
+![]({{site.baseurl}}/assets/old2_3.png)
 *The projects section can hold a lot more different projects now than the old
 design.*
 
