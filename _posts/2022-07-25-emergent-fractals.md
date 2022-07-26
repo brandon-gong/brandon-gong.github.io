@@ -7,7 +7,8 @@ tags: [javascript, p5.js, fractal]
 Let's play a game.
 
 Our game board is a triangle, with corners labeled 1, 2, and 3. Our piece is a
-small stamp, which starts in the middle of the board.
+small stamp, which can start at any random spot in the board, but we'll just
+put it in the middle for demonstration purposes.
 
 ![]({{site.baseurl}}/assets/starting_cg.png)
 
