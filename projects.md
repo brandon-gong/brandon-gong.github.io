@@ -2,6 +2,7 @@
 layout: page
 title: Projects
 order: 2
+usemermaid: true
 ---
 
 I consider *projects* to be reasonably large works that involve lots of
@@ -9,7 +10,51 @@ different components and a few weeks or months of concentrated effort and
 willpower to complete. Small toy programs that only take a day or two would be
 mentioned in my blog, but not here.
 
-## neche (2022)
+## ptree.ml (2022) \[[link](https://github.com/brandon-gong/ptree.ml)\]
+ptree.ml (short for Property Tree) is a "universal adaptor" between the
+extraordinarily popular data serialization formats INI, JSON, and XML for OCaml.
+It provides support for parsing any of these formats into a unified data
+structure, making edits / adding new data, and then exporting data back out to
+any of those file formats.
+
+As such, it can be used as
+
+- a single, familiar tool to parse multiple file formats (no need to learn a new
+  API every time);
+- a tool to convert between different file formats (e.g. read in an INI file,
+  write it out as JSON);
+- a way to easily serialize any data you have (not just modifying pre-existing
+  data from another file – you can easily build up your own tree from scratch
+  and write it to whatever format you like).
+<div class="mermaid">
+graph LR
+    A(ptree.ml)
+    B(JSON input)
+    C(INI input)
+    D(XML input)
+    E(JSON output)
+    F(INI output)
+    G(XML output)
+    C-->A
+    B-->A
+    D-->A
+    A-->F
+    A-->E
+    A-->G
+</div>
+
+The API exposed for editing property trees views these trees as a file system,
+where categories of properties are directories and the properties are the files
+themselves. Fittingly, the API closely resembles filesystem operations in the
+Unix terminal, with functions such as `cd`, `ls`, `cp`, `cat`, `rm`, and more.
+
+Everything is built from scratch using only the standard library, including the
+parsing. Parsing is accomplished through a homemade parser combinator libary.
+The property editor is modeled after the Zipper data structure, and allows edits
+to happen on property trees in a fast, immutable, persistent, and
+memory-efficient manner.
+
+## neche (2021) \[[link](https://github.com/brandon-gong/neche)\]
 This project evolved small neural networks to play checkers. Networks were given
 32 "sensory neurons" – to look at the different individual squares on the board
 – as well as some inner neurons. They output a single evaluation score, which
@@ -39,7 +84,7 @@ generational tournament in parallel. All evolution, tree search, and move
 move generation features were implemented from scratch.
 
 
-## CHS Math Bowl (2020)
+## CHS Math Bowl (2020) \[[link](https://github.com/brandon-gong/chs-math-bowl)\]
 Developed for Collierville High School's annual Math Bowl, it featured
 scoreboard and timers for each competition room, as well as an admin console
 that controlled starting & stopping rounds, handling disputes, etc. In the
