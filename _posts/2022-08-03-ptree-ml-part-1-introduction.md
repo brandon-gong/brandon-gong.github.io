@@ -5,6 +5,11 @@ tags: [ocaml, ptreeml, types, data]
 usemermaid: true
 ---
 
+
+_Note: This is just one post in a series of blog posts about ptree.ml. To see
+all posts about it, go [here]({% post_url 2022-08-01-ptree-ml-outline %})_.
+
+
 This will be the first post in a long series where I document the process of
 building a new project, which I've called "ptree.ml".
 
