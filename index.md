@@ -4,8 +4,8 @@ title: About
 order: 0
 ---
 
-I’m currently a Data Science Research Associate at Axle Informatics, working
-with the National Institutes of Health.
+I’m currently a Software Developer at Axle Informatics, working with the
+National Institutes of Health.
 
 I'm a second-year undergraduate at Brown University, concentrating
 in Computer Science and Mathematics. I've also taken classes in immunology,
