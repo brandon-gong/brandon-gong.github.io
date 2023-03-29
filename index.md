@@ -4,11 +4,8 @@ title: About
 order: 0
 ---
 
-I’m currently a Software Developer at Axle Informatics, working with the
-National Institutes of Health.
-
 I'm a second-year undergraduate at Brown University, concentrating
-in Computer Science and Mathematics. I've also taken classes in immunology,
+in Computer Science and Applied Mathematics. I've also taken classes in immunology,
 economics, visual art, and more. I post regularly to my [blog]({% link blog.md
 %}), documenting my new learnings / recent toy programs.
 
