@@ -532,6 +532,8 @@ we defined three primitive parsers `return`, `zero`, and `item`, as well as a
 key function for combining parsers, the monadic `bind`. Finally, we defined some
 incredibly helpful functions, which we'll use in the next post to really start
 parsing some actual text:
+- `satisfies`, which returns `Ok` only if a character satisfies a given
+  predicate,
 - `and_then`, which runs one parser after another
 - `or_else`, which tries running one parser, and if it fails tries another one
 - `many`, which runs a parser repeatedly and returns a list of parsed results
