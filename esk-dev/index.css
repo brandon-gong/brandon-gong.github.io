@@ -30,6 +30,7 @@ nav {
 
 .navbar {
 	padding: 3rem 6rem;
+	background-color: var(--bg);
 }
 
 .navbar a {
@@ -251,6 +252,19 @@ a.navbar-brand {
 		font-size: 4rem;
 		line-height: 4.7rem;
 	}
+	h2 {
+		letter-spacing: 0.4rem;
+		font-size: 1.2rem;
+		margin-top: 12rem;	
+	}
+	#hands-wrapper {
+		margin-top: -10vw;
+		margin-bottom: -10vw;
+	}
+	#about, #guests, #volunteers, #contact {
+		padding-top: 8rem;
+		margin-top: -6rem;
+	}
 	#socials {
 		flex-direction: column !important;
 	}
@@ -258,6 +272,7 @@ a.navbar-brand {
 		flex-direction: column;
 		align-items: center;
 		justify-content: center;
+		padding: 3rem;
 	}
 
 	#footer img {
