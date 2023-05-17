@@ -73,7 +73,7 @@ h2 {
 	height: 85vw;
 	z-index: -1;
 	margin-top: -20vw;
-	margin-bottom: -24vw;
+	margin-bottom: -20vw;
 }
 
 #hands {
@@ -114,7 +114,8 @@ h2 {
 
 #about, #guests, #volunteers {
 	min-height: 100vh;
-	padding: 2rem;
+	padding: 6rem;
+	margin-top: -4rem;
 }
 
 p {
