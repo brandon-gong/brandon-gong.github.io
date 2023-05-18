@@ -114,7 +114,7 @@ h2 {
 
 #about, #guests, #volunteers {
 	min-height: 100vh;
-	padding: 6rem;
+	padding-top: 6rem;
 	margin-top: -4rem;
 }
 
