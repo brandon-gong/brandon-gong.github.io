@@ -10,6 +10,37 @@ different components and a few weeks or months of concentrated effort and
 willpower to complete. Small toy programs that only take a day or two would be
 mentioned in my blog, but not here.
 
+## siliconnn (2023) \[[link](https://github.com/brandon-gong/siliconnn)\]
+I had been wanting to build a project in assembly for a while (ever since
+essentially late middle school); there was just something so appealing about the
+idea of laboring away with such a primitive, raw medium, building up each piece
+of functionality from nothing, and putting it all together into a polished,
+sophisticated machine.
+
+I finally got the chance to do so with siliconnn, which is a full neural network
+implementation in ARM64 assembly -- no dependencies, no calling C functions. It
+includes a long list of features, but the main highlights include:
+- Loading datasets from CSV, normalizing features, and shuffling
+- Splitting datasets into training and testing sets
+- Initializing fully-connected, feedforward neural networks with configurable
+  numbers of input and hidden neurons
+- Training NNs with configurable learning rate and number of epochs
+- Computing and printing mean squared error over a dataset
+- Dumping trained networks to files / loading pretrained networks from files.
+
+![]({{site.baseurl}}/assets/nn.png)
+*A network created with siliconnn for classifying the [Iris dataset](https://archive.ics.uci.edu/ml/datasets/iris).*
+
+Continuing with the artisanal analogy from earlier, most of the insight in this
+project occurred while writing the C reference implementation for it, akin to
+producing a pencil sketch before beginning the actual piece. Beyond that, the
+work translating into Assembly was pretty quiet and modest, while being one of
+the bigger tests I've faced in terms of endurance.
+
+I do feel that I learned a lot, and gained a lot more solid understanding of C
+and lower-level programming by working with Assembly. And I think I've gotten my
+fill of Assembly writing for this lifetime.
+
 ## ptree.ml (2022) \[[link](https://github.com/brandon-gong/ptree.ml)\]
 ptree.ml (short for Property Tree) is a "universal adaptor" between the
 extraordinarily popular data serialization formats INI, JSON, and XML for OCaml.
