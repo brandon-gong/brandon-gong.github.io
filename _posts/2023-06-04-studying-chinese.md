@@ -168,6 +168,9 @@ Chinese characters, and then check my guess with the back. I just use a piece of
 paper and pencil when practicing, or iPad and notes app. As I go, I scratch out
 the character I just wrote previously, so I can't cheat later on.
 
+![]({{site.baseurl}}/assets/sc_practice.jpeg)
+_What a scratch paper looks like as I practice writing._
+
 If I don't know a character, I may write it, scratch it out, write it again,
 etc. until I can confidently write it from memory. Then, Anki will show it to me
 again in 10 minutes and I will do the same thing -- exhaustively rewriting the
