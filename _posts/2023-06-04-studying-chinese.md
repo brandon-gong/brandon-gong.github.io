@@ -130,7 +130,7 @@ terms for that character such as 容易.)
 
 This has several benefits:
 - It solidifies my understanding of the meanings of the words. For example, some
-  characters on their own my have a rather abstract meaning on their own, but
+  characters may have a rather abstract meaning on their own, but
 	are used in words in similar topics or areas. Or sometimes characters mean
 	completely different things in different contexts.
 - Sometimes characters are pronounced differently when used in different terms.
