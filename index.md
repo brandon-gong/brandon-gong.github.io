@@ -4,10 +4,14 @@ title: About
 order: 0
 ---
 
-I'm a second-year undergraduate at Brown University, concentrating
-in Computer Science and Applied Mathematics. I've also taken classes in immunology,
-economics, visual art, and more. I post regularly to my [blog]({% link blog.md
+I'm a third-year undergraduate at Brown University, concentrating in Computer
+Science and Applied Mathematics. I post regularly to my [blog]({% link blog.md
 %}), documenting my new learnings / recent toy programs.
+
+In the past, I worked as an intern at the National Institutes of Health, where I
+mapped out the rare disease research landscape using graph databases. Later, I
+interned at The Washington Post, where I contributed significant additions and
+optimizations to their paywall and offer targeting engines.
 
 Coding is my favorite hobby! Doing personal [projects]({% link projects.md %})
 has given me the ability to quickly orient myself in new languages or
