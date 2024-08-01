@@ -5,21 +5,23 @@ order: 0
 ---
 
 I'm a fourth-year undergraduate at Brown University, concentrating in Computer
-Science and Applied Mathematics. I post regularly to my [blog]({% link blog.md
-%}), documenting my new learnings / recent toy programs.
+Science and Applied Mathematics.
 
-In the past, I worked as an intern at the National Institutes of Health, where I
-mapped out the rare disease research landscape using graph databases. In the
-past two summers, I have interned at The Washington Post as a backend
-developer on the monetization team.
+I have interned as a backend engineer at The Washington Post, building a new
+payments system to support current and future projects and contributing features
+and optimizations to paywall engines. Before that, I was at the National
+Institutes of Health, where I mapped the rare disease research landscape using
+graph databases.
 
 Coding is my favorite hobby! Doing personal [projects]({% link projects.md %})
 has given me the ability to quickly orient myself in new languages or
 frameworks. It's also made me sharper at reading and debugging unfamiliar code.
-These are skills that can't be found in the classroom.
+When I have some spare time, I post to my [blog]({% link blog.md %}),
+documenting my new learnings / recent toy programs.
 
 When I'm not sitting at the computer, I enjoy cooking, practicing piano, hiking,
-and playing tennis.
+and playing tennis. Check out my [random]({% link random.md %}) page to see what
+I'm currently obsessed with!
 
 Let's get in touch! You can find me at any of my [links]({% link links.md %}),
 grab a copy of my [resume]({{site.baseurl}}/resume.pdf), or reach out to me via
