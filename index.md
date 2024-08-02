@@ -4,8 +4,8 @@ title: About
 order: 0
 ---
 
-I'm a fourth-year undergraduate at Brown University, concentrating in Computer
-Science and Applied Mathematics.
+Hi! I'm **Brandon Gong**, a fourth-year undergraduate at Brown University
+concentrating in Computer Science and Applied Mathematics.
 
 I have interned as a backend engineer at The Washington Post, building a new
 payments system to support current and future projects and contributing features
