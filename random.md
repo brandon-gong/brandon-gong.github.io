@@ -53,7 +53,7 @@ decent spot to sit down and watch.*
 *My first time trying Nepali cuisine! Really delicious. The dish I got was
 called ghar ko thali; from left to right, a rice pudding for dessert, black
 lentil dal, spinach, bean/potato/bamboo curry, and a goat curry. Picked radish
-on the side as well. Absolutely delicious.*
+on the side as well. I also got momos and sel roti.*
 
 ![]({{site.baseurl}}/assets/recent-gallery/recent-2.jpg)
 *I stumbled upon this quaint little bookshop in DC. There were books absolutely
