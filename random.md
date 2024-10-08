@@ -18,7 +18,7 @@ order: -1
 - nintendo summer music :)
 
 #### Books I'm currently reading...
-- Anna Karenina (Tolstoy)
+- Pachinko (Lee)
 - Cuisine and Empire: Cooking in World History (Laudan)
 
 #### Math books I'm currently working through...
