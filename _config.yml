@@ -3,4 +3,9 @@ markdown:         kramdown
 permalink:        pretty
 title:            Brandon Gong
 baseurl:          ''
-
+collections:
+  portfolio:
+    output: true
+    sort_by: year
+  gallery:
+    output: true

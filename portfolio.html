@@ -1,0 +1,25 @@
+---
+layout: page
+title: Portfolio
+---
+
+<p>
+I build projects to strengthen my understanding of an unfamiliar programming
+language or topic. I don't use &ldquo;vibe coding&rdquo; in my projects.
+</p>
+
+<div class="catalog-wrapper">
+	<table class="catalog catalog-portfolio">
+		<tbody>
+	{% for project in site.portfolio reversed %}
+		<tr>
+			<td width="unset"><a href="{{project.url}}">{{project.title}}</a></td>
+			<td>{{project.description}}</td>
+			<td>{{project.year}}</td>
+		</tr>
+	{% endfor %}
+		</tbody>
+	</table>
+</div>
+
+<p style="text-align: center;margin-top: 2rem;"><a href="{{site.baseurl}}/">Back to home</a></p>

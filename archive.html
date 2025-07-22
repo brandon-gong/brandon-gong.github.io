@@ -1,0 +1,14 @@
+---
+layout: page
+title: Archive
+---
+
+<div class="force-width"></div>
+<div class="gallery-container">
+	{% assign gallery = site.gallery | reverse %}
+	{% for photo in gallery %}<a class="gallery-thumb"
+			 style="background-image: url('{{site.baseurl}}/photos/thumbs/{{photo.file}}')"
+			 href="{{photo.url}}"></a>{% endfor %}
+</div>
+
+<p style="text-align: center;margin-top: 2rem;"><a href="{{site.baseurl}}/">Back to home</a></p>

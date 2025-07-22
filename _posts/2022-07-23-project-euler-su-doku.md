@@ -1,20 +1,20 @@
 ---
 layout: post
-title: Solving Project Euler's "Su Doku" with constraint propagation
+title: Solving Project Euler’s “Su Doku” with constraint propagation
 tags: [functional, haskell, sudoku, project euler]
 usemathjax: true
 ---
 
 (Spoiler alert: In this post I discuss a solution to a Project Euler problem.
 Since it is within the first 100 problems, sharing my solution publicly on this
-blog is explicitly [allowed](https://projecteuler.net/#publish) by the Project
+blog is explicitly [allowed](https://projecteuler.net/#publish){:target="_blank"} by the Project
 Euler FAQ. But if you want to solve it on your own, go try it now and don't read
 any further!)
 
 ## Introduction to the problem
 
 Here's a brief overview of Project Euler's [Problem
-96](https://projecteuler.net/problem=96):
+96](https://projecteuler.net/problem=96){:target="_blank"}:
 - We are given a text file, named `p096_sudoku.txt`, containing 50 9x9 sudoku
 	puzzles	listed one after the other, formatted as such:
 	```
@@ -179,7 +179,7 @@ need to have their constraints updated – in this example, that would be square
 76.
 
 Let's first build up all of the different
-[houses](http://sudopedia.enjoysudoku.com/House.html) in a sudoku board – all
+[houses](http://sudopedia.enjoysudoku.com/House.html){:target="_blank"} in a sudoku board – all
 the rows, columns, and boxes.
 ```haskell
 x = [0..8]

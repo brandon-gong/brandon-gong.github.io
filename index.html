@@ -1,0 +1,51 @@
+---
+layout: default
+title: Home
+---
+
+<p style="margin-bottom: 0;">
+	I’m a software engineer at Roblox in San Francisco. My interests include math,
+	systems programming, and an uncountable set of other topics, some explored
+	here. <a href="{{ site.baseurl }}/info">More about me »</a>
+</p>
+
+<br>
+<a class="home-header" href="{{ site.baseurl }}/notes">Notes »</a>
+<div class="catalog-wrapper">
+	<table class="catalog">
+		<tbody>
+	{% for post in site.posts limit:5 %}
+		<tr>
+			<td><a href="{{post.url}}">{{post.title}}</a></td>
+			<td>{{post.date | date: "%Y-%m-%d"}}</td>
+		</tr>
+	{% endfor %}
+		</tbody>
+	</table>
+</div>
+
+<br>
+<a class="home-header" href="{{ site.baseurl }}/portfolio">Portfolio »</a>
+<div class="catalog-wrapper">
+	<table class="catalog catalog-portfolio">
+		<tbody>
+	{% assign portfolio = site.portfolio | reverse %}
+	{% for project in portfolio limit:3 %}
+		<tr>
+			<td width="unset"><a href="{{project.url}}">{{project.title}}</a></td>
+			<td>{{project.description}}</td>
+			<td>{{project.year}}</td>
+		</tr>
+	{% endfor %}
+		</tbody>
+	</table>
+</div>
+
+<br>
+<a class="home-header" href="{{ site.baseurl }}/gallery">Gallery »</a>
+<div class="gallery-container">
+	{% assign gallery = site.gallery | reverse %}
+	{% for photo in gallery limit:5 %}<a class="gallery-thumb"
+			 style="background-image: url('{{site.baseurl}}/photos/thumbs/{{photo.file}}')"
+			 href="{{photo.url}}"></a>{% endfor %}
+</div>

@@ -4,8 +4,10 @@ title: A hanzi graphics renderer
 tags: [processing, java, graphics]
 ---
 
-![]({{site.baseurl}}/assets/monalisa.png)
-*The end goal in action: Mona Lisa as drawn by the hanzi graphics renderer*
+<figure class="smaller">
+	<img src="{{site.baseurl}}/assets/monalisa.png" style="width: 350px">
+	<figcaption>The end goal in action: Mona Lisa as drawn by the hanzi graphics renderer</figcaption>
+</figure>
 
 Dithering, the process by which the number of colors in an image is reduced
 using scattered spots of color and noise, is commonly used in printers and old
@@ -14,7 +16,7 @@ example the Atari 2600 or Nintendo's NES. But these days it's also used for a
 stylistic effect, for example to make an image appear stippled.
 
 A common algorithm to approach this problem is [Floyd–Steinberg
-dithering](https://en.wikipedia.org/wiki/Floyd%E2%80%93Steinberg_dithering)
+dithering](https://en.wikipedia.org/wiki/Floyd%E2%80%93Steinberg_dithering){:target="_blank"}
 (quite a beautifully obvious algorithm in itself). But what if we used Chinese
 characters to dither images instead, with characters having higher stroke
 density being used to draw darker regions, and characters having only a few
@@ -25,11 +27,13 @@ pixelating". But that's where the idea came from, and the achieved output is
 quite similar to a dithered image.)
 
 I spent some time looking around online for bitmap Chinese fonts, and eventually
-settled on [Zpix](https://github.com/SolidZORO/zpix-pixel-font), which manages
+settled on [Zpix](https://github.com/SolidZORO/zpix-pixel-font){:target="_blank"}, which manages
 to support English, Chinese, and Japanese characters within an 11x11 pixel grid.
 
-![]({{site.baseurl}}/assets/zpix-specimen.png)
-*Zpix (bottom) compared to a typical sans-serif Chinese font (top).*
+<figure>
+	<img src="{{site.baseurl}}/assets/zpix-specimen.png">
+	<figcaption>Zpix (bottom) compared to a typical sans-serif Chinese font (top).</figcaption>
+</figure>
 
 The basic idea now is to pull out all of the Chinese characters that the font
 supports, count up how many black pixels each glyph has, sort all the glyphs
@@ -235,8 +239,10 @@ void draw() {
 
 And the result:
 
-![]({{site.baseurl}}/assets/dbgrenderer.gif)
-*Ignore the dithering -- converting it into a gif isn't great.*
+<figure>
+	<img src="{{site.baseurl}}/assets/dbgrenderer.gif">
+	<figcaption>Ignore the dithering -- converting it into a gif isn't great.</figcaption>
+</figure>
 
 Looks good! Pixelated Perlin noise, drawn to a `PGraphics` object and blown up
 to full screen by our `DbgRenderer`.
@@ -574,11 +580,13 @@ void draw(PGraphics pg) {
 
 And here's our hanzi graphics renderer at work, drawing some Perlin noise:
 
-![]({{site.baseurl}}/assets/glyphrenderer.gif)
+<figure>
+	<img src="{{site.baseurl}}/assets/glyphrenderer.gif">
+</figure>
 
 Slowed down, so it's a bit easier to see the individual glyphs that go into
 building up the smooth gradients between different darknesses:
 
-![]({{site.baseurl}}/assets/glyphrenderer_slow.gif)
-
-That's all.
+<figure>
+	<img src="{{site.baseurl}}/assets/glyphrenderer_slow.gif">
+</figure>

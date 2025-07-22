@@ -1,0 +1,19 @@
+---
+layout: default
+title: Gallery
+---
+
+{% assign gallery = site.gallery | reverse %}
+{% for photo in gallery limit:5 %}
+<div class="gallery-spacer"></div>
+<a class="gallery-photo" href="{{photo.url}}">
+	<figure class="bigger" style="padding: 0">
+		<img src="{{site.baseurl}}/photos/{{photo.file}}" style="width: {{photo.displaysize}}">
+	</figure>
+</a>
+<div class="gallery-spacer"></div>
+{% endfor %}
+
+<p style="text-align: center;"><a href="{{site.baseurl}}/archive">View full archive</a></p>
+
+<p style="text-align: center;margin-top: 2rem;"><a href="{{site.baseurl}}/">Back to home</a></p>

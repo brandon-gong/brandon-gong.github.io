@@ -1,17 +1,18 @@
 ---
 layout: post
-title: "Studying Chinese"
+title: Studying Chinese
+subtitle: A flashcard-based system for heritage speakers
 tags: [anki, chinese]
 usemathjax: true
 ---
 
 I am keenly aware that as I get older, picking up new languages is only going to
 become harder and harder. I am probably already past the [sensitive period for
-language acquisition](https://doi.org/10.1007/BF02996542), and I have relatively
-more free time now when school is on break than I might ever have again when I
-am living on my own. Because of this, learning Mandarin Chinese (the language of
-my parents, my relatives, and the culture I grew up with) is more of a priority
-for me at this time.
+language acquisition](https://doi.org/10.1007/BF02996542){:target="_blank"}, and
+I have relatively more free time now when school is on break than I might ever
+have again when I am living on my own. Because of this, learning Mandarin
+Chinese (the language of my parents, my relatives, and the culture I grew up
+with) is more of a priority for me at this time.
 
 After some trial and error, I have found the most effective way for me to study
 Chinese, one that I have been using for about a year now and actually feel
@@ -55,13 +56,16 @@ effective in finding new vocabulary, it was also much too difficult. I would run
 into sentences packed from beginning to end with words that I was completely
 unfamiliar with and had no clue how to apply even in spoken Chinese.
 
-![]({{site.baseurl}}/assets/sc_fqygy.jpeg)
-_The first page of 父亲与果园._
+<figure>
+	<img src="{{site.baseurl}}/assets/sc_fqygy.jpeg">
+	<figcaption>The first page of 父亲与果园.</figcaption>
+</figure>
 
-I have found [The Chairman's Bao](https://www.thechairmansbao.com/) to be a much
-gentler source of words. I find a lot of new nouns that I don't use in my daily
-life (e.g. 宜家 -- IKEA), and TCB has a convenient save function so I don't have
-to maintain a list outside of the app. I also come across conjunctions, adverbs,
+I have found [The Chairman's
+Bao](https://www.thechairmansbao.com/){:target="_blank"} to be a much gentler
+source of words. I find a lot of new nouns that I don't use in my daily life
+(e.g. 宜家 -- IKEA), and TCB has a convenient save function so I don't have to
+maintain a list outside of the app. I also come across conjunctions, adverbs,
 and adjectives that I can't read, although it's typically the case that I know
 what they sound like (e.g. 顺便 -- conveniently, simultaneously). When I tap on
 the word, TCB shows me its pinyin, which is generally enough for me to
@@ -88,26 +92,34 @@ To ease the flashcard creation process, I created a custom card format called
 `chinesetokensfmt`. It has three fields: `English Translation`, `Chinese
 Characters`, and `Pinyin`.
 
-![]({{site.baseurl}}/assets/sc_front.png)
-_The card front format. The English definition and pinyin are displayed
-together._
+<figure>
+	<img src="{{site.baseurl}}/assets/sc_front.png">
+	<figcaption>The card front format. The English definition and pinyin are displayed
+together.</figcaption>
+</figure>
 
-![]({{site.baseurl}}/assets/sc_back.png)
-_The back of the card. I keep the English and pinyin visible, and then also
+<figure>
+	<img src="{{site.baseurl}}/assets/sc_back.png">
+	<figcaption>The back of the card. I keep the English and pinyin visible, and then also
 display the Chinese characters using a more traditional font (Adobe Kaiti) so
 so that it contains all the stroke details of the characters as opposed to a
-sans-serif font._
+sans-serif font.</figcaption>
+</figure>
 
 Note that the card backs contain links to the [MDBG Chinese
-dictionary](https://www.mdbg.net/chinese/dictionary), which provides an easy way
+dictionary](https://www.mdbg.net/chinese/dictionary){:target="_blank"}, which provides an easy way
 to check if I'm getting stroke order correct. With this card format, creating a
 new card is quite convenient. It looks like this:
 
-![]({{site.baseurl}}/assets/sc_add.png)
+<figure>
+	<img src="{{site.baseurl}}/assets/sc_add.png">
+</figure>
 
 And the created card in action looks like this:
 
-![]({{site.baseurl}}/assets/sc_card.png)
+<figure>
+	<img src="{{site.baseurl}}/assets/sc_card.png">
+</figure>
 
 ### Repetition is key
 I don't just add terms to my deck in isolation. For each character in a
@@ -141,15 +153,17 @@ This has several benefits:
   them more often.
 
 My favorite website to use when making flashcards is the [Yellowbridge
-dictionary](https://www.yellowbridge.com/chinese/dictionary.php). Besides
+dictionary](https://www.yellowbridge.com/chinese/dictionary.php){:target="_blank"}. Besides
 providing definitions and pinyin and [effective
-pinyin](https://en.wikipedia.org/wiki/Tone_sandhi) tones, Yellowbridge also
+pinyin](https://en.wikipedia.org/wiki/Tone_sandhi){:target="_blank"} tones, Yellowbridge also
 provides a "Related words" section that is perfect for discovering terms that
 contain a particular character. This makes it really easy to create flashcards
 that all practice a certain character.
 
-![]({{site.baseurl}}/assets/sc_yellowbridge.png)
-_Continuing with the 博文 example from earlier._
+<figure>
+	<img src="{{site.baseurl}}/assets/sc_yellowbridge.png">
+	<figcaption>Continuing with the 博文 example from earlier.</figcaption>
+</figure>
 
 I won't add _all_ of the related words for each character. I mainly seek out
 terms that I've heard before (but may not contain all characters that I
@@ -168,8 +182,10 @@ Chinese characters, and then check my guess with the back. I just use a piece of
 paper and pencil when practicing, or iPad and notes app. As I go, I scratch out
 the character I just wrote previously, so I can't cheat later on.
 
-![]({{site.baseurl}}/assets/sc_practice.jpeg)
-_What a scratch paper looks like as I practice writing._
+<figure>
+	<img src="{{site.baseurl}}/assets/sc_practice.jpeg">
+	<figcaption>What a scratch paper looks like as I practice writing.</figcaption>
+</figure>
 
 If I don't know a character, I may write it, scratch it out, write it again,
 etc. until I can confidently write it from memory. Then, Anki will show it to me

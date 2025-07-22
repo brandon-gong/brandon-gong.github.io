@@ -1,0 +1,37 @@
+---
+layout: default
+---
+
+<div class="gallery-spacer"></div>
+<figure class="bigger" style="padding: 0">
+	<img src="{{site.baseurl}}/photos/{{page.file}}" style="width: {{page.displaysize}}">
+</figure>
+<div class="gallery-spacer"></div>
+
+<div class="gallery-description-container">
+	<div>
+		<h1>{{page.title}}</h1>
+		<h2>{{page.location}}</h2>
+	</div>
+	<div>
+		<h3><b>{{page.camera}}</b></h3>
+		<h4>{{ page.date | date: "%B %-d, %Y"}}</h4>
+	</div>
+</div>
+
+{{ content }}
+
+<p>&copy; {{ site.time | date: '%Y' }} Brandon Gong. All rights reserved.</p>
+
+{% assign items = site.gallery | reverse %}
+{% for item in items %}
+	{% if item.title == page.title %}
+		{% assign item_index = forloop.index %}
+	{% endif %}
+{% endfor %}
+
+{% if item_index <= 5 %}
+<p style="text-align: center;margin-top: 2rem;"><a href="{{site.baseurl}}/gallery">Back to gallery</a></p>
+{% else %}
+<p style="text-align: center;margin-top: 2rem;"><a href="{{site.baseurl}}/archive">Back to archive</a></p>
+{% endif %}
