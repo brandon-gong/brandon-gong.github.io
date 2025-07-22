@@ -6,6 +6,5 @@ baseurl:          ''
 collections:
   portfolio:
     output: true
-    sort_by: year
   gallery:
     output: true

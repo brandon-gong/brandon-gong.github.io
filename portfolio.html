@@ -11,7 +11,8 @@ language or topic. I don't use &ldquo;vibe coding&rdquo; in my projects.
 <div class="catalog-wrapper">
 	<table class="catalog catalog-portfolio">
 		<tbody>
-	{% for project in site.portfolio reversed %}
+	{% assign portfolio = site.portfolio | sort: "year" | reverse %}
+	{% for project in portfolio %}
 		<tr>
 			<td width="unset"><a href="{{project.url}}">{{project.title}}</a></td>
 			<td>{{project.description}}</td>

@@ -29,7 +29,7 @@ title: Home
 <div class="catalog-wrapper">
 	<table class="catalog catalog-portfolio">
 		<tbody>
-	{% assign portfolio = site.portfolio | reverse %}
+	{% assign portfolio = site.portfolio | sort: "year" | reverse %}
 	{% for project in portfolio limit:3 %}
 		<tr>
 			<td width="unset"><a href="{{project.url}}">{{project.title}}</a></td>
