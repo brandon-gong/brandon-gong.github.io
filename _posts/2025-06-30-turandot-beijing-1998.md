@@ -65,7 +65,7 @@ the actions of the characters in the opera to be a part of Puccini's soaring
 imagination of a fantastical land, and not at all a representation or commentary
 on Chinese people as a whole.
 
-Nevertheless, performance of _Turandot_ was block in China for decades after
+Nevertheless, performance of _Turandot_ was blocked in China for decades after
 its composition, as the government believed it portrayed China in a negative
 light. That is, until the late 1990s; here is where the story of the Beijing
 1998 production of _Turandot_ begins.
