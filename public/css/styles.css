@@ -90,6 +90,37 @@ p {
   margin-bottom: 1rem;
 }
 
+details {
+  max-width: 660px;
+  /* margin: 0 auto; */
+  margin: 0px 30px;
+  border-top: 1px solid transparent;
+  border-bottom: 1px solid transparent;
+  margin-bottom: 1rem;
+}
+
+details summary {
+  cursor: pointer;
+  text-decoration: dotted underline;
+}
+
+details summary::marker {
+  text-decoration: none;
+}
+
+details[open] {
+  border-color: #251d18;
+  padding: 8px 0px;
+}
+
+details p {
+  padding: 0;
+}
+
+details p:last-of-type {
+  margin-bottom: 0;
+}
+
 b {
   font-weight: 700;
 }
@@ -419,6 +450,10 @@ hr:after {
   max-width: 100vw;
   width: 660px;
   margin: 0 auto;
+}
+
+blockquote > p {
+  font-style: italic;
 }
 
 @media only screen and (max-width: 660px) {

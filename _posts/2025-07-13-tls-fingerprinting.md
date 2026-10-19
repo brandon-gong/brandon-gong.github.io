@@ -101,8 +101,8 @@ random (but deterministic) string of 0s and 1s. The trick is that it's
 effectively impossible to find another different message that causes this
 magical function to output this same string of 0s and 1s, thus making forgery
 impossible. In this class, we have the
-[SHA-2](https://en.wikipedia.org/wiki/SHA-2) family (with all of its members
-like SHA256 and SHA384), Poly1305, and SipHash.
+[SHA-2](https://en.wikipedia.org/wiki/SHA-2){:target="_blank"} family (with all
+of its members like SHA256 and SHA384), Poly1305, and SipHash.
 
 
 ## Finally, TLS
